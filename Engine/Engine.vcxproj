@@ -192,7 +192,8 @@
     <ClCompile Include="engine\src\utility\exception\WindowException.cpp" />
     <ClCompile Include="engine\src\graphics\bindable\IndexBuffer.cpp" />
     <ClCompile Include="engine\src\graphics\bindable\PrimitiveTopology.cpp" />
-    <ClCompile Include="engine\src\window\Camera.cpp" />
+    <ClCompile Include="engine\src\graphics\Camera.cpp" />
+    <ClCompile Include="engine\src\graphics\drawable\Light.cpp" />
     <ClCompile Include="sandbox\src\sandbox.cpp" />
     <ClCompile Include="engine\src\window\Window.cpp" />
     <ClCompile Include="engine\src\utility\time\Timer.cpp" />
@@ -222,11 +223,12 @@
     <ClInclude Include="engine\src\input\Mouse.h" />
     <ClInclude Include="engine\src\utility\time\Timer.h" />
     <ClInclude Include="engine\src\graphics\Graphics.h" />
-    <ClInclude Include="engine\src\window\Camera.h" />
+    <ClInclude Include="engine\src\graphics\Camera.h" />
     <ClInclude Include="engine\src\window\Window.h" />
     <ClInclude Include="engine\src\graphics\bindable\IndexBuffer.h" />
     <ClInclude Include="engine\src\graphics\bindable\PrimitiveTopology.h" />
     <ClInclude Include="engine\src\graphics\bindable\VertexShader.h" />
+    <ClInclude Include="engine\src\graphics\drawable\Light.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

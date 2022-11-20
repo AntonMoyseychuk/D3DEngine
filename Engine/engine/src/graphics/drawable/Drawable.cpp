@@ -16,6 +16,11 @@ namespace engine::graphics {
 		return m_Binds;
 	}
 
+	std::vector<std::unique_ptr<Bindable>>& Drawable::GetBinds() noexcept
+	{
+		return m_Binds;
+	}
+
 	void Drawable::Draw() const noexcept
 	{
 		for (const auto& bind : m_Binds) {

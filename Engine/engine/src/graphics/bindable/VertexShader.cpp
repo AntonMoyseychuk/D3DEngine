@@ -5,13 +5,13 @@
 #include <stdarg.h>
 
 namespace engine::graphics {
-    VertexShader::VertexShader(const Graphics& gfx, const wchar_t* filepath)
+    VertexShader::VertexShader(const Graphics& gfx, const std::wstring& filepath)
         : Bindable(gfx), m_Filepath(filepath)
     {
         OnCreate();
     }
 
-    VertexShader::VertexShader(const Graphics& gfx, const wchar_t* filepath, const std::vector<InputLayoutAttribute>& attribs)
+    VertexShader::VertexShader(const Graphics& gfx, const std::wstring& filepath, const std::vector<InputLayoutAttribute>& attribs)
         : Bindable(gfx), m_Filepath(filepath)
     {
         OnCreate();

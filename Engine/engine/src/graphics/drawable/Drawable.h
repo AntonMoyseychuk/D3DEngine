@@ -34,7 +34,9 @@ namespace engine::graphics {
 		void AddIndexBuffer(std::unique_ptr<IndexBuffer> ib) noexcept;
 
 		virtual const std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() const noexcept = 0;
+		virtual std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() noexcept = 0;
 		const std::vector<std::unique_ptr<Bindable>>& GetBinds() const noexcept;
+		std::vector<std::unique_ptr<Bindable>>& GetBinds() noexcept;
 
 	protected:
 		static const Graphics* m_Graphics;

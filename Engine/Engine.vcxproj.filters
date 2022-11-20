@@ -66,7 +66,7 @@
     <ClCompile Include="engine\src\graphics\bindable\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\window\Camera.cpp">
+    <ClCompile Include="engine\src\graphics\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\graphics\bindable\Texture.cpp">
@@ -79,6 +79,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\graphics\drawable\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\graphics\drawable\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,7 +155,7 @@
     <ClInclude Include="engine\src\graphics\drawable\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\window\Camera.h">
+    <ClInclude Include="engine\src\graphics\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\graphics\bindable\Texture.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\graphics\drawable\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\graphics\drawable\Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

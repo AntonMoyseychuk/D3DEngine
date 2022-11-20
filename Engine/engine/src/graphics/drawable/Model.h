@@ -3,16 +3,19 @@
 #include "engine/src/graphics/bindable/Texture.h"
 #include "engine/src/graphics/bindable/TransformConstantBuffer.h"
 #include "engine/src/graphics/bindable/Mesh.h"
-#include "engine/src/window/Camera.h"
+#include "engine/src/graphics/Camera.h"
 
 
 namespace engine::graphics::entity {
 	class Model : public Entity<Model>
 	{
 	public:
-		Model(const Graphics& gfx, const std::string& filepath, const Texture& texture);
+		Model(const Graphics& gfx, const std::string& modelFilepath, const Texture& texture);
 
 		void Draw() const noexcept override;
+
+		void SetOwnVertexShader(const std::wstring& filepath);
+		void SetOwnPixelShader(const std::wstring& filepath);
 
 	private:
 		void LoadModel(const std::string& filepath);
@@ -21,6 +24,5 @@ namespace engine::graphics::entity {
 
 	private:
 		std::vector<engine::graphics::Mesh> m_Meshes;
-		engine::graphics::Texture m_Texture;
 	};
 }

@@ -2,7 +2,8 @@
 #include "engine/src/window/Window.h"
 #include "engine/src/utility/time/Timer.h"
 
-#include "engine/src/graphics/drawable/Drawable.h"
+#include "engine/src/graphics/drawable/Model.h"
+#include "engine/src/graphics/drawable/Light.h"
 
 namespace engine::app {
 	class Application
@@ -19,5 +20,9 @@ namespace engine::app {
 		time::Timer m_Timer;
 
 		std::vector<std::unique_ptr<graphics::Drawable>> m_Drawables;
+
+		graphics::light::Light m_Light;
+
+		graphics::entity::Model m_SkyBox;
 	};
 }

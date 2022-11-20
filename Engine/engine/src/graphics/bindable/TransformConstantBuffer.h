@@ -1,7 +1,7 @@
 #pragma once
 #include "engine/src/graphics/drawable/Drawable.h"
 #include "engine/src/graphics/bindable/ConstantBuffer.h"
-#include "engine/src/window/Camera.h"
+#include "engine/src/graphics/Camera.h"
 
 
 namespace engine::graphics {

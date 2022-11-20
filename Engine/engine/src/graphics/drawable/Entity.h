@@ -1,7 +1,7 @@
 #pragma once
 #include "Drawable.h"
 #include "engine/src/utility/exception/D3DException.h"
-#include "engine/src/window/Camera.h"
+#include "engine/src/graphics/Camera.h"
 
 #include <vector>
 
@@ -191,6 +191,11 @@ namespace engine::graphics::entity {
 
 	protected:
 		inline const std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() const noexcept override
+		{
+			return m_StaticBinds;
+		}
+
+		inline std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() noexcept override
 		{
 			return m_StaticBinds;
 		}

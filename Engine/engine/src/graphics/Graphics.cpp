@@ -110,6 +110,17 @@ namespace engine::graphics {
 		viewPort.MinDepth = 0.0f;
 		viewPort.MaxDepth = 1.0f;
 		m_DeviceContext->RSSetViewports(1, &viewPort);
+
+
+		D3D11_RASTERIZER_DESC rastDesc;
+		memset(&rastDesc, 0, sizeof(rastDesc));
+		rastDesc.CullMode = D3D11_CULL_FRONT;
+		rastDesc.DepthClipEnable = true;
+		rastDesc.FillMode = D3D11_FILL_SOLID;
+		m_Device->CreateRasterizerState(&rastDesc, &m_CullStateFront);
+
+		rastDesc.CullMode = D3D11_CULL_BACK;
+		m_Device->CreateRasterizerState(&rastDesc, &m_CullStateBackward);
 	}
 
 	void Graphics::SwapBuffers() const noexcept
@@ -140,6 +151,11 @@ namespace engine::graphics {
 	void Graphics::Draw(uint32_t count) const noexcept
 	{
 		m_DeviceContext->Draw(count, 0);
+	}
+
+	void graphics::Graphics::SetRasterizerState(bool cullFront) const noexcept
+	{
+		m_DeviceContext->RSSetState(cullFront ? m_CullStateFront.Get() : m_CullStateBackward.Get());
 	}
 
 	DirectX::XMMATRIX Graphics::GetProjection() const noexcept

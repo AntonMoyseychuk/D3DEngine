@@ -5,7 +5,7 @@
 #include <stdarg.h>
 
 namespace engine::graphics {
-    PixelShader::PixelShader(const Graphics& gfx, const wchar_t* filepath)
+    PixelShader::PixelShader(const Graphics& gfx, const std::wstring& filepath)
         : Bindable(gfx), m_Filepath(filepath)
     {
         OnCreate();

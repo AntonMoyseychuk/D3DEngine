@@ -14,8 +14,8 @@ namespace engine::graphics {
 		enum class InputLayoutAttribute : uint32_t { POSITION = 0u, COLOR, NORMAL, TEXTURE };
 
 	public:
-		VertexShader(const Graphics& gfx, const wchar_t* filepath);
-		VertexShader(const Graphics& gfx, const wchar_t* filepath, const std::vector<InputLayoutAttribute>& attribs);
+		VertexShader(const Graphics& gfx, const std::wstring& filepath);
+		VertexShader(const Graphics& gfx, const std::wstring& filepath, const std::vector<InputLayoutAttribute>& attribs);
 
 		void SetInputLayout(const std::vector<InputLayoutAttribute>& attribs);
 
