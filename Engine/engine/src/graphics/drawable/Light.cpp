@@ -89,11 +89,16 @@ namespace engine::graphics::light {
 		return Entity<Light>::GetTransform();
 	}
 
-	void Light::Bind() const
+	void Light::Update() const
 	{
 		LightSettings.Position = this->m_Position;
 		LightSettings.Color = this->m_Color;
 		m_LightConstantBuffer.Update(LightSettings);
+	}
+
+	void Light::Bind() const
+	{
+		this->Update();
 		m_LightConstantBuffer.Bind();
 	}
 }

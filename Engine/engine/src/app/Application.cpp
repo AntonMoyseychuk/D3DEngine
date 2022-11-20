@@ -80,26 +80,20 @@ namespace engine::app {
 
 		m_Window.GetGraphics().SetRasterizerState(false);
 		for (auto& drawable : m_Drawables) {
-			if (auto p = dynamic_cast<engine::graphics::entity::Model*>(drawable.get())) {
+			if (auto p = dynamic_cast<graphics::entity::Model*>(drawable.get())) {
 				p->AdjustRotation(0.0f, 15.0f * dt, 0.0f);
 			}
 			drawable->Draw();
 		}
 
-		//if (m_Window.Keyboard.IsKeyPressed('J')) {
-		//	m_Light.AdjustPosition(-1000.0f * dt, 0.0f, 0.0f);
-		//}
-		//if (m_Window.Keyboard.IsKeyPressed('L')) {
-		//	m_Light.AdjustPosition(1000.0f * dt, 0.0f, 0.0f);
-		//}
-		//if (m_Window.Keyboard.IsKeyPressed('I')) {
-		//	m_Light.AdjustPosition(0.0f, 1000.0f * dt, 0.0f);
-		//}
-		//if (m_Window.Keyboard.IsKeyPressed('K')) {
-		//	m_Light.AdjustPosition(0.0f, -1000.0f * dt, 0.0f);
-		//}
-		//m_Light.Bind();
+		m_Window.GetGraphics().SetRasterizerState(true);
+		m_SkyBox.SetPosition(m_Window.GetGraphics().Camera.GetPosition());
+		m_SkyBox.Draw();
 
+		m_Light.Update();
+
+
+		//CAMERA LOGIC
 		const XMFLOAT3 ROTATION = m_Window.GetGraphics().Camera.GetRotation();
 		const float SPEED = 7.5f * dt;
 
@@ -157,10 +151,6 @@ namespace engine::app {
 		else {
 			isRotated = false;
 		}
-
-		m_Window.GetGraphics().SetRasterizerState(true);
-		m_SkyBox.SetPosition(m_Window.GetGraphics().Camera.GetPosition());
-		m_SkyBox.Draw();
 
 		m_Window.GetGraphics().SwapBuffers();
 	}

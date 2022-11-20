@@ -9,29 +9,25 @@ namespace engine::graphics::entity {
 		: Entity<Model>(gfx, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
 	{
 		if (!IsStaticInitialized()) {
-			AddStaticBind(std::make_unique<VertexShader>(gfx,
-				L"sandbox\\res\\shaders\\ModelVS.hlsl",
-				std::vector<engine::graphics::VertexShader::InputLayoutAttribute>
+			AddStaticBind(std::make_unique<VertexShader>(gfx, L"sandbox\\res\\shaders\\ModelVS.hlsl",
+				std::vector<engine::graphics::VertexShader::InputLayoutAttribute> 
 				{
 					graphics::VertexShader::InputLayoutAttribute::POSITION,
 					graphics::VertexShader::InputLayoutAttribute::TEXTURE,
 					graphics::VertexShader::InputLayoutAttribute::NORMAL
 				})
 			);
-			AddStaticBind(std::make_unique<PixelShader>(gfx,
-				L"sandbox\\res\\shaders\\ModelPS.hlsl")
-			);
-
+			AddStaticBind(std::make_unique<PixelShader>(gfx, L"sandbox\\res\\shaders\\ModelPS.hlsl"));
 			AddStaticBind(std::make_unique<PrimitiveTopology>(gfx, engine::graphics::PrimitiveTopology::Type::TRIANGLES));
 		}
 
-		AddBind(std::make_unique<Texture>(texture));
-		AddBind(std::make_unique<TransformConstantBuffer>(gfx, *this));
+		AddBind(std::make_unique<Texture>(texture), GetBinds().end());
+		AddBind(std::make_unique<TransformConstantBuffer>(gfx, *this), GetBinds().end());
 
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		LoadModel(modelFilepath);
 		for (const auto& mesh : m_Meshes) {
-			AddBind(std::make_unique<engine::graphics::Mesh>(mesh));
+			AddBind(std::make_unique<engine::graphics::Mesh>(mesh), GetBinds().end());
 		}
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
@@ -42,14 +38,10 @@ namespace engine::graphics::entity {
 			bind->Bind();
 		}
 
-		for (const auto& mesh : GetBinds()) {
-			mesh->Bind();
-		}
-
-		for (const auto& mesh : GetBinds()) {
-			if (const auto p = dynamic_cast<Mesh*>(mesh.get())) {
-				mesh->Bind();
-				m_Graphics->DrawIndexed(p->GetIndexBuffer().GetIndexCount());
+		for (const auto& bindable : GetBinds()) {
+			bindable->Bind();
+			if (const auto mesh = dynamic_cast<Mesh*>(bindable.get())) {
+				m_Graphics->DrawIndexed(mesh->GetIndexBuffer().GetIndexCount());
 			}
 		}
 	}
@@ -63,7 +55,7 @@ namespace engine::graphics::entity {
 			}
 		}
 
-		AddBind(std::make_unique<graphics::VertexShader>(*m_Graphics, filepath));
+		AddBind(std::make_unique<graphics::VertexShader>(*m_Graphics, filepath), GetBinds().begin());
 	}
 
 	void Model::SetOwnPixelShader(const std::wstring& filepath)
@@ -74,8 +66,7 @@ namespace engine::graphics::entity {
 				return;
 			}
 		}
-
-		AddBind(std::make_unique<graphics::PixelShader>(*m_Graphics, filepath));
+		AddBind(std::make_unique<graphics::PixelShader>(*m_Graphics, filepath), GetBinds().begin());
 	}
 	
 

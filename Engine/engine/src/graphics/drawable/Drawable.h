@@ -30,7 +30,7 @@ namespace engine::graphics {
 		virtual ~Drawable() = default;
 
 	protected:
-		void AddBind(std::unique_ptr<Bindable> bind) noexcept;
+		void AddBind(std::unique_ptr<Bindable> bind, std::vector<std::unique_ptr<Bindable>>::iterator where) noexcept;
 		void AddIndexBuffer(std::unique_ptr<IndexBuffer> ib) noexcept;
 
 		virtual const std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() const noexcept = 0;

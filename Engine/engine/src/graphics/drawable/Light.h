@@ -37,6 +37,7 @@ namespace engine::graphics::light {
 
 		DirectX::XMMATRIX GetTransform() const noexcept override;
 
+		void Update() const;
 		void Bind() const;
 
 	private:

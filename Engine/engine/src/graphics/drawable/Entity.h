@@ -153,12 +153,12 @@ namespace engine::graphics::entity {
 			return !m_StaticBinds.empty();
 		}
 
-		static void AddStaticBind(std::unique_ptr<Bindable> bind)
+		static void AddStaticBind(std::unique_ptr<Bindable> bind, std::vector<std::unique_ptr<Bindable>>::iterator where = m_StaticBinds.end())
 		{
 			if (typeid(*bind) == typeid(IndexBuffer)) {
 				THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "*Must* use AddStaticIndexBuffer to bind index buffer");
 			}
-			m_StaticBinds.push_back(std::move(bind));
+			m_StaticBinds.insert(where, std::move(bind));
 		}
 
 		void AddStaticIndexBuffer(std::unique_ptr<IndexBuffer> ib) noexcept
@@ -168,7 +168,7 @@ namespace engine::graphics::entity {
 			}
 
 			m_IndexBuffer = ib.get();
-			m_StaticBinds.push_back(std::move(ib));
+			m_StaticBinds.insert(m_StaticBinds.begin(), std::move(ib));
 		}
 
 		void SetIndexBufferFromStatic() noexcept
