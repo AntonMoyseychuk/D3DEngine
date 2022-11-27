@@ -58,6 +58,10 @@ namespace engine::graphics::entity {
 		{
 			return m_Position;
 		}
+		DirectX::XMVECTOR GetPositionVector() const noexcept
+		{
+			return DirectX::XMLoadFloat3(&m_Position);
+		}
 
 		
 		void SetRotation(const DirectX::XMFLOAT3& rotation) noexcept
@@ -108,6 +112,10 @@ namespace engine::graphics::entity {
 		{
 			return m_RotationAngle;
 		}
+		DirectX::XMVECTOR GetRotationVector() const noexcept
+		{
+			return DirectX::XMLoadFloat(&m_RotationAngle);
+		}
 
 
 		void Scale(const DirectX::XMFLOAT3& scale) noexcept
@@ -129,6 +137,10 @@ namespace engine::graphics::entity {
 		DirectX::XMFLOAT3 GetScale() const noexcept
 		{
 			return m_Scale;
+		}
+		DirectX::XMVECTOR GetScaleVector() const noexcept
+		{
+			return DirectX::XMLoadFloat3(&m_Scale);
 		}
 
 

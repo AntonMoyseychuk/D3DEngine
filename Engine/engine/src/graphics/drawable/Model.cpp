@@ -77,7 +77,7 @@ namespace engine::graphics::entity {
 		const aiScene* pScene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
 
 		if (pScene == nullptr) {
-			THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, ("Can't open the model!\n" + filepath).c_str());
+			THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, ("Can't find the model!\n" + filepath).c_str());
 		}
 
 		this->ProcessNode(pScene->mRootNode, pScene);

@@ -15,7 +15,7 @@
 namespace engine::app {
 	Application::Application(const wchar_t* title, uint32_t width, uint32_t height)
 		: m_Window(title, width, height), m_Light(m_Window.GetGraphics(), {0.0f, 1000.0f, 1000.0f}, {1.0f, 1.0f, 1.0f, 1.0f}),
-		m_SkyBox(m_Window.GetGraphics(), "sandbox\\res\\texture\\sphere.obj", 
+		m_SkyBox(m_Window.GetGraphics(), "sandbox\\res\\models\\sphere.obj", 
 			graphics::Texture(m_Window.GetGraphics(), L"sandbox\\res\\texture\\sky.jpg"))
 	{
 		m_SkyBox.SetOwnPixelShader(L"sandbox\\res\\shaders\\SkyBox.hlsl");
@@ -27,16 +27,17 @@ namespace engine::app {
 		m_Window.GetGraphics().Camera.SetPosition({ 0.0f, 0.0f, -10.0f });
 
 		const char* models[] = {
-			"sandbox\\res\\texture\\suzanne.obj",
-			"sandbox\\res\\texture\\sphere.obj",
-			"sandbox\\res\\texture\\Chaynik.obj",
-			"sandbox\\res\\texture\\sword.obj",
+			//"sandbox\\res\\models\\Chaynik.obj",
+			//"sandbox\\res\\models\\sphere.obj",
+			"sandbox\\res\\models\\suzanne.obj",
+			//"sandbox\\res\\models\\room.obj",
+			//"sandbox\\res\\models\\sword.obj",
 		};
 		const wchar_t* textures[] = {
+			//L"sandbox\\res\\texture\\Chaynik.png",
+			//L"sandbox\\res\\texture\\BatEye.dds",
 			L"sandbox\\res\\texture\\stones.bmp",
-			L"sandbox\\res\\texture\\BatEye.dds",
-			L"sandbox\\res\\texture\\Chaynik.png",
-			L"sandbox\\res\\texture\\sword.png",
+			//L"sandbox\\res\\texture\\sword.png",
 		};
 
 		std::unique_ptr<graphics::entity::Model> model = nullptr;
@@ -95,7 +96,7 @@ namespace engine::app {
 
 		//CAMERA LOGIC
 		const XMFLOAT3 ROTATION = m_Window.GetGraphics().Camera.GetRotation();
-		const float SPEED = 7.5f * dt;
+		float SPEED = 7.5f * dt;
 
 		if (m_Window.Keyboard.IsKeyPressed('W')) {
 			m_Window.GetGraphics().Camera.AdjustPosition(this->m_Window.GetGraphics().Camera.GetForwardVector() * SPEED);

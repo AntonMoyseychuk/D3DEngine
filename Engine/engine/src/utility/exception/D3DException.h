@@ -47,9 +47,22 @@ namespace engine::except {
 
 #define THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(hResult, msg)\
     throw ENGINE_D3D_EXCEPTION_MSG(hResult, msg, std::vector<std::string>())
+
+#define THROW_D3D_EXCEPTION_IF_FAILED(expr, info) m_DXGIInfoManager.Reset(); if (FAILED((D3D_OP_RESULT = (expr))))\
+	throw ENGINE_D3D_EXCEPTION(D3D_OP_RESULT, info)
+
+#define THROW_D3D_EXCEPTION_MSG_IF_FAILED(expr, msg, info) m_DXGIInfoManager.Reset(); if (FAILED((D3D_OP_RESULT = (expr))))\
+	throw ENGINE_D3D_EXCEPTION_MSG(D3D_OP_RESULT, msg, info)
 #else
 #define ENGINE_D3D_EXCEPTION(hResult) engine::except::D3DException(__FILE__, __LINE__, hResult)
 #define ENGINE_D3D_EXCEPTION_MSG(hResult, msg) engine::except::D3DException(msg, __FILE__, __LINE__, hResult)
 
 #define ENGINE_D3D_DEVICE_REMOVED_EXCEPTION(hResult) engine::except::D3DDeviceRemovedException(__FILE__, __LINE__, hResult)
+
+#define THROW_D3D_EXCEPTION_IF_FAILED(expr) if (FAILED((D3D_OP_RESULT = (expr))))\
+	throw ENGINE_D3D_EXCEPTION(D3D_OP_RESULT)
+
+#define THROW_D3D_EXCEPTION_MSG_IF_FAILED(expr, msg) if (FAILED((D3D_OP_RESULT = (expr))))\
+	throw ENGINE_D3D_EXCEPTION_MSG(D3D_OP_RESULT, msg)
+
 #endif

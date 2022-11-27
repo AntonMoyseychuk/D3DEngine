@@ -46,20 +46,14 @@ namespace engine::window {
 		: m_Title(title)
 	{
 		RECT wr = { 0, 0, width, height };
-		if (!AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, false)) {
+		if (!AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, false)) {
 			throw ENGINE_WINDOW_LAST_ERROR_EXCEPTION();
 		}
 		m_Width = wr.right - wr.left;
 		m_Height = wr.bottom - wr.top;
 
-		m_HWND = CreateWindow(
-			WindowClass::GetName(), title,
-			WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
-			CW_USEDEFAULT, CW_USEDEFAULT,
-			m_Width, m_Height,
-			nullptr, nullptr,
-			WindowClass::GetInstance(),
-			this
+		m_HWND = CreateWindow(WindowClass::GetName(), title, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+			m_Width, m_Height, nullptr, nullptr, WindowClass::GetInstance(), this
 		);
 		if (m_HWND == nullptr) {
 			throw ENGINE_WINDOW_LAST_ERROR_EXCEPTION();

@@ -3,20 +3,6 @@
 #include "engine/src/utility/winapi/WinAPI.h"
 #include "engine/src/utility/exception/D3DException.h"
 
-#ifndef NDEBUG
-#define THROW_D3D_EXCEPTION_IF_FAILED(expr, info) m_DXGIInfoManager.Reset(); if (FAILED((D3D_OP_RESULT = (expr))))\
-	throw ENGINE_D3D_EXCEPTION(D3D_OP_RESULT, info)
-
-#define THROW_D3D_EXCEPTION_MSG_IF_FAILED(expr, msg, info) m_DXGIInfoManager.Reset(); if (FAILED((D3D_OP_RESULT = (expr))))\
-	throw ENGINE_D3D_EXCEPTION_MSG(D3D_OP_RESULT, msg, info)
-
-#else
-#define THROW_D3D_EXCEPTION_IF_FAILED(expr) if (FAILED((D3D_OP_RESULT = (expr))))\
-	throw ENGINE_D3D_EXCEPTION(D3D_OP_RESULT)
-
-#define THROW_D3D_EXCEPTION_MSG_IF_FAILED(expr, msg) if (FAILED((D3D_OP_RESULT = (expr))))\
-	throw ENGINE_D3D_EXCEPTION_MSG(D3D_OP_RESULT, msg)
-#endif
 
 namespace engine::graphics {
 	Graphics::Graphics(window_id id)
