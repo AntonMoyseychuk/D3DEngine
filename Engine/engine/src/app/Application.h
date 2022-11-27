@@ -2,7 +2,7 @@
 #include "engine/src/window/Window.h"
 #include "engine/src/utility/time/Timer.h"
 
-#include "engine/src/graphics/drawable/Model.h"
+#include "engine/src/graphics/drawable/SkySphere.h"
 #include "engine/src/graphics/drawable/Light.h"
 
 namespace engine::app {
@@ -23,6 +23,6 @@ namespace engine::app {
 
 		graphics::light::Light m_Light;
 
-		graphics::entity::Model m_SkyBox;
+		graphics::SkySphere m_SkyBox;
 	};
 }

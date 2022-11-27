@@ -15,10 +15,8 @@
 namespace engine::app {
 	Application::Application(const wchar_t* title, uint32_t width, uint32_t height)
 		: m_Window(title, width, height), m_Light(m_Window.GetGraphics(), {0.0f, 1000.0f, 1000.0f}, {1.0f, 1.0f, 1.0f, 1.0f}),
-		m_SkyBox(m_Window.GetGraphics(), "sandbox\\res\\models\\sphere.obj", 
-			graphics::Texture(m_Window.GetGraphics(), L"sandbox\\res\\texture\\sky.jpg"))
+		m_SkyBox(m_Window.GetGraphics(), graphics::Texture(m_Window.GetGraphics(), L"sandbox\\res\\texture\\sky.jpg"))
 	{
-		m_SkyBox.SetOwnPixelShader(L"sandbox\\res\\shaders\\SkyBox.hlsl");
 		m_SkyBox.Scale(100.0f);
 
 		m_Window.GetGraphics().SetProjectionMatrix(
@@ -42,8 +40,8 @@ namespace engine::app {
 
 		std::unique_ptr<graphics::entity::Model> model = nullptr;
 		for (uint32_t i = 0; i < ARRAYSIZE(models); ++i) {
-			model = std::make_unique<graphics::entity::Model>(m_Window.GetGraphics(), models[i], 
-				graphics::Texture(m_Window.GetGraphics(), textures[i]));
+			model = std::make_unique<graphics::entity::Model>(m_Window.GetGraphics(), models[i]/*, 
+				graphics::Texture(m_Window.GetGraphics(), textures[i])*/);
 			model->SetPosition(i * 5.0f, 0.0f, 0.0f);
 
 			m_Drawables.emplace_back(std::move(model));

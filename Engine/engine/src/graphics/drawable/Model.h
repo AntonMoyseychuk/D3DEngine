@@ -1,16 +1,13 @@
 #pragma once
 #include "engine/src/graphics/drawable/Entity.h"
-#include "engine/src/graphics/bindable/Texture.h"
-#include "engine/src/graphics/bindable/TransformConstantBuffer.h"
 #include "engine/src/graphics/bindable/Mesh.h"
-#include "engine/src/graphics/Camera.h"
 
 
 namespace engine::graphics::entity {
 	class Model : public Entity<Model>
 	{
 	public:
-		Model(const Graphics& gfx, const std::string& modelFilepath, const Texture& texture);
+		Model(const Graphics& gfx, const std::string& modelFilepath/*, const Texture& texture*/);
 
 		void Draw() const noexcept override;
 

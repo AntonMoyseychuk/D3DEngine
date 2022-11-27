@@ -197,6 +197,7 @@
     <ClCompile Include="sandbox\src\sandbox.cpp" />
     <ClCompile Include="engine\src\window\Window.cpp" />
     <ClCompile Include="engine\src\utility\time\Timer.cpp" />
+    <ClCompile Include="engine\src\graphics\drawable\SkySphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\src\graphics\bindable\Bindable.h" />
@@ -229,6 +230,7 @@
     <ClInclude Include="engine\src\graphics\bindable\PrimitiveTopology.h" />
     <ClInclude Include="engine\src\graphics\bindable\VertexShader.h" />
     <ClInclude Include="engine\src\graphics\drawable\Light.h" />
+    <ClInclude Include="engine\src\graphics\drawable\SkySphere.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,8 +4,10 @@
 #include "engine/src/graphics/bindable/PixelShader.h"
 #include "engine/src/graphics/bindable/PrimitiveTopology.h"
 
+#include "engine/src/graphics/bindable/TransformConstantBuffer.h"
+
 namespace engine::graphics::entity {
-	Model::Model(const Graphics& gfx, const std::string& modelFilepath, const Texture& texture)
+	Model::Model(const Graphics& gfx, const std::string& modelFilepath/*, const Texture& texture*/)
 		: Entity<Model>(gfx, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
 	{
 		if (!IsStaticInitialized()) {
@@ -21,7 +23,7 @@ namespace engine::graphics::entity {
 			AddStaticBind(std::make_unique<PrimitiveTopology>(gfx, engine::graphics::PrimitiveTopology::Type::TRIANGLES));
 		}
 
-		AddBind(std::make_unique<Texture>(texture), GetBinds().end());
+		//AddBind(std::make_unique<Texture>(texture), GetBinds().end());
 		AddBind(std::make_unique<TransformConstantBuffer>(gfx, *this), GetBinds().end());
 
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

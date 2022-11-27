@@ -84,6 +84,9 @@
     <ClCompile Include="engine\src\graphics\drawable\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\graphics\drawable\SkySphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\src\utility\parser\Parser.h">
@@ -174,6 +177,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\graphics\drawable\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\graphics\drawable\SkySphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

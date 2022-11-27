@@ -1,8 +1,8 @@
 #pragma once
-#include "engine/src/graphics/drawable/Drawable.h"
+#include "engine/src/graphics/bindable/Bindable.h"
 #include "engine/src/graphics/bindable/VertexBuffer.h"
 #include "engine/src/graphics/bindable/IndexBuffer.h"
-#include "TransformConstantBuffer.h"
+
 
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
@@ -23,5 +23,7 @@ namespace engine::graphics {
 	private:
 		VertexBuffer m_VBO;
 		IndexBuffer m_IBO;
+
+		
 	};
 }
