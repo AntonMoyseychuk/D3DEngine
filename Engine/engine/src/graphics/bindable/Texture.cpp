@@ -1,5 +1,5 @@
 #include "Texture.h"
-#include "engine/src/utility/exception/D3DException.h"
+#include "engine/src/utility/exception/ExeptionMacros.h"
 
 namespace engine::graphics {
 	Texture::Texture(const Graphics& gfx, const wchar_t* filepath)
@@ -16,9 +16,8 @@ namespace engine::graphics {
 
 	void Texture::OnCreate() const
 	{
-		if (FAILED(D3DX11CreateShaderResourceViewFromFile(m_Graphics.GetDevice(), m_Filepath.c_str(), NULL, NULL, &m_ID, NULL))) {
-			THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, "D3DX11CreateShaderResourceViewFromFile failed!");
-		}
+		HRESULT hr = D3DX11CreateShaderResourceViewFromFile(m_Graphics.GetDevice(), m_Filepath.c_str(), NULL, NULL, &m_ID, NULL);
+		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "TEXTURE", "D3DX11CreateShaderResourceViewFromFile failed!");
 
 		D3D11_SAMPLER_DESC sampDesc;
 		ZeroMemory(&sampDesc, sizeof(sampDesc));
@@ -31,8 +30,7 @@ namespace engine::graphics {
 		sampDesc.MinLOD = 0;
 		sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
-		if (FAILED(m_Graphics.GetDevice()->CreateSamplerState(&sampDesc, &m_SamplerState))) {
-			THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, "CreateSamplerState failed!");
-		}
+		hr = m_Graphics.GetDevice()->CreateSamplerState(&sampDesc, &m_SamplerState);
+		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "TEXTURE", "CreateSamplerState failed!");
 	}
 }

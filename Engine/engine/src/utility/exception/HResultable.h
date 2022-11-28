@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "engine/src/utility/winapi/WinAPI.h"
-#include "engine/src/utility/parser/Parser.h"
+#include "engine/src/utility/parser/StringParser.h"
 
 namespace engine::except {
 	class HResultable
@@ -28,7 +28,7 @@ namespace engine::except {
 			}
 
 			msgBuff[msgLen - 2] = '\0';
-			std::string error = engine::util::Parser::ToString(msgBuff);
+			std::string error = engine::util::StringParser::ToString(msgBuff);
 			LocalFree(msgBuff);
 			return error;
 		}

@@ -1,9 +1,6 @@
 #pragma once
-#ifndef NDEBUG
-#include "engine/src/utility/exception/DXGIInfoManager.h"
-#endif
 
-#include "engine/src/graphics/Camera.h"
+#include "engine/src/graphics/camera/Camera.h"
 
 #include <d3dx11.h>
 #include <DirectXMath.h>
@@ -14,7 +11,7 @@ namespace engine::graphics {
 	{
 	public:
 		typedef HWND window_id;
-		camera::Camera Camera;
+		Camera Camera;
 
 	public:
 		Graphics(window_id id);
@@ -38,10 +35,6 @@ namespace engine::graphics {
 		DirectX::XMMATRIX GetProjection() const noexcept;
 
 	private:
-#ifndef NDEBUG
-		util::DXGIInfoManager m_DXGIInfoManager;
-#endif
-
 		Microsoft::WRL::ComPtr<ID3D11Device> m_Device = nullptr;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> m_SwapChain = nullptr;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_DeviceContext = nullptr;

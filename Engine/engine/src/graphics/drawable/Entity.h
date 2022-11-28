@@ -1,7 +1,6 @@
 #pragma once
 #include "Drawable.h"
-#include "engine/src/utility/exception/D3DException.h"
-#include "engine/src/graphics/Camera.h"
+#include "engine/src/graphics/camera/Camera.h"
 
 #include <vector>
 
@@ -167,17 +166,14 @@ namespace engine::graphics::entity {
 
 		static void AddStaticBind(std::unique_ptr<Bindable> bind, std::vector<std::unique_ptr<Bindable>>::iterator where = m_StaticBinds.end())
 		{
-			if (typeid(*bind) == typeid(IndexBuffer)) {
-				THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "*Must* use AddStaticIndexBuffer to bind index buffer");
-			}
+			THROW_EXCEPTION_IF_LOGIC_ERROR(typeid(*bind) == typeid(IndexBuffer), "ENTITY",
+				"*Must* use AddStaticIndexBuffer to bind index buffer");
 			m_StaticBinds.insert(where, std::move(bind));
 		}
 
 		void AddStaticIndexBuffer(std::unique_ptr<IndexBuffer> ib) noexcept
 		{
-			if (m_IndexBuffer != nullptr) {
-				THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "Attempting to add index buffer a second time!");
-			}
+			THROW_EXCEPTION_IF_LOGIC_ERROR(m_IndexBuffer != nullptr, "ENTITY", "Attempting to add index buffer a second time!");
 
 			m_IndexBuffer = ib.get();
 			m_StaticBinds.insert(m_StaticBinds.begin(), std::move(ib));
@@ -185,9 +181,7 @@ namespace engine::graphics::entity {
 
 		void SetIndexBufferFromStatic() noexcept
 		{
-			if (m_IndexBuffer != nullptr) {
-				THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "Attempting to add index buffer a second time!");
-			}
+			THROW_EXCEPTION_IF_LOGIC_ERROR(m_IndexBuffer != nullptr, "ENTITY", "Attempting to add index buffer a second time!");
 
 			for (const auto& bind : m_StaticBinds) {
 				if (const auto p = dynamic_cast<IndexBuffer*>(bind.get())) {
@@ -196,9 +190,7 @@ namespace engine::graphics::entity {
 				}
 			}
 
-			if (m_IndexBuffer == nullptr) {
-				THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "Failed to find Index Buffer in static binds!");
-			}
+			THROW_EXCEPTION_IF_LOGIC_ERROR(m_IndexBuffer == nullptr, "ENTITY", "Failed to find Index Buffer in static binds!");
 		}
 
 	protected:

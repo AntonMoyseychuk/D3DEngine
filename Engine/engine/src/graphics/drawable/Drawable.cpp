@@ -36,17 +36,15 @@ namespace engine::graphics {
 
 	void Drawable::AddBind(std::unique_ptr<Bindable> bind, std::vector<std::unique_ptr<Bindable>>::iterator where) noexcept
 	{
-		if (typeid(*bind) == typeid(IndexBuffer)) {
-			THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "*Must* use AddIndexBuffer to bind index buffer");
-		}
+		THROW_EXCEPTION_IF_LOGIC_ERROR(typeid(*bind) == typeid(IndexBuffer), "DRAWABLE", 
+			"*Must* use AddIndexBuffer to bind index buffer");
 		m_Binds.insert(where, std::move(bind));
 	}
 
 	void Drawable::AddIndexBuffer(std::unique_ptr<IndexBuffer> ib) noexcept
 	{
-		if (m_IndexBuffer != nullptr) {
-			THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "Attempting to add index buffer a second time!");
-		}
+		THROW_EXCEPTION_IF_LOGIC_ERROR(m_IndexBuffer != nullptr, "DRAWABLE",
+			"Attempting to add index buffer a second time!");
 
 		m_IndexBuffer = ib.get();
 		m_Binds.insert(m_Binds.begin(), std::move(ib));

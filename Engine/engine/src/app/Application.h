@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/src/window/Window.h"
+#include "engine/src/graphics/window/Window.h"
 #include "engine/src/utility/time/Timer.h"
 
 #include "engine/src/graphics/drawable/SkySphere.h"

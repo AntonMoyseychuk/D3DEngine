@@ -1,5 +1,4 @@
 #include "PixelShader.h"
-#include "engine/src/utility/exception/D3DException.h"
 
 #include <d3dcompiler.h>
 #include <stdarg.h>
@@ -23,18 +22,17 @@ namespace engine::graphics {
             "main", "ps_4_0", 0, 0, nullptr, &m_PsBinary, &errorBlob, nullptr)))
         {
             if (errorBlob == nullptr) {
-                THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG,
-                    ("Invalid pixel shader filepath: " + util::Parser::ToString(m_Filepath)).c_str());
+                THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", "Invalid pixel shader filepath: " + util::StringParser::ToString(m_Filepath));
             }
             else {
                 std::string error((char*)errorBlob->GetBufferPointer());
-                THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, ("[PIXEL SHADER] " + error).c_str());
+                THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", error);
             }
         }
 
         if (FAILED(m_Graphics.GetDevice()->CreatePixelShader(m_PsBinary->GetBufferPointer(),
             m_PsBinary->GetBufferSize(), nullptr, &m_PS))) {
-            THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, "Pixel shader creation failed!");;
+            THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", "Pixel shader creation failed!");
         }
     }
 }

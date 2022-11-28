@@ -1,5 +1,4 @@
 #include "VertexShader.h"
-#include "engine/src/utility/exception/D3DException.h"
 
 #include <d3dcompiler.h>
 #include <stdarg.h>
@@ -21,10 +20,7 @@ namespace engine::graphics {
 
     void VertexShader::SetInputLayout(const std::vector<InputLayoutAttribute>& attribs)
     {
-        if (attribs.empty()) {
-            THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG,
-                "The size of \"attribs\" must be greater than 0!");
-        }
+        THROW_EXCEPTION_IF_LOGIC_ERROR(attribs.empty(), "VERTEX SHADER", "The size of \"attribs\" must be greater than 0!");
 
         for (const auto& attrib : attribs) {
             switch (attrib)
@@ -54,9 +50,8 @@ namespace engine::graphics {
                 break;
 
             default:
-                THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, ("Invalid attribute value [Attribute = "
-                    + std::to_string(static_cast<uint32_t>(attrib)) + "]").c_str()
-                );
+                THROW_EXCEPTION_IF_LOGIC_ERROR(true, "VERTEX SHADER", "Invalid attribute value [Attribute = "
+                    + std::to_string(static_cast<uint32_t>(attrib)) + "]");
                 break;
             }
         }
@@ -73,15 +68,11 @@ namespace engine::graphics {
     {
         Bind();
 
-        if (m_InputLayoutDesc.empty()) {
-            THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "Input Layout in not set!");
-        }
+        THROW_EXCEPTION_IF_LOGIC_ERROR(m_InputLayoutDesc.empty(), "VERTEX SHADER", "Input Layout in not set!");
 
-        if (FAILED(m_Graphics.GetDevice()->CreateInputLayout(m_InputLayoutDesc.data(), m_InputLayoutDesc.size(),
-            m_VsBinary->GetBufferPointer(), m_VsBinary->GetBufferSize(), &m_InputLayout))) {
-            THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL,
-                "Input Layout creation failed!\nCheck the correctness of the arguments.");
-        }
+        HRESULT hr = m_Graphics.GetDevice()->CreateInputLayout(m_InputLayoutDesc.data(), m_InputLayoutDesc.size(),
+            m_VsBinary->GetBufferPointer(), m_VsBinary->GetBufferSize(), &m_InputLayout);
+        THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "VERTEX SHADER", "Input Layout creation failed!\nCheck the correctness of the arguments.");
         m_Graphics.GetDeviceContext()->IASetInputLayout(m_InputLayout.Get());
     }
 
@@ -92,18 +83,17 @@ namespace engine::graphics {
             "main", "vs_4_0", 0, 0, nullptr, &m_VsBinary, &errorBlob, nullptr)))
         {
             if (errorBlob == nullptr) {
-                THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(D3D11_ERROR_FILE_NOT_FOUND,
-                    ("Invalid vertex shader filepath: " + util::Parser::ToString(m_Filepath)).c_str());
+                THROW_EXCEPTION_IF_LOGIC_ERROR(true, "VERTEX SHADER", 
+                    "Invalid vertex shader filepath: " + util::StringParser::ToString(m_Filepath));
             }
             else {
                 std::string error((char*)errorBlob->GetBufferPointer());
-                THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, ("[VERTEX SHADER] " + error).c_str());
+                THROW_EXCEPTION_IF_LOGIC_ERROR(true, "VERTEX SHADER", error);
             }
         }
 
-        if (FAILED(m_Graphics.GetDevice()->CreateVertexShader(m_VsBinary->GetBufferPointer(),
-            m_VsBinary->GetBufferSize(), nullptr, &m_VS))) {
-            THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(DXGI_ERROR_INVALID_CALL, "Vertex shader creation failed!");
-        }
+        HRESULT hr = m_Graphics.GetDevice()->CreateVertexShader(m_VsBinary->GetBufferPointer(),
+            m_VsBinary->GetBufferSize(), nullptr, &m_VS);
+        THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "VERTEX SHADER", "Vertex shader creation failed!");
     }
 }

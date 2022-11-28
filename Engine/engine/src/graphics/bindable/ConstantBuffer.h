@@ -17,9 +17,7 @@ namespace engine::graphics {
             this->m_BufferDesc.ByteWidth = sizeof(T);
 
             HRESULT hr = this->GetGraphics().GetDevice()->CreateBuffer(&this->m_BufferDesc, nullptr, &this->m_ID);
-            if (FAILED(hr)) {
-                THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(hr, (std::string(this->GetType()) + " Buffer creation failed!").c_str());
-            }
+            THROW_EXCEPTION_IF_HRESULT_ERROR(hr, std::string(this->GetType()) + " BUFFER", std::string(this->GetType()) + " Buffer creation failed!");
         }
 
         ConstantBuffer(const Graphics& gfx, const T& data)
@@ -38,9 +36,7 @@ namespace engine::graphics {
         {
             D3D11_MAPPED_SUBRESOURCE msr;
             HRESULT hr = this->GetGraphics().GetDeviceContext()->Map(this->m_ID.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &msr);
-            if (FAILED(hr)) {
-                THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(hr, "Can't get constant buffer data from GPU!");
-            }
+            THROW_EXCEPTION_IF_HRESULT_ERROR(hr, std::string(this->GetType()) + " BUFFER", "Can't get constant buffer data from GPU!");
             memcpy(msr.pData, &data, sizeof(data));
             this->m_Graphics.GetDeviceContext()->Unmap(this->m_ID.Get(), 0u);
         }

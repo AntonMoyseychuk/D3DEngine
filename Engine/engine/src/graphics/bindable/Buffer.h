@@ -4,7 +4,7 @@
 #include <wrl.h>
 
 #include "Bindable.h"
-#include "engine/src/utility/exception/D3DException.h"
+#include "engine/src/utility/exception/ExeptionMacros.h"
 
 namespace engine::graphics {
 	template <typename T>
@@ -31,17 +31,13 @@ namespace engine::graphics {
 
 		virtual void OnCreateID(const T* data) const 
 		{
-			if (data == nullptr) {
-				THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "\"data\" argument is nullptr!");
-			}
+			THROW_EXCEPTION_IF_LOGIC_ERROR(data == nullptr, "BUFFER", "\"data\" argument is nullptr!");
 
 			D3D11_SUBRESOURCE_DATA gpuBuffer = { 0 };
 			gpuBuffer.pSysMem = data;
 
 			HRESULT hr = GetGraphics().GetDevice()->CreateBuffer(&this->m_BufferDesc, &gpuBuffer, &this->m_ID);
-			if (FAILED(hr)) {
-				THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(hr, (std::string(this->GetType()) + " Buffer creation failed!").c_str());
-			}
+			THROW_EXCEPTION_IF_HRESULT_ERROR(hr, " BASE BUFFER", "Base buffer creation failed!");
 		}
 
 	protected:

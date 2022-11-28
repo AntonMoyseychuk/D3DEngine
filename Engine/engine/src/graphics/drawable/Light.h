@@ -1,7 +1,7 @@
 #pragma once
 #include "engine/src/graphics/bindable/ConstantBuffer.h"
 #include "engine/src/graphics/drawable/Entity.h"
-#include "engine/src/graphics/Camera.h"
+#include "engine/src/graphics/camera/Camera.h"
 
 namespace engine::graphics::light {
 	class Light : protected entity::Entity<Light> 

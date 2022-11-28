@@ -4,9 +4,7 @@ namespace engine::graphics {
 	IndexBuffer::IndexBuffer(const Graphics& graphics, const std::vector<uint32_t>& indices)
 		: Buffer(graphics, indices.size() * sizeof(uint32_t))
 	{
-		if (indices.empty()) {
-			THROW_ENGINE_D3D_EXCEPTION_MSG_NOINFO(E_INVALIDARG, "\"indices\" is empty!");
-		}
+		THROW_EXCEPTION_IF_LOGIC_ERROR(indices.empty(), std::string(this->GetType()) + " BUFFER", "\"indices\" argument is empty!");
 
 		m_BufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
 

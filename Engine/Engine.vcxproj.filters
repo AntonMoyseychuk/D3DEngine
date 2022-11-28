@@ -18,7 +18,7 @@
     <ClCompile Include="sandbox\src\sandbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\window\Window.cpp">
+    <ClCompile Include="engine\src\graphics\window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\input\Keyboard.cpp">
@@ -34,18 +34,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\graphics\Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\utility\exception\WindowException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\utility\exception\Exception.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\utility\exception\D3DException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\utility\exception\DXGIInfoManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\graphics\bindable\IndexBuffer.cpp">
@@ -66,7 +54,7 @@
     <ClCompile Include="engine\src\graphics\bindable\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\graphics\Camera.cpp">
+    <ClCompile Include="engine\src\graphics\camera\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\graphics\bindable\Texture.cpp">
@@ -87,9 +75,15 @@
     <ClCompile Include="engine\src\graphics\drawable\SkySphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\utility\exception\Exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\utility\exception\WindowException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\src\utility\parser\Parser.h">
+    <ClInclude Include="engine\src\utility\parser\StringParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\utility\winapi\WinAPI.h">
@@ -110,22 +104,7 @@
     <ClInclude Include="engine\src\graphics\Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\window\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\utility\exception\WindowException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\utility\exception\Exception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\utility\exception\D3DException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\utility\exception\HResultable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\src\utility\exception\DXGIInfoManager.h">
+    <ClInclude Include="engine\src\graphics\window\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\graphics\bindable\Buffer.h">
@@ -158,7 +137,7 @@
     <ClInclude Include="engine\src\graphics\drawable\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\src\graphics\Camera.h">
+    <ClInclude Include="engine\src\graphics\camera\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\graphics\bindable\Texture.h">
@@ -180,6 +159,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\src\graphics\drawable\SkySphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\utility\exception\ExeptionMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\utility\exception\Exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\utility\exception\HResultable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\src\utility\exception\WindowException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/src/graphics/Graphics.h"
+#include "engine/src/utility/exception/ExeptionMacros.h"
 
 #include <DirectXMath.h>
 #include <memory>

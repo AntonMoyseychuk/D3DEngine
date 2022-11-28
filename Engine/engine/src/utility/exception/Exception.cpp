@@ -20,7 +20,7 @@ namespace engine::except {
 
 	const char* Exception::GetType() const noexcept
 	{
-		return "Base Engine Exception";
+		return "BASE ENGINE EXCEPTION";
 	}
 
 	const char* Exception::GetFile() const noexcept
@@ -30,7 +30,7 @@ namespace engine::except {
 
 	std::string Exception::GetLocationString() const noexcept
 	{
-		return "[File]" + m_File + " (" + std::to_string(m_Line) + ")";
+		return "[File]" + m_File + " (line: " + std::to_string(m_Line) + ")";
 	}
 
 	uint32_t Exception::GetLine() const noexcept
