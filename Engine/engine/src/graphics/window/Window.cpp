@@ -6,21 +6,18 @@
 
 
 namespace engine::window {
-	Window::WindowClass Window::WindowClass::s_WindowClass;
-
-	Window::WindowClass::WindowClass() noexcept
+	Window::WindowClass::WindowClass(const wchar_t* iconFilepath) noexcept
 		: m_Instance(GetModuleHandle(nullptr))
 	{
 		WNDCLASSEX wc = { 0 };
 		wc.cbSize = sizeof(wc);
 		wc.style = CS_OWNDC;
-		wc.hInstance = GetInstance();
+		wc.hInstance = m_Instance;
 		wc.lpszClassName = GetName();
 		wc.lpfnWndProc = HandleMsgSetup;
 		wc.cbClsExtra = 0;
 		wc.cbWndExtra = 0;
-		wc.hIcon = (HICON)LoadImage(nullptr, L"D:\\Studies\\Graphics\\D3DEngine\\Engine\\sandbox\\res\\texture\\icon.ico",
-			IMAGE_ICON, DI_DEFAULTSIZE, DI_DEFAULTSIZE, LR_LOADFROMFILE);;
+		wc.hIcon = (HICON)LoadImage(nullptr, iconFilepath, IMAGE_ICON, DI_DEFAULTSIZE, DI_DEFAULTSIZE, LR_LOADFROMFILE);;
 		wc.hCursor = nullptr;
 		wc.hbrBackground = nullptr;
 		wc.lpszMenuName = nullptr;
@@ -39,12 +36,17 @@ namespace engine::window {
 
 	HINSTANCE Window::WindowClass::GetInstance() noexcept
 	{
-		return s_WindowClass.m_Instance;
+		return Get().m_Instance;
 	}
 
+	Window::WindowClass& Window::WindowClass::Get() noexcept
+	{
+		static WindowClass windowClass(L"D:\\Studies\\Graphics\\D3DEngine\\Engine\\sandbox\\res\\texture\\icon.ico");
+		return windowClass;
+	}
 
 	Window::Window(const wchar_t* title, uint32_t width, uint32_t height)
-		: m_Title(title)
+		: m_Title(title), m_WindowClass(WindowClass::Get())
 	{
 		RECT wr = { 0, 0, width, height };
 		if (!AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, false)) {
@@ -65,7 +67,7 @@ namespace engine::window {
 		try {
 			m_Graphics = std::make_unique<graphics::Graphics>(m_HWND);
 		}
-		catch (const except::Exception& ex) {
+		catch (const std::exception& ex) {
 			DestroyWindow(m_HWND);
 			throw;
 		}

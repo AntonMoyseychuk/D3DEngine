@@ -20,17 +20,17 @@ namespace engine::window {
 		public:
 			static const wchar_t* GetName() noexcept;
 			static HINSTANCE GetInstance() noexcept;
+
+			static WindowClass& Get() noexcept;
 		private:
-			WindowClass() noexcept;
+			WindowClass(const wchar_t* iconFilepath) noexcept;
 			~WindowClass() noexcept;
 
 			WindowClass(const WindowClass& wc) = delete;
 			WindowClass& operator=(const WindowClass& wc) = delete;
 
 		private:
-			static WindowClass s_WindowClass;
 			static constexpr const wchar_t* s_ClassName = L"Window";
-
 			HINSTANCE m_Instance;
 		};
 
@@ -68,6 +68,8 @@ namespace engine::window {
 		std::wstring m_Title;
 		uint32_t m_Width;
 		uint32_t m_Height;
+
+		WindowClass& m_WindowClass;
 
 		std::unique_ptr<engine::graphics::Graphics> m_Graphics = nullptr;
 	};
