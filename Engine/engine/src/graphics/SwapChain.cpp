@@ -28,6 +28,6 @@ namespace engine::graphics {
 
 		auto& device = D3DDevice::Get();
 		HRESULT hr = device.m_DXGIFactory->CreateSwapChain(device.m_D3DDevice.Get(), &swapChainDesc, &m_SwapChain);
-		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "SWAP CHAIN", "swap chain creation failed");
+		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "SWAP CHAIN", "Swap chain creation failed");
 	}
 }
