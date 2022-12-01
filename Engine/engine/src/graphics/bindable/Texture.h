@@ -1,14 +1,15 @@
 #pragma once
-#include "Bindable.h"
-
+#include <string>
 #include <d3dx11.h>
 #include <wrl.h>
+
+#include "Bindable.h"
 
 namespace engine::graphics {
 	class Texture : public Bindable
 	{
 	public:
-		Texture(const Graphics& gfx, const wchar_t* filepath);
+		Texture(const wchar_t* filepath);
 		void Bind() const noexcept override;
 
 	private:

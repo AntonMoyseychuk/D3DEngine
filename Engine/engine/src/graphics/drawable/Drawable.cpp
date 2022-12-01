@@ -2,15 +2,6 @@
 #include "engine/src/graphics/bindable/IndexBuffer.h"
 
 namespace engine::graphics {
-	const Graphics* Drawable::m_Graphics = nullptr;
-
-	Drawable::Drawable(const Graphics& gfx)
-	{
-		if (m_Graphics == nullptr) {
-			m_Graphics = &gfx;
-		}
-	}
-
 	const std::vector<std::unique_ptr<Bindable>>& Drawable::GetBinds() const noexcept
 	{
 		return m_Binds;
@@ -31,7 +22,7 @@ namespace engine::graphics {
 			bind->Bind();
 		}
 
-		m_Graphics->DrawIndexed(m_IndexBuffer->GetIndexCount());
+		Graphics::Get().DrawIndexed(m_IndexBuffer->GetIndexCount());
 	}
 
 	void Drawable::AddBind(std::unique_ptr<Bindable> bind, std::vector<std::unique_ptr<Bindable>>::iterator where) noexcept

@@ -1,67 +1,45 @@
 #include "Graphics.h"
+#include "D3DDevice.h"
+
 #include "engine/src/utility/exception/ExeptionMacros.h"
 #include "engine/src/utility/winapi/WinAPI.h"
 
 
 namespace engine::graphics {
-	Graphics::Graphics(window_id id)
-		: m_ProjectionMatrix(DirectX::XMMatrixIdentity()), Camera()
+	Graphics& Graphics::Get() noexcept
 	{
-		//Device & SwapChain
-		DXGI_SWAP_CHAIN_DESC swapChainDesc = { 0 };
-		swapChainDesc.BufferDesc.Width = 0;
-		swapChainDesc.BufferDesc.Height = 0;
-		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-		swapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
-		swapChainDesc.BufferDesc.RefreshRate.Denominator = 0;
-		swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-		swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-		swapChainDesc.SampleDesc.Count = 1;
-		swapChainDesc.SampleDesc.Quality = 0;
-		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-		swapChainDesc.BufferCount = 1;
-		swapChainDesc.OutputWindow = id;
-		swapChainDesc.Windowed = true;
-		swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-		swapChainDesc.Flags = 0;
+		static Graphics gfx;
+		return gfx;
+	}
 
-		HRESULT D3D_OP_RESULT = D3D11CreateDeviceAndSwapChain(
-			nullptr,
-			D3D_DRIVER_TYPE_HARDWARE,
-			nullptr,
-			D3D11_CREATE_DEVICE_DEBUG,
-			nullptr,
-			0,
-			D3D11_SDK_VERSION,
-			&swapChainDesc,
-			&m_SwapChain,
-			&m_Device,
-			nullptr,
-			&m_DeviceContext
-		);
-		THROW_EXCEPTION_IF_HRESULT_ERROR(D3D_OP_RESULT, "GRAPHICS", "D3D11CreateDeviceAndSwapChain failed!");
+	void Graphics::Init(SwapChain& swapChain)
+	{
+		THROW_EXCEPTION_IF_LOGIC_ERROR(swapChain.m_SwapChain == nullptr, "GRAPHICS", 
+			"Swap chain is not initialized, it must be inialized before graphics initialization");
+
 
 		Microsoft::WRL::ComPtr<ID3D11Resource> pBackBuffer = nullptr;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(m_SwapChain->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer),
+		THROW_EXCEPTION_IF_HRESULT_ERROR(swapChain.GetSwapChainDXGI()->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer),
 			"GRAPHICS", "m_SwapChain->GetBuffer failed!");
-
-		THROW_EXCEPTION_IF_HRESULT_ERROR(m_Device->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &m_RenderTargetView),
+		
+		
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &m_RenderTargetView),
 			"GRAPHICS", "Render Target View creation failed!");
-
-
+		
+		
 		D3D11_DEPTH_STENCIL_DESC dsDesc = {};
 		dsDesc.DepthEnable = true;
 		dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 		dsDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilState = nullptr;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(m_Device->CreateDepthStencilState(&dsDesc, &m_DepthStencilState), "GRAPHICS"
-			"Depth Stencil State creation failed!");
-		m_DeviceContext->OMSetDepthStencilState(m_DepthStencilState.Get(), 1u);
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateDepthStencilState(&dsDesc, &m_DepthStencilState), 
+			"GRAPHICS", "Depth Stencil State creation failed!");
+		D3DDevice::Get().GetDeviceContextD3D11()->OMSetDepthStencilState(m_DepthStencilState.Get(), 1u);
 		
-
+		
 		RECT clientRect = { 0 };
 		GetClientRect(GetForegroundWindow(), &clientRect);
-
+		
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencil = nullptr;
 		D3D11_TEXTURE2D_DESC depthDesc = {};
 		depthDesc.Width = clientRect.right - clientRect.left;
@@ -73,71 +51,60 @@ namespace engine::graphics {
 		depthDesc.SampleDesc.Quality = 0u;
 		depthDesc.Usage = D3D11_USAGE_DEFAULT;
 		depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(m_Device->CreateTexture2D(&depthDesc, nullptr, &depthStencil), "GRAPHICS"
-			"m_Device->CreateTexture2D failed!");
-
-
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateTexture2D(&depthDesc, nullptr, &depthStencil), 
+			"GRAPHICS", "m_Device->CreateTexture2D failed!");
+		
+		
 		D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc = {};
 		depthStencilViewDesc.Format = DXGI_FORMAT_D32_FLOAT;
 		depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		depthStencilViewDesc.Texture2D.MipSlice = 0u;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(m_Device->CreateDepthStencilView(depthStencil.Get(), &depthStencilViewDesc, &m_DepthStencilView),
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateDepthStencilView(depthStencil.Get(), &depthStencilViewDesc, &m_DepthStencilView),
 			"GRAPHICS", "m_Device->CreateTexture2D failed!");
-
-		m_DeviceContext->OMSetRenderTargets(1u, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
-
+		
+		D3DDevice::Get().GetDeviceContextD3D11()->OMSetRenderTargets(1u, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
+		
 		D3D11_VIEWPORT viewPort = { 0 };
 		viewPort.Width = clientRect.right - clientRect.left;
 		viewPort.Height = clientRect.bottom - clientRect.top;
 		viewPort.MinDepth = 0.0f;
 		viewPort.MaxDepth = 1.0f;
-		m_DeviceContext->RSSetViewports(1, &viewPort);
-
-
+		D3DDevice::Get().GetDeviceContextD3D11()->RSSetViewports(1, &viewPort);
+		
+		
 		D3D11_RASTERIZER_DESC rastDesc;
 		memset(&rastDesc, 0, sizeof(rastDesc));
 		rastDesc.CullMode = D3D11_CULL_FRONT;
 		rastDesc.DepthClipEnable = true;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		m_Device->CreateRasterizerState(&rastDesc, &m_CullStateFront);
-
+		D3DDevice::Get().GetDeviceD3D11()->CreateRasterizerState(&rastDesc, &m_CullStateFront);
+		
 		rastDesc.CullMode = D3D11_CULL_BACK;
-		m_Device->CreateRasterizerState(&rastDesc, &m_CullStateBackward);
+		D3DDevice::Get().GetDeviceD3D11()->CreateRasterizerState(&rastDesc, &m_CullStateBackward);
 	}
 
-	void Graphics::SwapBuffers() const noexcept
+	void Graphics::ClearBuffers(float r, float g, float b, float a) const noexcept
 	{
-		HRESULT D3D_OP_RESULT;
-		if (FAILED(D3D_OP_RESULT = m_SwapChain->Present(1u, 0u))) {
-			if (D3D_OP_RESULT == DXGI_ERROR_DEVICE_REMOVED) {
-				THROW_EXCEPTION_IF_LOGIC_ERROR(true, "GRAPHICS", "DXGI_ERROR_DEVICE_REMOVED");
-			}
-			else {
-				THROW_EXCEPTION_IF_HRESULT_ERROR(D3D_OP_RESULT, "GRAPHICS", "Swap buffers failed");
-			}
-		}
-	}
-
-	void Graphics::ClearBuffers(float r, float g, float b) const noexcept
-	{
-		float color[] = { r, g, b, 1.0f };
-		m_DeviceContext->ClearRenderTargetView(m_RenderTargetView.Get(), color);
-		m_DeviceContext->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
+		auto immContext = D3DDevice::Get().GetDeviceContextD3D11();
+		
+		float color[] = { r, g, b, a };
+		immContext->ClearRenderTargetView(m_RenderTargetView.Get(), color);
+		immContext->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 	}
 
 	void Graphics::DrawIndexed(uint32_t count) const noexcept
 	{
-		m_DeviceContext->DrawIndexed(count, 0, 0);
+		D3DDevice::Get().GetDeviceContextD3D11()->DrawIndexed(count, 0, 0);
 	}
 
 	void Graphics::Draw(uint32_t count) const noexcept
 	{
-		m_DeviceContext->Draw(count, 0);
+		D3DDevice::Get().GetDeviceContextD3D11()->Draw(count, 0);
 	}
 
 	void graphics::Graphics::SetRasterizerState(bool cullFront) const noexcept
 	{
-		m_DeviceContext->RSSetState(cullFront ? m_CullStateFront.Get() : m_CullStateBackward.Get());
+		D3DDevice::Get().GetDeviceContextD3D11()->RSSetState(cullFront ? m_CullStateFront.Get() : m_CullStateBackward.Get());
 	}
 
 	DirectX::XMMATRIX Graphics::GetProjection() const noexcept

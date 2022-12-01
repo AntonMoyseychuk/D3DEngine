@@ -1,8 +1,8 @@
 #include "IndexBuffer.h"
 
 namespace engine::graphics {
-	IndexBuffer::IndexBuffer(const Graphics& graphics, const std::vector<uint32_t>& indices)
-		: Buffer(graphics, indices.size() * sizeof(uint32_t))
+	IndexBuffer::IndexBuffer(const std::vector<uint32_t>& indices)
+		: Buffer(indices.size() * sizeof(uint32_t))
 	{
 		THROW_EXCEPTION_IF_LOGIC_ERROR(indices.empty(), std::string(this->GetType()) + " BUFFER", "\"indices\" argument is empty!");
 
@@ -14,7 +14,7 @@ namespace engine::graphics {
 
 	void IndexBuffer::Bind() const noexcept
 	{
-		m_Graphics.GetDeviceContext()->IASetIndexBuffer(m_ID.Get(), DXGI_FORMAT_R32_UINT, 0);
+		D3DDevice::Get().GetDeviceContextD3D11()->IASetIndexBuffer(m_ID.Get(), DXGI_FORMAT_R32_UINT, 0);
 	}
 
 	uint32_t IndexBuffer::GetIndexCount() const

@@ -1,7 +1,6 @@
 #pragma once
 #include "engine/src/graphics/drawable/Drawable.h"
 #include "engine/src/graphics/bindable/ConstantBuffer.h"
-#include "engine/src/graphics/camera/Camera.h"
 
 
 namespace engine::graphics {
@@ -21,7 +20,7 @@ namespace engine::graphics {
 		};
 
 	public:
-		TransformConstantBuffer(const Graphics& gfx, const Drawable& parent);
+		TransformConstantBuffer(const Drawable& parent);
 		void Bind() const noexcept override;
 	
 	private:

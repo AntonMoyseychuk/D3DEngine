@@ -3,8 +3,8 @@
 namespace engine::graphics::light {
 	Light::LightConstantBuffer Light::LightSettings;
 
-	Light::Light(const Graphics& gfx, const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT4& color)
-		: Entity<Light>::Entity(gfx, position, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f }), m_Color(color), m_LightConstantBuffer(gfx)
+	Light::Light(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT4& color)
+		: Entity<Light>::Entity(position, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f }), m_Color(color), m_LightConstantBuffer()
 	{
 		this->Bind();
 	}

@@ -1,9 +1,10 @@
 #pragma once
-#include "engine/src/graphics/Graphics.h"
 #include "engine/src/utility/exception/ExeptionMacros.h"
+#include "engine/src/graphics/Graphics.h"
 
 #include <DirectXMath.h>
 #include <memory>
+#include <vector>
 
 namespace engine::graphics {
 	class Bindable;
@@ -21,7 +22,7 @@ namespace engine::graphics {
 		template <typename T>
 		friend class entity::Entity;
 	public:
-		Drawable(const Graphics& gfx);
+		Drawable() = default;
 		Drawable(const Drawable&) = delete;
 
 		virtual void Draw() const noexcept;
@@ -38,9 +39,6 @@ namespace engine::graphics {
 		virtual std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() noexcept = 0;
 		const std::vector<std::unique_ptr<Bindable>>& GetBinds() const noexcept;
 		std::vector<std::unique_ptr<Bindable>>& GetBinds() noexcept;
-
-	protected:
-		static const Graphics* m_Graphics;
 
 	private:
 		const engine::graphics::IndexBuffer* m_IndexBuffer = nullptr;

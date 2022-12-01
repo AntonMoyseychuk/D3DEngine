@@ -13,7 +13,7 @@ namespace engine::graphics {
 	class Mesh : public Bindable
 	{
 	public:
-		Mesh(const Graphics& gfx, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices);
+		Mesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices);
 
 		void Bind() const noexcept override;
 

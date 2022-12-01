@@ -9,7 +9,7 @@ namespace engine::graphics {
 	class PixelShader : public Bindable
 	{
 	public:
-		PixelShader(const Graphics& gfx, const std::wstring& filepath);
+		PixelShader(const std::wstring& filepath);
 
 		void Bind() const noexcept override;
 

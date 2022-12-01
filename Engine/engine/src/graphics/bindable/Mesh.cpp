@@ -1,8 +1,8 @@
 #include "Mesh.h"
 
 namespace engine::graphics {
-	Mesh::Mesh(const Graphics& gfx, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices)
-		: Bindable(gfx), m_VBO(gfx, vertices), m_IBO(gfx, indices)
+	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices)
+		: Bindable(), m_VBO(vertices), m_IBO(indices)
 	{
 	}
 

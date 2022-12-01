@@ -11,13 +11,10 @@ namespace engine::graphics {
 	class Buffer : public Bindable
 	{
 	public:
-		Buffer(const Graphics& gfx)
-			: Bindable(gfx) 
-		{
-		}
+		Buffer() = default;
 
-		Buffer(const Graphics& gfx, size_t size)
-			: Bindable(gfx), m_ID(nullptr), m_BufferDesc({0}), m_Size(size)
+		Buffer(size_t size)
+			: Bindable(), m_ID(nullptr), m_BufferDesc({0}), m_Size(size)
 		{
 			m_BufferDesc.ByteWidth = size;
 			m_BufferDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
@@ -36,7 +33,7 @@ namespace engine::graphics {
 			D3D11_SUBRESOURCE_DATA gpuBuffer = { 0 };
 			gpuBuffer.pSysMem = data;
 
-			HRESULT hr = GetGraphics().GetDevice()->CreateBuffer(&this->m_BufferDesc, &gpuBuffer, &this->m_ID);
+			HRESULT hr = D3DDevice::Get().GetDeviceD3D11()->CreateBuffer(&this->m_BufferDesc, &gpuBuffer, &this->m_ID);
 			THROW_EXCEPTION_IF_HRESULT_ERROR(hr, " BASE BUFFER", "Base buffer creation failed!");
 		}
 

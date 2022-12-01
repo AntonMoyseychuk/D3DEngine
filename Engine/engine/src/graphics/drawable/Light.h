@@ -15,7 +15,7 @@ namespace engine::graphics::light {
 		};
 
 	public:
-		Light(const Graphics& gfx, const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT4& color);
+		Light(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT4& color);
 		
 		void SetPosition(const DirectX::XMFLOAT3& position) noexcept;
 		void SetPosition(const DirectX::XMVECTOR& position) noexcept;

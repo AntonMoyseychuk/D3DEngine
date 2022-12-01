@@ -14,15 +14,15 @@
 
 namespace engine::app {
 	Application::Application(const wchar_t* title, uint32_t width, uint32_t height)
-		: m_Window(title, width, height), m_Light(m_Window.GetGraphics(), {0.0f, 1000.0f, 1000.0f}, {1.0f, 1.0f, 1.0f, 1.0f}),
-		m_SkyBox(m_Window.GetGraphics(), graphics::Texture(m_Window.GetGraphics(), L"sandbox\\res\\texture\\sky.jpg"))
+		: m_Window(title, width, height), m_Light({0.0f, 1000.0f, 1000.0f}, {1.0f, 1.0f, 1.0f, 1.0f}),
+		m_SkyBox(graphics::Texture(L"sandbox\\res\\texture\\sky.jpg"))
 	{
 		m_SkyBox.Scale(100.0f);
 
-		m_Window.GetGraphics().SetProjectionMatrix(
+		graphics::Graphics::Get().SetProjectionMatrix(
 			DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV4, m_Window.GetWidth() / m_Window.GetHeight(), 0.01f, 150.0f)
 		);
-		m_Window.GetGraphics().Camera.SetPosition({ 0.0f, 0.0f, -10.0f });
+		graphics::Graphics::Get().Camera.SetPosition({ 0.0f, 0.0f, -10.0f });
 
 		const char* models[] = {
 			//"sandbox\\res\\models\\Chaynik.obj",
@@ -40,10 +40,9 @@ namespace engine::app {
 
 		std::unique_ptr<graphics::entity::Model> model = nullptr;
 		for (uint32_t i = 0; i < ARRAYSIZE(models); ++i) {
-			model = std::make_unique<graphics::entity::Model>(m_Window.GetGraphics(), models[i]/*, 
-				graphics::Texture(m_Window.GetGraphics(), textures[i])*/);
+			model = std::make_unique<graphics::entity::Model>(models[i]/*, graphics::Texture(m_Window.GetGraphics(), textures[i])*/);
 			model->SetPosition(i * 5.0f, 0.0f, 0.0f);
-
+		
 			m_Drawables.emplace_back(std::move(model));
 		}
 	}
@@ -75,64 +74,64 @@ namespace engine::app {
 			<< std::setprecision(1) << std::fixed << 1.0f / dt;
 		m_Window.SetTitle(oss.str().c_str());
 
-		m_Window.GetGraphics().ClearBuffers(0.2f, 0.2f, 0.2f);
+		graphics::Graphics::Get().ClearBuffers(0.2f, 0.2f, 0.2f);
 
-		m_Window.GetGraphics().SetRasterizerState(false);
+		graphics::Graphics::Get().SetRasterizerState(false);
 		for (auto& drawable : m_Drawables) {
 			if (auto p = dynamic_cast<graphics::entity::Model*>(drawable.get())) {
 				p->AdjustRotation(0.0f, 15.0f * dt, 0.0f);
 			}
 			drawable->Draw();
 		}
-
-		m_Window.GetGraphics().SetRasterizerState(true);
-		m_SkyBox.SetPosition(m_Window.GetGraphics().Camera.GetPosition());
+		
+		graphics::Graphics::Get().SetRasterizerState(true);
+		m_SkyBox.SetPosition(graphics::Graphics::Get().Camera.GetPosition());
 		m_SkyBox.Draw();
-
+		
 		m_Light.Update();
-
-
+		
+		
 		//CAMERA LOGIC
-		const XMFLOAT3 ROTATION = m_Window.GetGraphics().Camera.GetRotation();
+		const XMFLOAT3 ROTATION = graphics::Graphics::Get().Camera.GetRotation();
 		float SPEED = 7.5f * dt;
-
+		
 		if (m_Window.Keyboard.IsKeyPressed('W')) {
-			m_Window.GetGraphics().Camera.AdjustPosition(this->m_Window.GetGraphics().Camera.GetForwardVector() * SPEED);
+			graphics::Graphics::Get().Camera.AdjustPosition(graphics::Graphics::Get().Camera.GetForwardVector() * SPEED);
 		}
 		if (m_Window.Keyboard.IsKeyPressed('S')) {
-			m_Window.GetGraphics().Camera.AdjustPosition(this->m_Window.GetGraphics().Camera.GetBackwardVector() * SPEED);
+			graphics::Graphics::Get().Camera.AdjustPosition(graphics::Graphics::Get().Camera.GetBackwardVector() * SPEED);
 		}
-
+		
 		if (m_Window.Keyboard.IsKeyPressed('A')) {
-			m_Window.GetGraphics().Camera.AdjustPosition(this->m_Window.GetGraphics().Camera.GetLeftVector() * SPEED);
+			graphics::Graphics::Get().Camera.AdjustPosition(graphics::Graphics::Get().Camera.GetLeftVector() * SPEED);
 		}
 		if (m_Window.Keyboard.IsKeyPressed('D')) {
-			m_Window.GetGraphics().Camera.AdjustPosition(this->m_Window.GetGraphics().Camera.GetRightVector() * SPEED);
+			graphics::Graphics::Get().Camera.AdjustPosition(graphics::Graphics::Get().Camera.GetRightVector() * SPEED);
 		}
-
+		
 		if (m_Window.Keyboard.IsKeyPressed(VK_SPACE)) {
-			m_Window.GetGraphics().Camera.AdjustPosition(0.0f, SPEED, 0.0f);
+			graphics::Graphics::Get().Camera.AdjustPosition(0.0f, SPEED, 0.0f);
 		}
 		if (m_Window.Keyboard.IsKeyPressed(VK_CONTROL)) {
-			m_Window.GetGraphics().Camera.AdjustPosition(0.0f, -SPEED, 0.0f);
+			graphics::Graphics::Get().Camera.AdjustPosition(0.0f, -SPEED, 0.0f);
 		}
-
+		
 		if (m_Window.Keyboard.IsKeyPressed(VK_RIGHT)) {
-			m_Window.GetGraphics().Camera.AdjustRotation(0.0f, 100 * dt, 0.0f);
+			graphics::Graphics::Get().Camera.AdjustRotation(0.0f, 100 * dt, 0.0f);
 		}
 		if (m_Window.Keyboard.IsKeyPressed(VK_LEFT)) {
-			m_Window.GetGraphics().Camera.AdjustRotation(0.0f, -100 * dt, 0.0f);
+			graphics::Graphics::Get().Camera.AdjustRotation(0.0f, -100 * dt, 0.0f);
 		}
 		if (m_Window.Keyboard.IsKeyPressed(VK_UP)) {
-			m_Window.GetGraphics().Camera.AdjustRotation(-100 * dt, 0.0f, 0.0f);
+			graphics::Graphics::Get().Camera.AdjustRotation(-100 * dt, 0.0f, 0.0f);
 		}
 		if (m_Window.Keyboard.IsKeyPressed(VK_DOWN)) {
-			m_Window.GetGraphics().Camera.AdjustRotation(100 * dt, 0.0f, 0.0f);
+			graphics::Graphics::Get().Camera.AdjustRotation(100 * dt, 0.0f, 0.0f);
 		}
-
+		
 		static bool isRotated;
 		static std::pair<float, float> lastCursorPos, currCursorPos;
-
+		
 		if (m_Window.Mouse.IsLeftButtonPressed()) {
 			if (!isRotated) {
 				lastCursorPos = m_Window.Mouse.GetPosition();
@@ -142,8 +141,8 @@ namespace engine::app {
 				currCursorPos = m_Window.Mouse.GetPosition();
 				const float DX = (currCursorPos.first - lastCursorPos.first) / 2.5f;
 				const float DY = (currCursorPos.second - lastCursorPos.second) / 2.5f;
-				m_Window.GetGraphics().Camera.AdjustRotation(DY, DX, 0.0f);
-
+				graphics::Graphics::Get().Camera.AdjustRotation(DY, DX, 0.0f);
+		
 				lastCursorPos = currCursorPos;
 			}
 		}
@@ -151,6 +150,6 @@ namespace engine::app {
 			isRotated = false;
 		}
 
-		m_Window.GetGraphics().SwapBuffers();
+		m_Window.SwapBuffers(true);
 	}
 }

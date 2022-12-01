@@ -6,6 +6,6 @@ namespace engine::graphics {
 	class SkySphere : public entity::Model
 	{
 	public:
-		SkySphere(const Graphics& gfx, const Texture& texture);
+		SkySphere(const Texture& texture);
 	};
 }

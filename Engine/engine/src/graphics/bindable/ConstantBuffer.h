@@ -6,8 +6,8 @@ namespace engine::graphics {
     class ConstantBuffer : public Buffer<T>
     {
     public:
-        ConstantBuffer(const Graphics& gfx)
-            : Buffer<T>::Buffer(gfx)
+        ConstantBuffer()
+            : Buffer<T>::Buffer()
         {
             this->m_BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
             this->m_BufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -16,12 +16,13 @@ namespace engine::graphics {
             this->m_BufferDesc.StructureByteStride = 0;
             this->m_BufferDesc.ByteWidth = sizeof(T);
 
-            HRESULT hr = this->GetGraphics().GetDevice()->CreateBuffer(&this->m_BufferDesc, nullptr, &this->m_ID);
-            THROW_EXCEPTION_IF_HRESULT_ERROR(hr, std::string(this->GetType()) + " BUFFER", std::string(this->GetType()) + " Buffer creation failed!");
+            HRESULT hr = D3DDevice::Get().GetDeviceD3D11()->CreateBuffer(&this->m_BufferDesc, nullptr, &this->m_ID);
+            THROW_EXCEPTION_IF_HRESULT_ERROR(hr, std::string(this->GetType()) + " BUFFER", 
+                std::string(this->GetType()) + " Buffer creation failed!");
         }
 
-        ConstantBuffer(const Graphics& gfx, const T& data)
-            : Buffer<T>::Buffer(gfx, sizeof(data))
+        ConstantBuffer(const T& data)
+            : Buffer<T>::Buffer(sizeof(data))
         {
             this->m_BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
             this->m_BufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -35,10 +36,10 @@ namespace engine::graphics {
         void Update(const T& data) const
         {
             D3D11_MAPPED_SUBRESOURCE msr;
-            HRESULT hr = this->GetGraphics().GetDeviceContext()->Map(this->m_ID.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &msr);
+            HRESULT hr = D3DDevice::Get().GetDeviceContextD3D11()->Map(this->m_ID.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &msr);
             THROW_EXCEPTION_IF_HRESULT_ERROR(hr, std::string(this->GetType()) + " BUFFER", "Can't get constant buffer data from GPU!");
             memcpy(msr.pData, &data, sizeof(data));
-            this->m_Graphics.GetDeviceContext()->Unmap(this->m_ID.Get(), 0u);
+            D3DDevice::Get().GetDeviceContextD3D11()->Unmap(this->m_ID.Get(), 0u);
         }
 
         const char* GetType() const noexcept override { return "Constant"; }
@@ -54,7 +55,7 @@ namespace engine::graphics {
 
         void Bind() const noexcept  override
         {
-            this->m_Graphics.GetDeviceContext()->VSSetConstantBuffers(0u, 1u, this->m_ID.GetAddressOf());
+            D3DDevice::Get().GetDeviceContextD3D11()->VSSetConstantBuffers(0u, 1u, this->m_ID.GetAddressOf());
         }
     };
 
@@ -68,7 +69,7 @@ namespace engine::graphics {
 
         void Bind() const noexcept override
         {
-            this->m_Graphics.GetDeviceContext()->PSSetConstantBuffers(0u, 1u, this->m_ID.GetAddressOf());
+            D3DDevice::Get().GetDeviceContextD3D11()->PSSetConstantBuffers(0u, 1u, this->m_ID.GetAddressOf());
         }
     };
 }

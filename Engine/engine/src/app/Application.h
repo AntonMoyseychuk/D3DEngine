@@ -20,9 +20,9 @@ namespace engine::app {
 		time::Timer m_Timer;
 
 		std::vector<std::unique_ptr<graphics::Drawable>> m_Drawables;
-
+		
 		graphics::light::Light m_Light;
-
+		
 		graphics::SkySphere m_SkyBox;
 	};
 }

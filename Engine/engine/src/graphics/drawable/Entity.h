@@ -154,8 +154,8 @@ namespace engine::graphics::entity {
 		}
 
 	protected:
-		Entity(const Graphics& gfx, const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3& scale, const DirectX::XMFLOAT3& rotation)
-			: Drawable(gfx), m_Position(position), m_Scale(scale), m_RotationAngle(rotation)
+		Entity(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3& scale, const DirectX::XMFLOAT3& rotation)
+			: Drawable(), m_Position(position), m_Scale(scale), m_RotationAngle(rotation)
 		{
 		}
 

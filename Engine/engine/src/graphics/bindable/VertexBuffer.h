@@ -6,7 +6,7 @@ namespace engine::graphics {
 	class VertexBuffer : public Buffer<engine::graphics::Vertex>
 	{
 	public:
-		VertexBuffer(const Graphics& graphics, const std::vector<engine::graphics::Vertex>& vertices);
+		VertexBuffer(const std::vector<engine::graphics::Vertex>& vertices);
 		void Bind() const noexcept override;
 
 		uint32_t GetVertCount() const;

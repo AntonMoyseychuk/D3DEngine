@@ -1,16 +1,16 @@
 #include "TransformConstantBuffer.h"
+#include "engine/src/graphics/Graphics.h"
 
 namespace engine::graphics {
-	TransformConstantBuffer::TransformConstantBuffer(const Graphics& gfx, const Drawable& parent)
-		: Bindable(gfx), m_Parent(parent)
+	TransformConstantBuffer::TransformConstantBuffer(const Drawable& parent)
+		: Bindable(), m_Parent(parent)
 	{
 		if (m_VSConstBuff == nullptr) {
 			m_VSConstBuff = std::make_unique<VSConstantBuffer<Transform>>(
-				gfx, 
 				Transform{
 					DirectX::XMMatrixTranspose(m_Parent.GetTransform()),
-					DirectX::XMMatrixTranspose(m_Graphics.Camera.GetViewMatrix()),
-					DirectX::XMMatrixTranspose(m_Graphics.GetProjection())
+					DirectX::XMMatrixTranspose(Graphics::Get().Camera.GetViewMatrix()),
+					DirectX::XMMatrixTranspose(Graphics::Get().GetProjection())
 				}
 			);
 		}
@@ -20,8 +20,8 @@ namespace engine::graphics {
 	{
 		m_VSConstBuff->Update(Transform{
 				DirectX::XMMatrixTranspose(m_Parent.GetTransform()),
-				DirectX::XMMatrixTranspose(m_Graphics.Camera.GetViewMatrix()),
-				DirectX::XMMatrixTranspose(m_Graphics.GetProjection())
+				DirectX::XMMatrixTranspose(Graphics::Get().Camera.GetViewMatrix()),
+				DirectX::XMMatrixTranspose(Graphics::Get().GetProjection())
 			}
 		);
 		m_VSConstBuff->Bind();

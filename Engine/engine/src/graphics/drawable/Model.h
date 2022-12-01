@@ -7,7 +7,7 @@ namespace engine::graphics::entity {
 	class Model : public Entity<Model>
 	{
 	public:
-		Model(const Graphics& gfx, const std::string& modelFilepath/*, const Texture& texture*/);
+		Model(const std::string& modelFilepath/*, const Texture& texture*/);
 
 		void Draw() const noexcept override;
 

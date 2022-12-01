@@ -3,13 +3,10 @@
 #include <memory>
 
 #include "engine/src/utility/winapi/WinAPI.h"
+#include "engine/src/graphics/SwapChain.h"
 
 #include "engine/src/input/Keyboard.h"
 #include "engine/src/input/Mouse.h"
-
-namespace engine::graphics {
-	class Graphics;
-}
 
 namespace engine::window {
 	class Window
@@ -35,21 +32,21 @@ namespace engine::window {
 		};
 
 	public:
-		typedef HWND window_id;
-
 		Window(const wchar_t* title, uint32_t width, uint32_t height);
 		~Window();
 
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;
 
+	public:
+		void SwapBuffers(bool vsync);
+	
+	public:
 		const wchar_t* GetTitle() const noexcept;
-		window_id GetHandle() const noexcept;
+		HWND GetHandle() const noexcept;
 		void SetTitle(const wchar_t* title);
 		float GetHeight() const noexcept;
 		float GetWidth() const noexcept;
-
-		graphics::Graphics& GetGraphics();
 
 	private:
 		static LRESULT WINAPI HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -63,14 +60,14 @@ namespace engine::window {
 		input::Mouse Mouse;
 
 	private:
-		window_id m_HWND;
+		WindowClass& m_WindowClass;
+		
+		HWND m_HWND;
 		
 		std::wstring m_Title;
 		uint32_t m_Width;
 		uint32_t m_Height;
-
-		WindowClass& m_WindowClass;
-
-		std::unique_ptr<engine::graphics::Graphics> m_Graphics = nullptr;
+		
+		graphics::SwapChain m_SwapChain;
 	};
 }

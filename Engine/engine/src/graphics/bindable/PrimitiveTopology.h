@@ -5,7 +5,7 @@ namespace engine::graphics {
 	class PrimitiveTopology : public Bindable
 	{
 	public:
-		enum class Type : uint32_t
+		enum class Type
 		{
 			TRIANGLES = D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
 			TRIANGLE_STRIP = D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
@@ -17,7 +17,7 @@ namespace engine::graphics {
 		};
 
 	public:
-		PrimitiveTopology(const Graphics& gfx, Type type);
+		PrimitiveTopology(Type type);
 		void Bind() const noexcept override;
 
 	protected:

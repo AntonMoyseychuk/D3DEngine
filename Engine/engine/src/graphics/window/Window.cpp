@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "engine/src/graphics/Graphics.h"
+#include "engine/src/graphics/D3DDevice.h"
 
 #include "engine/src/utility/exception/WindowException.h"
 #include "engine/src/utility/exception/ExeptionMacros.h"
@@ -65,7 +66,8 @@ namespace engine::window {
 		ShowWindow(m_HWND, SW_SHOW);
 
 		try {
-			m_Graphics = std::make_unique<graphics::Graphics>(m_HWND);
+			m_SwapChain.Init(m_HWND, graphics::D3DDevice::Get());
+			graphics::Graphics::Get().Init(m_SwapChain);
 		}
 		catch (const std::exception& ex) {
 			DestroyWindow(m_HWND);
@@ -78,7 +80,7 @@ namespace engine::window {
 		DestroyWindow(m_HWND);
 	}
 
-	Window::window_id Window::GetHandle() const noexcept
+	HWND Window::GetHandle() const noexcept
 	{
 		return m_HWND;
 	}
@@ -100,15 +102,22 @@ namespace engine::window {
 		return m_Width;
 	}
 
+	void Window::SwapBuffers(bool vsync)
+	{
+		HRESULT D3D_OP_RESULT;
+		if (FAILED(D3D_OP_RESULT = m_SwapChain.GetSwapChainDXGI()->Present(vsync, 0u))) {
+			if (D3D_OP_RESULT == DXGI_ERROR_DEVICE_REMOVED) {
+				THROW_EXCEPTION_IF_LOGIC_ERROR(true, "WINDOW", "DXGI_ERROR_DEVICE_REMOVED");
+			}
+			else {
+				THROW_EXCEPTION_IF_HRESULT_ERROR(D3D_OP_RESULT, "WINDOW", "Swap buffers failed");
+			}
+		}
+	}
+
 	float Window::GetHeight() const noexcept
 	{
 		return m_Height;
-	}
-
-	graphics::Graphics& Window::GetGraphics()
-	{
-		THROW_EXCEPTION_IF_LOGIC_ERROR(m_Graphics == nullptr, "WINDOW", "Graphics is not initialized");
-		return *m_Graphics;
 	}
 
 	LRESULT WINAPI Window::HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)

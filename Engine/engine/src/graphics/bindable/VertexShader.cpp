@@ -4,14 +4,14 @@
 #include <stdarg.h>
 
 namespace engine::graphics {
-    VertexShader::VertexShader(const Graphics& gfx, const std::wstring& filepath)
-        : Bindable(gfx), m_Filepath(filepath)
+    VertexShader::VertexShader(const std::wstring& filepath)
+        : Bindable(), m_Filepath(filepath)
     {
         OnCreate();
     }
 
-    VertexShader::VertexShader(const Graphics& gfx, const std::wstring& filepath, const std::vector<InputLayoutAttribute>& attribs)
-        : Bindable(gfx), m_Filepath(filepath)
+    VertexShader::VertexShader(const std::wstring& filepath, const std::vector<InputLayoutAttribute>& attribs)
+        : Bindable(), m_Filepath(filepath)
     {
         OnCreate();
 
@@ -61,7 +61,7 @@ namespace engine::graphics {
 
     void VertexShader::Bind() const noexcept
     {
-        m_Graphics.GetDeviceContext()->VSSetShader(m_VS.Get(), nullptr, 0);
+        D3DDevice::Get().GetDeviceContextD3D11()->VSSetShader(m_VS.Get(), nullptr, 0);
     }
 
     void VertexShader::OnSetInputLayout() const
@@ -70,10 +70,10 @@ namespace engine::graphics {
 
         THROW_EXCEPTION_IF_LOGIC_ERROR(m_InputLayoutDesc.empty(), "VERTEX SHADER", "Input Layout in not set!");
 
-        HRESULT hr = m_Graphics.GetDevice()->CreateInputLayout(m_InputLayoutDesc.data(), m_InputLayoutDesc.size(),
+        HRESULT hr = D3DDevice::Get().GetDeviceD3D11()->CreateInputLayout(m_InputLayoutDesc.data(), m_InputLayoutDesc.size(),
             m_VsBinary->GetBufferPointer(), m_VsBinary->GetBufferSize(), &m_InputLayout);
         THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "VERTEX SHADER", "Input Layout creation failed!\nCheck the correctness of the arguments.");
-        m_Graphics.GetDeviceContext()->IASetInputLayout(m_InputLayout.Get());
+        D3DDevice::Get().GetDeviceContextD3D11()->IASetInputLayout(m_InputLayout.Get());
     }
 
     void VertexShader::OnCreate() const
@@ -92,7 +92,7 @@ namespace engine::graphics {
             }
         }
 
-        HRESULT hr = m_Graphics.GetDevice()->CreateVertexShader(m_VsBinary->GetBufferPointer(),
+        HRESULT hr = D3DDevice::Get().GetDeviceD3D11()->CreateVertexShader(m_VsBinary->GetBufferPointer(),
             m_VsBinary->GetBufferSize(), nullptr, &m_VS);
         THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "VERTEX SHADER", "Vertex shader creation failed!");
     }

@@ -4,15 +4,15 @@
 #include <stdarg.h>
 
 namespace engine::graphics {
-    PixelShader::PixelShader(const Graphics& gfx, const std::wstring& filepath)
-        : Bindable(gfx), m_Filepath(filepath)
+    PixelShader::PixelShader(const std::wstring& filepath)
+        : Bindable(), m_Filepath(filepath)
     {
         OnCreate();
     }
 
     void PixelShader::Bind() const noexcept
     {
-        m_Graphics.GetDeviceContext()->PSSetShader(m_PS.Get(), nullptr, 0);
+        D3DDevice::Get().GetDeviceContextD3D11()->PSSetShader(m_PS.Get(), nullptr, 0);
     }
 
     void PixelShader::OnCreate() const
@@ -22,7 +22,8 @@ namespace engine::graphics {
             "main", "ps_4_0", 0, 0, nullptr, &m_PsBinary, &errorBlob, nullptr)))
         {
             if (errorBlob == nullptr) {
-                THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", "Invalid pixel shader filepath: " + util::StringParser::ToString(m_Filepath));
+                THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", 
+                    "Invalid pixel shader filepath: " + util::StringParser::ToString(m_Filepath));
             }
             else {
                 std::string error((char*)errorBlob->GetBufferPointer());
@@ -30,7 +31,7 @@ namespace engine::graphics {
             }
         }
 
-        if (FAILED(m_Graphics.GetDevice()->CreatePixelShader(m_PsBinary->GetBufferPointer(),
+        if (FAILED(D3DDevice::Get().GetDeviceD3D11()->CreatePixelShader(m_PsBinary->GetBufferPointer(),
             m_PsBinary->GetBufferSize(), nullptr, &m_PS))) {
             THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", "Pixel shader creation failed!");
         }

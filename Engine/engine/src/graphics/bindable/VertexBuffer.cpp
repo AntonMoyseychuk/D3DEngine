@@ -1,8 +1,8 @@
 #include "VertexBuffer.h"
 
 namespace engine::graphics {
-	VertexBuffer::VertexBuffer(const Graphics& graphics, const std::vector<Vertex>& vertices)
-		: Buffer<Vertex>::Buffer(graphics, vertices.size() * sizeof(Vertex))
+	VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices)
+		: Buffer<Vertex>::Buffer(vertices.size() * sizeof(Vertex))
 	{
 		THROW_EXCEPTION_IF_LOGIC_ERROR(vertices.empty(), std::string(this->GetType()) + " BUFFER",
 			std::string(this->GetType()) + "\"verticies\" argument is empty!");
@@ -17,7 +17,7 @@ namespace engine::graphics {
 	{
 		uint32_t stride = sizeof(Vertex);
 		uint32_t offset = 0u;
-		this->m_Graphics.GetDeviceContext()->IASetVertexBuffers(0, 1, this->m_ID.GetAddressOf(), &stride, &offset);
+		D3DDevice::Get().GetDeviceContextD3D11()->IASetVertexBuffers(0, 1, this->m_ID.GetAddressOf(), &stride, &offset);
 	}
 
 	uint32_t VertexBuffer::GetVertCount() const
