@@ -10,13 +10,13 @@ namespace engine::graphics {
 	public:
 		static D3DDevice& Get();
 
-		ID3D11Device* GetDeviceD3D11();
-		ID3D11DeviceContext* GetDeviceContextD3D11();
-
-		IDXGIFactory* GetFactoryDXGI();
+		ID3D11Device* GetDevice();
+		ID3D11DeviceContext* GetImmediateDeviceContext();
 
 	private:
 		D3DDevice();
+		
+		IDXGIFactory* GetFactoryDXGI();
 
 	private:
 		D3D_FEATURE_LEVEL m_FeatureLevel;

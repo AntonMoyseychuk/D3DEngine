@@ -14,7 +14,7 @@ namespace engine::graphics {
 
 	void IndexBuffer::Bind() const noexcept
 	{
-		D3DDevice::Get().GetDeviceContextD3D11()->IASetIndexBuffer(m_ID.Get(), DXGI_FORMAT_R32_UINT, 0);
+		D3DDevice::Get().GetImmediateDeviceContext()->IASetIndexBuffer(m_ID.Get(), DXGI_FORMAT_R32_UINT, 0);
 	}
 
 	uint32_t IndexBuffer::GetIndexCount() const

@@ -43,12 +43,12 @@ namespace engine::graphics {
 		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "DIRECT3D DEVICE", "Can't get IDXGIFactory");
 	}
 
-	ID3D11Device* D3DDevice::GetDeviceD3D11()
+	ID3D11Device* D3DDevice::GetDevice()
 	{
 		return m_D3DDevice.Get();
 	}
 
-	ID3D11DeviceContext* D3DDevice::GetDeviceContextD3D11()
+	ID3D11DeviceContext* D3DDevice::GetImmediateDeviceContext()
 	{
 		return m_ImmediateContext.Get();
 	}

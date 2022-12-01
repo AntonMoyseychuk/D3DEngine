@@ -8,6 +8,6 @@ namespace engine::graphics {
 
 	void PrimitiveTopology::Bind() const noexcept
 	{
-		D3DDevice::Get().GetDeviceContextD3D11()->IASetPrimitiveTopology(m_Topology);
+		D3DDevice::Get().GetImmediateDeviceContext()->IASetPrimitiveTopology(m_Topology);
 	}
 }

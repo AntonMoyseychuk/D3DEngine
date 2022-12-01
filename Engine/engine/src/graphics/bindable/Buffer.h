@@ -33,7 +33,7 @@ namespace engine::graphics {
 			D3D11_SUBRESOURCE_DATA gpuBuffer = { 0 };
 			gpuBuffer.pSysMem = data;
 
-			HRESULT hr = D3DDevice::Get().GetDeviceD3D11()->CreateBuffer(&this->m_BufferDesc, &gpuBuffer, &this->m_ID);
+			HRESULT hr = D3DDevice::Get().GetDevice()->CreateBuffer(&this->m_BufferDesc, &gpuBuffer, &this->m_ID);
 			THROW_EXCEPTION_IF_HRESULT_ERROR(hr, " BASE BUFFER", "Base buffer creation failed!");
 		}
 

@@ -105,7 +105,7 @@ namespace engine::window {
 	void Window::SwapBuffers(bool vsync)
 	{
 		HRESULT D3D_OP_RESULT;
-		if (FAILED(D3D_OP_RESULT = m_SwapChain.GetSwapChainDXGI()->Present(vsync, 0u))) {
+		if (FAILED(D3D_OP_RESULT = m_SwapChain.GetSwapChain()->Present(vsync, 0u))) {
 			if (D3D_OP_RESULT == DXGI_ERROR_DEVICE_REMOVED) {
 				THROW_EXCEPTION_IF_LOGIC_ERROR(true, "WINDOW", "DXGI_ERROR_DEVICE_REMOVED");
 			}

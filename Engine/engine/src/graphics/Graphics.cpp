@@ -19,11 +19,11 @@ namespace engine::graphics {
 
 
 		Microsoft::WRL::ComPtr<ID3D11Resource> pBackBuffer = nullptr;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(swapChain.GetSwapChainDXGI()->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer),
+		THROW_EXCEPTION_IF_HRESULT_ERROR(swapChain.GetSwapChain()->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer),
 			"GRAPHICS", "m_SwapChain->GetBuffer failed!");
 		
 		
-		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &m_RenderTargetView),
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDevice()->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &m_RenderTargetView),
 			"GRAPHICS", "Render Target View creation failed!");
 		
 		
@@ -32,9 +32,9 @@ namespace engine::graphics {
 		dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 		dsDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilState = nullptr;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateDepthStencilState(&dsDesc, &m_DepthStencilState), 
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDevice()->CreateDepthStencilState(&dsDesc, &m_DepthStencilState), 
 			"GRAPHICS", "Depth Stencil State creation failed!");
-		D3DDevice::Get().GetDeviceContextD3D11()->OMSetDepthStencilState(m_DepthStencilState.Get(), 1u);
+		D3DDevice::Get().GetImmediateDeviceContext()->OMSetDepthStencilState(m_DepthStencilState.Get(), 1u);
 		
 		
 		RECT clientRect = { 0 };
@@ -51,7 +51,7 @@ namespace engine::graphics {
 		depthDesc.SampleDesc.Quality = 0u;
 		depthDesc.Usage = D3D11_USAGE_DEFAULT;
 		depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateTexture2D(&depthDesc, nullptr, &depthStencil), 
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDevice()->CreateTexture2D(&depthDesc, nullptr, &depthStencil), 
 			"GRAPHICS", "m_Device->CreateTexture2D failed!");
 		
 		
@@ -59,17 +59,17 @@ namespace engine::graphics {
 		depthStencilViewDesc.Format = DXGI_FORMAT_D32_FLOAT;
 		depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		depthStencilViewDesc.Texture2D.MipSlice = 0u;
-		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDeviceD3D11()->CreateDepthStencilView(depthStencil.Get(), &depthStencilViewDesc, &m_DepthStencilView),
+		THROW_EXCEPTION_IF_HRESULT_ERROR(D3DDevice::Get().GetDevice()->CreateDepthStencilView(depthStencil.Get(), &depthStencilViewDesc, &m_DepthStencilView),
 			"GRAPHICS", "m_Device->CreateTexture2D failed!");
 		
-		D3DDevice::Get().GetDeviceContextD3D11()->OMSetRenderTargets(1u, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
+		D3DDevice::Get().GetImmediateDeviceContext()->OMSetRenderTargets(1u, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
 		
 		D3D11_VIEWPORT viewPort = { 0 };
 		viewPort.Width = clientRect.right - clientRect.left;
 		viewPort.Height = clientRect.bottom - clientRect.top;
 		viewPort.MinDepth = 0.0f;
 		viewPort.MaxDepth = 1.0f;
-		D3DDevice::Get().GetDeviceContextD3D11()->RSSetViewports(1, &viewPort);
+		D3DDevice::Get().GetImmediateDeviceContext()->RSSetViewports(1, &viewPort);
 		
 		
 		D3D11_RASTERIZER_DESC rastDesc;
@@ -77,15 +77,15 @@ namespace engine::graphics {
 		rastDesc.CullMode = D3D11_CULL_FRONT;
 		rastDesc.DepthClipEnable = true;
 		rastDesc.FillMode = D3D11_FILL_SOLID;
-		D3DDevice::Get().GetDeviceD3D11()->CreateRasterizerState(&rastDesc, &m_CullStateFront);
+		D3DDevice::Get().GetDevice()->CreateRasterizerState(&rastDesc, &m_CullStateFront);
 		
 		rastDesc.CullMode = D3D11_CULL_BACK;
-		D3DDevice::Get().GetDeviceD3D11()->CreateRasterizerState(&rastDesc, &m_CullStateBackward);
+		D3DDevice::Get().GetDevice()->CreateRasterizerState(&rastDesc, &m_CullStateBackward);
 	}
 
 	void Graphics::ClearBuffers(float r, float g, float b, float a) const noexcept
 	{
-		auto immContext = D3DDevice::Get().GetDeviceContextD3D11();
+		auto immContext = D3DDevice::Get().GetImmediateDeviceContext();
 		
 		float color[] = { r, g, b, a };
 		immContext->ClearRenderTargetView(m_RenderTargetView.Get(), color);
@@ -94,17 +94,17 @@ namespace engine::graphics {
 
 	void Graphics::DrawIndexed(uint32_t count) const noexcept
 	{
-		D3DDevice::Get().GetDeviceContextD3D11()->DrawIndexed(count, 0, 0);
+		D3DDevice::Get().GetImmediateDeviceContext()->DrawIndexed(count, 0, 0);
 	}
 
 	void Graphics::Draw(uint32_t count) const noexcept
 	{
-		D3DDevice::Get().GetDeviceContextD3D11()->Draw(count, 0);
+		D3DDevice::Get().GetImmediateDeviceContext()->Draw(count, 0);
 	}
 
 	void graphics::Graphics::SetRasterizerState(bool cullFront) const noexcept
 	{
-		D3DDevice::Get().GetDeviceContextD3D11()->RSSetState(cullFront ? m_CullStateFront.Get() : m_CullStateBackward.Get());
+		D3DDevice::Get().GetImmediateDeviceContext()->RSSetState(cullFront ? m_CullStateFront.Get() : m_CullStateBackward.Get());
 	}
 
 	DirectX::XMMATRIX Graphics::GetProjection() const noexcept

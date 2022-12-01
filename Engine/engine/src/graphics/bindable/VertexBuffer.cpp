@@ -17,7 +17,7 @@ namespace engine::graphics {
 	{
 		uint32_t stride = sizeof(Vertex);
 		uint32_t offset = 0u;
-		D3DDevice::Get().GetDeviceContextD3D11()->IASetVertexBuffers(0, 1, this->m_ID.GetAddressOf(), &stride, &offset);
+		D3DDevice::Get().GetImmediateDeviceContext()->IASetVertexBuffers(0, 1, this->m_ID.GetAddressOf(), &stride, &offset);
 	}
 
 	uint32_t VertexBuffer::GetVertCount() const

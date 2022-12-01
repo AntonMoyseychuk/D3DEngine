@@ -19,7 +19,7 @@ namespace engine::graphics {
 		SwapChain() = default;
 
 		void Init(HWND windowID, D3DDevice& device);
-		IDXGISwapChain* GetSwapChainDXGI() noexcept;
+		IDXGISwapChain* GetSwapChain() noexcept;
 
 	private:
 		Microsoft::WRL::ComPtr<IDXGISwapChain> m_SwapChain = nullptr;

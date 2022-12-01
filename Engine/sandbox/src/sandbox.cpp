@@ -10,7 +10,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	std::unique_ptr<engine::app::Application> app = nullptr;
 	int result = { 0 };
 	try {
-		app = std::make_unique<engine::app::Application>(L"Sandbox", 1080, 720);
+		app = std::make_unique<engine::app::Application>(L"Sandbox", 1280, 900);
 	
 		result = app->Run();
 	}

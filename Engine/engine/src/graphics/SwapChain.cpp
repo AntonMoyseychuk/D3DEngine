@@ -2,7 +2,7 @@
 #include "engine/src/utility/exception/ExeptionMacros.h"
 
 namespace engine::graphics {
-	IDXGISwapChain* SwapChain::GetSwapChainDXGI() noexcept
+	IDXGISwapChain* SwapChain::GetSwapChain() noexcept
 	{
 		return m_SwapChain.Get();
 	}

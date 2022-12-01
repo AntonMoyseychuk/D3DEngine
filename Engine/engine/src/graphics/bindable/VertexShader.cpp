@@ -61,7 +61,7 @@ namespace engine::graphics {
 
     void VertexShader::Bind() const noexcept
     {
-        D3DDevice::Get().GetDeviceContextD3D11()->VSSetShader(m_VS.Get(), nullptr, 0);
+        D3DDevice::Get().GetImmediateDeviceContext()->VSSetShader(m_VS.Get(), nullptr, 0);
     }
 
     void VertexShader::OnSetInputLayout() const
@@ -70,10 +70,10 @@ namespace engine::graphics {
 
         THROW_EXCEPTION_IF_LOGIC_ERROR(m_InputLayoutDesc.empty(), "VERTEX SHADER", "Input Layout in not set!");
 
-        HRESULT hr = D3DDevice::Get().GetDeviceD3D11()->CreateInputLayout(m_InputLayoutDesc.data(), m_InputLayoutDesc.size(),
+        HRESULT hr = D3DDevice::Get().GetDevice()->CreateInputLayout(m_InputLayoutDesc.data(), m_InputLayoutDesc.size(),
             m_VsBinary->GetBufferPointer(), m_VsBinary->GetBufferSize(), &m_InputLayout);
         THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "VERTEX SHADER", "Input Layout creation failed!\nCheck the correctness of the arguments.");
-        D3DDevice::Get().GetDeviceContextD3D11()->IASetInputLayout(m_InputLayout.Get());
+        D3DDevice::Get().GetImmediateDeviceContext()->IASetInputLayout(m_InputLayout.Get());
     }
 
     void VertexShader::OnCreate() const
@@ -92,7 +92,7 @@ namespace engine::graphics {
             }
         }
 
-        HRESULT hr = D3DDevice::Get().GetDeviceD3D11()->CreateVertexShader(m_VsBinary->GetBufferPointer(),
+        HRESULT hr = D3DDevice::Get().GetDevice()->CreateVertexShader(m_VsBinary->GetBufferPointer(),
             m_VsBinary->GetBufferSize(), nullptr, &m_VS);
         THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "VERTEX SHADER", "Vertex shader creation failed!");
     }

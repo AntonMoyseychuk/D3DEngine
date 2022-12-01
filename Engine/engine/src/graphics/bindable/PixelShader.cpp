@@ -12,7 +12,7 @@ namespace engine::graphics {
 
     void PixelShader::Bind() const noexcept
     {
-        D3DDevice::Get().GetDeviceContextD3D11()->PSSetShader(m_PS.Get(), nullptr, 0);
+        D3DDevice::Get().GetImmediateDeviceContext()->PSSetShader(m_PS.Get(), nullptr, 0);
     }
 
     void PixelShader::OnCreate() const
@@ -31,7 +31,7 @@ namespace engine::graphics {
             }
         }
 
-        if (FAILED(D3DDevice::Get().GetDeviceD3D11()->CreatePixelShader(m_PsBinary->GetBufferPointer(),
+        if (FAILED(D3DDevice::Get().GetDevice()->CreatePixelShader(m_PsBinary->GetBufferPointer(),
             m_PsBinary->GetBufferSize(), nullptr, &m_PS))) {
             THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", "Pixel shader creation failed!");
         }
