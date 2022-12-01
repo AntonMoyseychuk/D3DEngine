@@ -66,7 +66,7 @@ namespace engine::window {
 		ShowWindow(m_HWND, SW_SHOW);
 
 		try {
-			m_SwapChain.Init(m_HWND, graphics::D3DDevice::Get());
+			m_SwapChain.Init(m_HWND);
 			graphics::Graphics::Get().Init(m_SwapChain);
 		}
 		catch (const std::exception& ex) {

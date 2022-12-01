@@ -18,7 +18,7 @@ namespace engine::graphics {
 	private:
 		SwapChain() = default;
 
-		void Init(HWND windowID, D3DDevice& device);
+		void Init(HWND windowID);
 		IDXGISwapChain* GetSwapChain() noexcept;
 
 	private:

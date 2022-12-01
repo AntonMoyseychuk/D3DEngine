@@ -15,6 +15,9 @@ namespace engine::graphics {
 
 	private:
 		D3DDevice();
+
+		D3DDevice(const D3DDevice& device) = delete;
+		D3DDevice& operator=(const D3DDevice& device) = delete;
 		
 		IDXGIFactory* GetFactoryDXGI();
 

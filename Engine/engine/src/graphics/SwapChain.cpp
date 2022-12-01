@@ -7,7 +7,7 @@ namespace engine::graphics {
 		return m_SwapChain.Get();
 	}
 
-	void SwapChain::Init(HWND windowID, D3DDevice& device)
+	void SwapChain::Init(HWND windowID)
 	{
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = { 0 };
 		swapChainDesc.BufferDesc.Width = 0;
@@ -26,6 +26,7 @@ namespace engine::graphics {
 		swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 		swapChainDesc.Flags = 0;
 
+		auto& device = D3DDevice::Get();
 		HRESULT hr = device.m_DXGIFactory->CreateSwapChain(device.m_D3DDevice.Get(), &swapChainDesc, &m_SwapChain);
 		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "SWAP CHAIN", "swap chain creation failed");
 	}
