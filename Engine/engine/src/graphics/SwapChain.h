@@ -2,6 +2,7 @@
 #include "D3DDevice.h"
 
 #include <d3d11.h>
+#include <stdint.h>
 #include <wrl.h>
 
 namespace engine::window {
@@ -20,7 +21,7 @@ namespace engine::graphics {
 
 	private:
 		SwapChain() = default;
-		void Init(HWND windowID);
+		void Init(HWND windowID, uint32_t clientStateWidth, uint32_t clientStateHeight);
 		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
 
 	private:

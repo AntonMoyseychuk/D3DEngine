@@ -46,10 +46,10 @@ namespace engine::window {
 		return windowClass;
 	}
 
-	Window::Window(const wchar_t* title, uint32_t width, uint32_t height)
+	Window::Window(const wchar_t* title, uint32_t clientStateWidth, uint32_t clientStateHeight)
 		: m_Title(title), m_WindowClass(WindowClass::Get())
 	{
-		RECT wr = { 0, 0, width, height };
+		RECT wr = { 0, 0, clientStateWidth, clientStateHeight };
 		if (!AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, false)) {
 			throw ENGINE_WINDOW_LAST_ERROR_EXCEPTION();
 		}
@@ -66,7 +66,7 @@ namespace engine::window {
 		ShowWindow(m_HWND, SW_SHOW);
 
 		try {
-			m_SwapChain.Init(m_HWND);
+			m_SwapChain.Init(m_HWND, clientStateWidth, clientStateHeight);
 			graphics::Graphics::Get().Init();
 		}
 		catch (const std::exception& ex) {
@@ -83,6 +83,13 @@ namespace engine::window {
 	HWND Window::GetHandle() const noexcept
 	{
 		return m_HWND;
+	}
+
+	RECT Window::GetClientWindowRect() const noexcept
+	{
+		RECT rc = { 0 };
+		GetClientRect(m_HWND, &rc);
+		return rc;
 	}
 
 	const wchar_t* Window::GetTitle() const noexcept

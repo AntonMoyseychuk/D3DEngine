@@ -7,11 +7,11 @@ namespace engine::graphics {
 		return m_SwapChain.Get();
 	}
 
-	void SwapChain::Init(HWND windowID)
+	void SwapChain::Init(HWND windowID, uint32_t clientStateWidth, uint32_t clientStateHeight)
 	{
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = { 0 };
-		swapChainDesc.BufferDesc.Width = 0;
-		swapChainDesc.BufferDesc.Height = 0;
+		swapChainDesc.BufferDesc.Width = clientStateWidth;
+		swapChainDesc.BufferDesc.Height = clientStateHeight;
 		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 0;
@@ -52,7 +52,7 @@ namespace engine::graphics {
 
 
 		RECT clientRect = { 0 };
-		GetClientRect(GetForegroundWindow(), &clientRect);
+		GetClientRect(windowID, &clientRect);
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencil = nullptr;
 		D3D11_TEXTURE2D_DESC depthDesc = { 0 };

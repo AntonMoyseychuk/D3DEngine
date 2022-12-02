@@ -32,7 +32,7 @@ namespace engine::window {
 		};
 
 	public:
-		Window(const wchar_t* title, uint32_t width, uint32_t height);
+		Window(const wchar_t* title, uint32_t clientStateWidth, uint32_t clientStateHeight);
 		~Window();
 
 		Window(const Window&) = delete;
@@ -43,11 +43,12 @@ namespace engine::window {
 		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
 	
 	public:
+		RECT GetClientWindowRect() const noexcept;
 		const wchar_t* GetTitle() const noexcept;
-		HWND GetHandle() const noexcept;
 		void SetTitle(const wchar_t* title);
-		float GetHeight() const noexcept;
+		HWND GetHandle() const noexcept;
 		float GetWidth() const noexcept;
+		float GetHeight() const noexcept;
 
 	private:
 		static LRESULT WINAPI HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
