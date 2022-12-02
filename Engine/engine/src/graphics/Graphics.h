@@ -14,16 +14,15 @@ namespace engine::graphics {
 	public:
 		static Graphics& Get() noexcept;
 
-		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
-		void DrawIndexed(uint32_t count) const noexcept;
 		void Draw(uint32_t vertexCount) const noexcept;
+		void DrawIndexed(uint32_t count) const noexcept;
 		void SetRasterizerState(bool cullFront) const noexcept;
 
 		void SetProjectionMatrix(const DirectX::XMMATRIX& proj) noexcept;
 		DirectX::XMMATRIX GetProjection() const noexcept;
 
 	private:
-		void Init(SwapChain& swapChain);
+		void Init();
 
 	private:
 		Graphics() = default;
@@ -35,10 +34,6 @@ namespace engine::graphics {
 		Camera Camera;
 
 	private:
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_RenderTargetView = nullptr;
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> m_DepthStencilView = nullptr;
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_DepthStencilState = nullptr;
-
 		Microsoft::WRL::ComPtr<ID3D11RasterizerState> m_CullStateFront = nullptr;
 		Microsoft::WRL::ComPtr<ID3D11RasterizerState> m_CullStateBackward = nullptr;
 

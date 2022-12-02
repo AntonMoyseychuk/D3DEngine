@@ -40,6 +40,7 @@ namespace engine::window {
 
 	public:
 		void SwapBuffers(bool vsync);
+		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
 	
 	public:
 		const wchar_t* GetTitle() const noexcept;

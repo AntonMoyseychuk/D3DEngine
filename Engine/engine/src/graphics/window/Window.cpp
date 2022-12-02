@@ -67,7 +67,7 @@ namespace engine::window {
 
 		try {
 			m_SwapChain.Init(m_HWND);
-			graphics::Graphics::Get().Init(m_SwapChain);
+			graphics::Graphics::Get().Init();
 		}
 		catch (const std::exception& ex) {
 			DestroyWindow(m_HWND);
@@ -113,6 +113,11 @@ namespace engine::window {
 				THROW_EXCEPTION_IF_HRESULT_ERROR(D3D_OP_RESULT, "WINDOW", "Swap buffers failed");
 			}
 		}
+	}
+
+	void Window::ClearBuffers(float r, float g, float b, float a) const noexcept
+	{
+		m_SwapChain.ClearBuffers(r, g, b, a);
 	}
 
 	float Window::GetHeight() const noexcept

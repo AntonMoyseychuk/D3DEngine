@@ -74,7 +74,7 @@ namespace engine::app {
 			<< std::setprecision(1) << std::fixed << 1.0f / dt;
 		m_Window.SetTitle(oss.str().c_str());
 
-		graphics::Graphics::Get().ClearBuffers(0.2f, 0.2f, 0.2f);
+		m_Window.ClearBuffers(0.2f, 0.2f, 0.2f);
 
 		graphics::Graphics::Get().SetRasterizerState(false);
 		for (auto& drawable : m_Drawables) {

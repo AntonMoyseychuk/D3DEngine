@@ -15,13 +15,19 @@ namespace engine::graphics {
 		friend class Graphics;
 		friend class window::Window;
 
-	private:
-		SwapChain() = default;
-
-		void Init(HWND windowID);
+	public:
 		IDXGISwapChain* GetSwapChain() noexcept;
 
 	private:
+		SwapChain() = default;
+		void Init(HWND windowID);
+		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
+
+	private:
 		Microsoft::WRL::ComPtr<IDXGISwapChain> m_SwapChain = nullptr;
+
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_RenderTargetView = nullptr;
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> m_DepthStencilView = nullptr;
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_DepthStencilState = nullptr;
 	};
 }
