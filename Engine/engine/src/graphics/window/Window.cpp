@@ -109,7 +109,7 @@ namespace engine::window {
 		return m_Width;
 	}
 
-	void Window::SwapBuffers(bool vsync)
+	void Window::SwapBuffers(bool vsync) const
 	{
 		HRESULT D3D_OP_RESULT;
 		if (FAILED(D3D_OP_RESULT = m_SwapChain.GetSwapChain()->Present(vsync, 0u))) {

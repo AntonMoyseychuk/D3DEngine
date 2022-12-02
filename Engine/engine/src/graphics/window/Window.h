@@ -39,7 +39,7 @@ namespace engine::window {
 		Window& operator=(const Window&) = delete;
 
 	public:
-		void SwapBuffers(bool vsync);
+		void SwapBuffers(bool vsync) const;
 		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
 	
 	public:
@@ -62,14 +62,13 @@ namespace engine::window {
 		input::Mouse Mouse;
 
 	private:
+		HWND m_HWND;
 		WindowClass& m_WindowClass;
 		
-		HWND m_HWND;
-		
-		std::wstring m_Title;
 		uint32_t m_Width;
 		uint32_t m_Height;
+		std::wstring m_Title;
 		
-		graphics::SwapChain m_SwapChain;
+		mutable graphics::SwapChain m_SwapChain;
 	};
 }

@@ -12,17 +12,18 @@ namespace engine::app {
 		Application(const wchar_t* title, uint32_t width, uint32_t height);
 		int Run();
 
-	private:
-		void Update();
+	protected:
+		void Render() const noexcept;
+
+		virtual void Update();
 
 	private:
-		window::Window m_Window;
 		time::Timer m_Timer;
+		window::Window m_Window;
 
 		std::vector<std::unique_ptr<graphics::Drawable>> m_Drawables;
+		std::vector<std::unique_ptr<graphics::light::Light>> m_Lights;
 		
-		graphics::light::Light m_Light;
-		
-		graphics::SkySphere m_SkyBox;
+		graphics::SkySphere m_SkySphere;
 	};
 }

@@ -24,6 +24,7 @@ namespace engine::graphics {
 	public:
 		Drawable() = default;
 		Drawable(const Drawable&) = delete;
+		Drawable& operator=(const Drawable&) = delete;
 
 		virtual void Draw() const noexcept;
 
