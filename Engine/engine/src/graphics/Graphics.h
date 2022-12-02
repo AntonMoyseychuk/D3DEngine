@@ -19,7 +19,7 @@ namespace engine::graphics {
 		void SetRasterizerState(bool cullFront) const noexcept;
 
 		void SetProjectionMatrix(const DirectX::XMMATRIX& proj) noexcept;
-		DirectX::XMMATRIX GetProjection() const noexcept;
+		DirectX::XMMATRIX GetProjectionMatrix() const noexcept;
 
 	private:
 		void Init();

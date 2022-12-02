@@ -23,7 +23,7 @@ namespace engine::app {
 			DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV4, m_Window.GetWidth() / m_Window.GetHeight(), 0.01f, 150.0f)
 		);
 		graphics::Graphics::Get().Camera.SetPosition({ 0.0f, 0.0f, -10.0f });
-
+		
 		const char* models[] = {
 			//"sandbox\\res\\models\\Chaynik.obj",
 			//"sandbox\\res\\models\\sphere.obj",

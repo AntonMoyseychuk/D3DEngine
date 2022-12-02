@@ -41,7 +41,7 @@ namespace engine::graphics {
 		D3DDevice::Get().GetImmediateDeviceContext()->RSSetState(cullFront ? m_CullStateFront.Get() : m_CullStateBackward.Get());
 	}
 
-	DirectX::XMMATRIX Graphics::GetProjection() const noexcept
+	DirectX::XMMATRIX Graphics::GetProjectionMatrix() const noexcept
 	{
 		return m_ProjectionMatrix;
 	}

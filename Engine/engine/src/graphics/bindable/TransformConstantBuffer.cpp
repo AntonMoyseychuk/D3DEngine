@@ -10,7 +10,7 @@ namespace engine::graphics {
 				Transform{
 					DirectX::XMMatrixTranspose(m_Parent.GetTransform()),
 					DirectX::XMMatrixTranspose(Graphics::Get().Camera.GetViewMatrix()),
-					DirectX::XMMatrixTranspose(Graphics::Get().GetProjection())
+					DirectX::XMMatrixTranspose(Graphics::Get().GetProjectionMatrix())
 				}
 			);
 		}
@@ -21,7 +21,7 @@ namespace engine::graphics {
 		m_VSConstBuff->Update(Transform{
 				DirectX::XMMatrixTranspose(m_Parent.GetTransform()),
 				DirectX::XMMatrixTranspose(Graphics::Get().Camera.GetViewMatrix()),
-				DirectX::XMMatrixTranspose(Graphics::Get().GetProjection())
+				DirectX::XMMatrixTranspose(Graphics::Get().GetProjectionMatrix())
 			}
 		);
 		m_VSConstBuff->Bind();
