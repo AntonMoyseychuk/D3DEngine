@@ -23,7 +23,5 @@ namespace graphics_engine::core {
 	private:
 		VertexBuffer m_VBO;
 		IndexBuffer m_IBO;
-
-		
 	};
 }

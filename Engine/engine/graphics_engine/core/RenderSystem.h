@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/camera/Camera.h"
+#include "engine/graphics_engine/camera/Camera.h"
 
 #include <d3dx11.h>
 #include <DirectXMath.h>

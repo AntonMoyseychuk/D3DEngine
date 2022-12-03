@@ -1,6 +1,6 @@
 #include <memory>
 
-#include "engine/graphics_engine/application/Application.h"
+#include "engine/application/Application.h"
 
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
@@ -8,11 +8,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(nCmdShow);
 
-	std::unique_ptr<graphics_engine::app::Application> app = nullptr;
 	try {
-		app = std::make_unique<graphics_engine::app::Application>(L"Sandbox", 1280, 900);
+		graphics_engine::app::Application engine(L"Sandbox", 1280, 900);
 	
-		return app->Run();
+		return engine.Run();
 	}
 	catch (const std::exception& ex) {
 		MessageBoxA(nullptr, ex.what(), "Unexpected Error", MB_ICONEXCLAMATION | MB_OK);

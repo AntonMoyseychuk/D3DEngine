@@ -1,7 +1,6 @@
 #pragma once
 #include "engine/graphics_engine/core/bindable/ConstantBuffer.h"
 #include "engine/graphics_engine/core/drawable/GameObject.h"
-#include "engine/camera/Camera.h"
 
 namespace graphics_engine::core::entity {
 	class Light : protected entity::GameObject<Light> 

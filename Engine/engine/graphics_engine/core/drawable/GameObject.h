@@ -1,6 +1,5 @@
 #pragma once
 #include "Drawable.h"
-#include "engine/camera/Camera.h"
 
 #include <vector>
 

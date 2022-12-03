@@ -20,7 +20,7 @@ namespace graphics_engine::core::entity {
 				})
 			);
 			AddStaticBind(std::make_unique<PixelShader>(L"sandbox\\res\\shaders\\ModelPS.hlsl"));
-			AddStaticBind(std::make_unique<PrimitiveTopology>(graphics_engine::core::PrimitiveTopology::Type::TRIANGLES));
+			AddStaticBind(std::make_unique<PrimitiveTopology>(core::PrimitiveTopology::Type::TRIANGLES));
 		}
 
 		AddBind(std::make_unique<Texture>(texture), GetBinds().end());
@@ -29,7 +29,7 @@ namespace graphics_engine::core::entity {
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		LoadModel(modelFilepath);
 		for (const auto& mesh : m_Meshes) {
-			AddBind(std::make_unique<graphics_engine::core::Mesh>(mesh), GetBinds().end());
+			AddBind(std::make_unique<core::Mesh>(mesh), GetBinds().end());
 		}
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}

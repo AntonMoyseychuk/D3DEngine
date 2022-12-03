@@ -27,7 +27,7 @@
     <ClCompile Include="engine\input\Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\application\Application.cpp">
+    <ClCompile Include="engine\application\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\utility\time\Timer.cpp">
@@ -36,7 +36,7 @@
     <ClCompile Include="engine\graphics_engine\core\RenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\camera\Camera.cpp">
+    <ClCompile Include="engine\graphics_engine\camera\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\utility\exception\Exception.cpp">
@@ -104,7 +104,7 @@
     <ClInclude Include="engine\input\Mouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\application\Application.h">
+    <ClInclude Include="engine\application\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\utility\time\Timer.h">
@@ -116,7 +116,7 @@
     <ClInclude Include="engine\window\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\camera\Camera.h">
+    <ClInclude Include="engine\graphics_engine\camera\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\graphics_engine\core\Vertex.h">

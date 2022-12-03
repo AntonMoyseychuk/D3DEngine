@@ -184,7 +184,7 @@
     <ClCompile Include="engine\graphics_engine\core\bindable\VertexBuffer.cpp" />
     <ClCompile Include="engine\graphics_engine\core\bindable\VertexShader.cpp" />
     <ClCompile Include="engine\graphics_engine\core\D3DDevice.cpp" />
-    <ClCompile Include="engine\graphics_engine\application\Application.cpp" />
+    <ClCompile Include="engine\application\Application.cpp" />
     <ClCompile Include="engine\graphics_engine\core\drawable\Drawable.cpp" />
     <ClCompile Include="engine\graphics_engine\core\drawable\Light.cpp" />
     <ClCompile Include="engine\graphics_engine\core\drawable\Model.cpp" />
@@ -192,7 +192,7 @@
     <ClCompile Include="engine\input\Keyboard.cpp" />
     <ClCompile Include="engine\input\Mouse.cpp" />
     <ClCompile Include="engine\graphics_engine\core\RenderSystem.cpp" />
-    <ClCompile Include="engine\camera\Camera.cpp" />
+    <ClCompile Include="engine\graphics_engine\camera\Camera.cpp" />
     <ClCompile Include="engine\utility\exception\Exception.cpp" />
     <ClCompile Include="engine\utility\exception\WindowException.cpp" />
     <ClCompile Include="sandbox\src\sandbox.cpp" />
@@ -219,7 +219,7 @@
     <ClInclude Include="engine\graphics_engine\core\drawable\Model.h" />
     <ClInclude Include="engine\graphics_engine\core\drawable\SkySphere.h" />
     <ClInclude Include="engine\graphics_engine\core\Vertex.h" />
-    <ClInclude Include="engine\graphics_engine\application\Application.h" />
+    <ClInclude Include="engine\application\Application.h" />
     <ClInclude Include="engine\utility\exception\Exception.h" />
     <ClInclude Include="engine\utility\exception\ExeptionMacros.h" />
     <ClInclude Include="engine\utility\exception\HResultable.h" />
@@ -230,7 +230,7 @@
     <ClInclude Include="engine\input\Mouse.h" />
     <ClInclude Include="engine\utility\time\Timer.h" />
     <ClInclude Include="engine\graphics_engine\core\RenderSystem.h" />
-    <ClInclude Include="engine\camera\Camera.h" />
+    <ClInclude Include="engine\graphics_engine\camera\Camera.h" />
     <ClInclude Include="engine\window\Window.h" />
     <ClInclude Include="engine\graphics_engine\core\SwapChain.h" />
   </ItemGroup>
