@@ -8,7 +8,7 @@
 
 namespace graphics_engine::core::entity {
 	Model::Model(const std::string& modelFilepath, const Texture& texture)
-		: Entity<Model>({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
+		: GameObject<Model>({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
 	{
 		if (!IsStaticInitialized()) {
 			AddStaticBind(std::make_unique<VertexShader>(L"sandbox\\res\\shaders\\ModelVS.hlsl",

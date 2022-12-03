@@ -213,7 +213,7 @@
     <ClInclude Include="engine\graphics_engine\core\bindable\VertexShader.h" />
     <ClInclude Include="engine\graphics_engine\core\D3DDevice.h" />
     <ClInclude Include="engine\graphics_engine\core\drawable\Drawable.h" />
-    <ClInclude Include="engine\graphics_engine\core\drawable\Entity.h" />
+    <ClInclude Include="engine\graphics_engine\core\drawable\GameObject.h" />
     <ClInclude Include="engine\graphics_engine\core\drawable\Light.h" />
     <ClInclude Include="engine\graphics_engine\core\drawable\Model.h" />
     <ClInclude Include="engine\graphics_engine\core\drawable\SkySphere.h" />

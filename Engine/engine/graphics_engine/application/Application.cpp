@@ -23,7 +23,7 @@ namespace graphics_engine::app {
 		
 		const char* models[] = {
 			//"sandbox\\res\\models\\Chaynik.obj",
-			//"sandbox\\res\\models\\sphere.obj",
+			"sandbox\\res\\models\\sphere.obj",
 			"sandbox\\res\\models\\suzanne.obj",
 			//"sandbox\\res\\models\\room.obj",
 			//"sandbox\\res\\models\\sword.obj",
@@ -37,16 +37,16 @@ namespace graphics_engine::app {
 
 		std::unique_ptr<entity::Model> model = nullptr;
 		for (uint32_t i = 0; i < ARRAYSIZE(models); ++i) {
-			model = std::make_unique<entity::Model>(models[i], Texture(textures[i]));
-			model->SetOwnPixelShader(L"sandbox\\res\\shaders\\SkyBox.hlsl");
+			model = std::make_unique<entity::Model>(models[i], Texture(textures[0]));
 			model->SetPosition(i * 5.0f, 0.0f, 0.0f);
 		
 			m_Drawables.emplace_back(std::move(model));
 		}
 
-		//m_Lights.emplace_back(std::move(std::make_unique<light::Light>(DirectX::XMFLOAT3(0.0f, 1000.0f, 1000.0f),
-		//	DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f)))
-		//);
+		//
+		m_Lights.emplace_back(std::move(std::make_unique<entity::Light>(DirectX::XMFLOAT3(0.0f, 1000.0f, 1000.0f),
+			DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f)))
+		);
 	}
 
 	int Application::Run()
@@ -100,10 +100,11 @@ namespace graphics_engine::app {
 			}
 		}
 		
-		//for (auto& light : m_Lights) {
-		//	light->Update();
-		//}
 		//
+		for (auto& light : m_Lights) {
+			light->Update();
+		}
+		
 		m_SkySphere.SetPosition(RenderSystem::Get().Camera.GetPosition());
 		
 		

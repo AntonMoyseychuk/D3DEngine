@@ -6,7 +6,7 @@
 
 namespace graphics_engine::core::entity {
 	template <typename T>
-	class Entity : public Drawable
+	class GameObject : public Drawable
 	{
 	public:
 		void SetPosition(const DirectX::XMFLOAT3& position) noexcept
@@ -154,7 +154,7 @@ namespace graphics_engine::core::entity {
 		}
 
 	protected:
-		Entity(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3& scale, const DirectX::XMFLOAT3& rotation)
+		GameObject(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3& scale, const DirectX::XMFLOAT3& rotation)
 			: Drawable(), m_Position(position), m_Scale(scale), m_RotationAngle(rotation)
 		{
 		}
@@ -214,5 +214,5 @@ namespace graphics_engine::core::entity {
 	};
 
 	template <typename T>
-	std::vector<std::unique_ptr<Bindable>> Entity<T>::m_StaticBinds;
+	std::vector<std::unique_ptr<Bindable>> GameObject<T>::m_StaticBinds;
 }

@@ -5,7 +5,7 @@
 #include "engine/graphics_engine/core/drawable/Drawable.h"
 
 #include "engine/graphics_engine/core/drawable/SkySphere.h"
-//#include "engine/graphics_engine/core/drawable/Light.h"
+#include "engine/graphics_engine/core/drawable/Light.h"
 
 namespace graphics_engine::app {
 	class Application
@@ -24,8 +24,8 @@ namespace graphics_engine::app {
 		window::Window m_Window;
 
 		std::vector<std::unique_ptr<core::Drawable>> m_Drawables;
-		//std::vector<std::unique_ptr<core::light::Light>> m_Lights;
-		//
+		std::vector<std::unique_ptr<core::entity::Light>> m_Lights;
+		
 		core::SkySphere m_SkySphere;
 	};
 }

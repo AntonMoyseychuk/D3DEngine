@@ -173,7 +173,7 @@
     <ClInclude Include="engine\graphics_engine\core\drawable\Drawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\drawable\Entity.h">
+    <ClInclude Include="engine\graphics_engine\core\drawable\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\graphics_engine\core\drawable\Light.h">

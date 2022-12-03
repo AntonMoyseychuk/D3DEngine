@@ -1,10 +1,10 @@
 #pragma once
-#include "graphics_engine/src/core/bindable/ConstantBuffer.h"
-#include "graphics_engine/src/core/drawable/Entity.h"
-#include "graphics_engine/src/core/camera/Camera.h"
+#include "engine/graphics_engine/core/bindable/ConstantBuffer.h"
+#include "engine/graphics_engine/core/drawable/GameObject.h"
+#include "engine/camera/Camera.h"
 
-namespace graphics_engine::core::light {
-	class Light : protected entity::Entity<Light> 
+namespace graphics_engine::core::entity {
+	class Light : protected entity::GameObject<Light> 
 	{
 	public:
 		struct LightConstantBuffer

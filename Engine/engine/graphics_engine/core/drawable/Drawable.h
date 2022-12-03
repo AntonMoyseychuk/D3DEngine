@@ -13,14 +13,14 @@ namespace graphics_engine::core {
 
 namespace graphics_engine::core::entity {
 	template <typename T>
-	class Entity;
+	class GameObject;
 }
 
 namespace graphics_engine::core {
 	class Drawable
 	{
 		template <typename T>
-		friend class entity::Entity;
+		friend class entity::GameObject;
 	public:
 		Drawable() = default;
 		Drawable(const Drawable&) = delete;

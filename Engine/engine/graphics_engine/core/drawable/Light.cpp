@@ -1,57 +1,57 @@
 #include "Light.h"
 
-namespace graphics_engine::core::light {
+namespace graphics_engine::core::entity {
 	Light::LightConstantBuffer Light::LightSettings;
 
 	Light::Light(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT4& color)
-		: Entity<Light>::Entity(position, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f }), m_Color(color), m_LightConstantBuffer()
+		: GameObject<Light>::GameObject(position, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f }), m_Color(color), m_LightConstantBuffer()
 	{
 		this->Bind();
 	}
 
 	void Light::SetPosition(const DirectX::XMFLOAT3& position) noexcept
 	{
-		Entity<Light>::SetPosition(position);
+		GameObject<Light>::SetPosition(position);
 	}
 
 	void Light::SetPosition(const DirectX::XMVECTOR& position) noexcept
 	{
-		Entity<Light>::SetPosition(position);
+		GameObject<Light>::SetPosition(position);
 	}
 
 	void Light::SetPosition(float x, float y, float z) noexcept
 	{
-		Entity<Light>::SetPosition(x, y, z);
+		GameObject<Light>::SetPosition(x, y, z);
 	}
 
 	void Light::SetPosition(float value) noexcept
 	{
-		Entity<Light>::SetPosition(value, value, value);
+		GameObject<Light>::SetPosition(value, value, value);
 	}
 
 	void Light::AdjustPosition(const DirectX::XMFLOAT3& offset) noexcept
 	{
-		Entity<Light>::AdjustPosition(offset);
+		GameObject<Light>::AdjustPosition(offset);
 	}
 
 	void Light::AdjustPosition(const DirectX::XMVECTOR& offset) noexcept
 	{
-		Entity<Light>::AdjustPosition(offset);
+		GameObject<Light>::AdjustPosition(offset);
 	}
 
 	void Light::AdjustPosition(float x, float y, float z) noexcept
 	{
-		Entity<Light>::AdjustPosition(x, y, z);
+		GameObject<Light>::AdjustPosition(x, y, z);
 	}
 
 	void Light::AdjustPosition(float value) noexcept
 	{
-		Entity<Light>::AdjustPosition(value, value, value);
+		GameObject<Light>::AdjustPosition(value, value, value);
 	}
 
 	DirectX::XMFLOAT3 Light::GetPosition() const noexcept
 	{
-		return Entity<Light>::GetPosition();
+		return GameObject<Light>::GetPosition();
 	}
 
 	void Light::SetColor(const DirectX::XMFLOAT4& color) noexcept
@@ -86,7 +86,7 @@ namespace graphics_engine::core::light {
 
 	DirectX::XMMATRIX Light::GetTransform() const noexcept
 	{
-		return Entity<Light>::GetTransform();
+		return GameObject<Light>::GetTransform();
 	}
 
 	void Light::Update() const

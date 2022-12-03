@@ -1,12 +1,12 @@
 #pragma once
-#include "engine/graphics_engine/core/drawable/Entity.h"
+#include "engine/graphics_engine/core/drawable/GameObject.h"
 #include "engine/graphics_engine/core/bindable/Mesh.h"
 
 #include "engine/graphics_engine/core/bindable/Texture.h"
 
 
 namespace graphics_engine::core::entity {
-	class Model : public Entity<Model>
+	class Model : public GameObject<Model>
 	{
 	public:
 		Model(const std::string& modelFilepath, const Texture& texture);
