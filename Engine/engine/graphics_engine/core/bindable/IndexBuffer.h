@@ -1,8 +1,9 @@
 #pragma once
+#include <vector>
 #include "Buffer.h"
 
 namespace graphics_engine::core {
-	class IndexBuffer : public Buffer<uint32_t>
+	class IndexBuffer : public Buffer
 	{
 	public:
 		IndexBuffer(const std::vector<uint32_t>& indices);

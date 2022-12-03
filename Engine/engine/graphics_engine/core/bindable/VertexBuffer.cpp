@@ -1,8 +1,9 @@
 #include "VertexBuffer.h"
+#include "engine/utility/exception/ExeptionMacros.h"
 
 namespace graphics_engine::core {
 	VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices)
-		: Buffer<Vertex>::Buffer(vertices.size() * sizeof(Vertex))
+		: Buffer(vertices.size() * sizeof(Vertex))
 	{
 		THROW_EXCEPTION_IF_LOGIC_ERROR(vertices.empty(), std::string(this->GetType()) + " BUFFER",
 			std::string(this->GetType()) + "\"verticies\" argument is empty!");
@@ -23,5 +24,10 @@ namespace graphics_engine::core {
 	uint32_t VertexBuffer::GetVertCount() const
 	{
 		return this->m_Size / sizeof(Vertex);
+	}
+
+	const char* VertexBuffer::GetType() const noexcept
+	{
+		return "Vertex";
 	}
 }

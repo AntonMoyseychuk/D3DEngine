@@ -1,13 +1,13 @@
 #pragma once
 #include "Buffer.h"
+#include "engine/utility/exception/ExeptionMacros.h"
 
 namespace graphics_engine::core {
     template<typename T>
-    class ConstantBuffer : public Buffer<T>
+    class ConstantBuffer : public Buffer
     {
     public:
-        ConstantBuffer()
-            : Buffer<T>::Buffer()
+        ConstantBuffer() : Buffer()
         {
             this->m_BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
             this->m_BufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -21,8 +21,7 @@ namespace graphics_engine::core {
                 std::string(this->GetType()) + " Buffer creation failed!");
         }
 
-        ConstantBuffer(const T& data)
-            : Buffer<T>::Buffer(sizeof(data))
+        ConstantBuffer(const T& data) : Buffer(sizeof(data))
         {
             this->m_BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
             this->m_BufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;

@@ -1,4 +1,5 @@
 #include "IndexBuffer.h"
+#include "engine/utility/exception/ExeptionMacros.h"
 
 namespace graphics_engine::core {
 	IndexBuffer::IndexBuffer(const std::vector<uint32_t>& indices)

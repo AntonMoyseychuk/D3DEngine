@@ -42,7 +42,7 @@ namespace graphics_engine::window {
 
 	Window::WindowClass& Window::WindowClass::Get() noexcept
 	{
-		static WindowClass windowClass(L"D:\\Studies\\RenderSystem\\D3DEngine\\Engine\\sandbox\\res\\texture\\icon.ico");
+		static WindowClass windowClass(L"D:\\Studies\\Graphics\\D3DEngine\\Engine\\sandbox\\res\\texture\\icon.ico");
 		return windowClass;
 	}
 

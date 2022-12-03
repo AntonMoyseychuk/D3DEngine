@@ -1,9 +1,11 @@
 #pragma once
+#include <vector>
+
 #include "Buffer.h"
 #include "engine/graphics_engine/core/Vertex.h"
 
 namespace graphics_engine::core {
-	class VertexBuffer : public Buffer<graphics_engine::core::Vertex>
+	class VertexBuffer : public Buffer
 	{
 	public:
 		VertexBuffer(const std::vector<graphics_engine::core::Vertex>& vertices);
@@ -11,9 +13,6 @@ namespace graphics_engine::core {
 
 		uint32_t GetVertCount() const;
 
-		const char* GetType() const noexcept override
-		{
-			return "Vertex";
-		}
+		const char* GetType() const noexcept override;
 	};
 }
