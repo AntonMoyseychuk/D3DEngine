@@ -15,7 +15,7 @@ namespace graphics_engine::core {
         D3DDevice::Get().GetImmediateDeviceContext()->PSSetShader(m_PS.Get(), nullptr, 0);
     }
 
-    void PixelShader::OnCreate() const
+    void PixelShader::OnCreate()
     {
         Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr;
         if (FAILED(D3DX11CompileFromFile(m_Filepath.c_str(), nullptr, nullptr,

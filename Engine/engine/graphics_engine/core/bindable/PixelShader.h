@@ -14,12 +14,12 @@ namespace graphics_engine::core {
 		void Bind() const noexcept override;
 
 	protected:
-		void OnCreate() const;
+		void OnCreate();
 
 	private:
 		std::wstring m_Filepath = L"";
 
-		mutable Microsoft::WRL::ComPtr<ID3D10Blob> m_PsBinary = nullptr;
-		mutable Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PS = nullptr;
+		Microsoft::WRL::ComPtr<ID3D10Blob> m_PsBinary = nullptr;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PS = nullptr;
 	};
 }
