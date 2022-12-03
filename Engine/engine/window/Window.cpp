@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "engine/graphics_engine/core/RenderSystem.h"
+#include "engine/graphics_engine/core/SwapChain.h"
 #include "engine/graphics_engine/core/D3DDevice.h"
 
 #include "engine/utility/exception/WindowException.h"
@@ -46,10 +46,10 @@ namespace graphics_engine::window {
 		return windowClass;
 	}
 
-	Window::Window(const wchar_t* title, uint32_t clientStateWidth, uint32_t clientStateHeight)
+	Window::Window(const wchar_t* title, uint32_t drawContextWidth, uint32_t drawContextHeight)
 		: m_Title(title), m_WindowClass(WindowClass::Get())
 	{
-		RECT wr = { 0, 0, clientStateWidth, clientStateHeight };
+		RECT wr = { 0, 0, drawContextWidth, drawContextHeight };
 		if (!AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, false)) {
 			throw ENGINE_WINDOW_LAST_ERROR_EXCEPTION();
 		}
@@ -66,7 +66,7 @@ namespace graphics_engine::window {
 		ShowWindow(m_HWND, SW_SHOW);
 
 		try {
-			m_SwapChain.Init(m_HWND, clientStateWidth, clientStateHeight);
+			m_SwapChain.reset(new core::SwapChain(m_HWND, drawContextWidth, drawContextHeight));
 		}
 		catch (const std::exception& ex) {
 			DestroyWindow(m_HWND);
@@ -115,20 +115,12 @@ namespace graphics_engine::window {
 
 	void Window::SwapBuffers(bool vsync) const
 	{
-		HRESULT D3D_OP_RESULT;
-		if (FAILED(D3D_OP_RESULT = m_SwapChain.GetSwapChain()->Present(vsync, 0u))) {
-			if (D3D_OP_RESULT == DXGI_ERROR_DEVICE_REMOVED) {
-				THROW_EXCEPTION_IF_LOGIC_ERROR(true, "WINDOW", "DXGI_ERROR_DEVICE_REMOVED");
-			}
-			else {
-				THROW_EXCEPTION_IF_HRESULT_ERROR(D3D_OP_RESULT, "WINDOW", "Swap buffers failed");
-			}
-		}
+		m_SwapChain->_SwapBuffers(vsync);
 	}
 
 	void Window::ClearBuffers(float r, float g, float b, float a) const noexcept
 	{
-		m_SwapChain.ClearBuffers(r, g, b, a);
+		m_SwapChain->_ClearBuffers(r, g, b, a);
 	}
 
 	LRESULT WINAPI Window::HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)

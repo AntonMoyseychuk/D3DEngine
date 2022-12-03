@@ -7,11 +7,11 @@ namespace graphics_engine::core {
 		return m_SwapChain.Get();
 	}
 
-	void SwapChain::Init(HWND windowID, uint32_t clientStateWidth, uint32_t clientStateHeight)
+	SwapChain::SwapChain(HWND windowID, uint32_t contextWidth, uint32_t contextHeight)
 	{
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = { 0 };
-		swapChainDesc.BufferDesc.Width = clientStateWidth;
-		swapChainDesc.BufferDesc.Height = clientStateHeight;
+		swapChainDesc.BufferDesc.Width = contextWidth;
+		swapChainDesc.BufferDesc.Height = contextHeight;
 		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 0;
@@ -27,7 +27,7 @@ namespace graphics_engine::core {
 		swapChainDesc.Flags = 0;
 
 		auto& device = D3DDevice::Get();
-		HRESULT hr = device.m_DXGIFactory->CreateSwapChain(device.m_D3DDevice.Get(), &swapChainDesc, &m_SwapChain);
+		HRESULT hr = device.GetFactoryDXGI()->CreateSwapChain(device.GetDevice(), &swapChainDesc, &m_SwapChain);
 		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "SWAP CHAIN", "Swap chain creation failed");
 
 
@@ -87,12 +87,20 @@ namespace graphics_engine::core {
 		D3DDevice::Get().GetImmediateDeviceContext()->RSSetViewports(1, &viewPort);
 	}
 
-	void SwapChain::ClearBuffers(float r, float g, float b, float a) const noexcept
+	void SwapChain::_ClearBuffers(float r, float g, float b, float a) const noexcept
 	{
 		auto immContext = D3DDevice::Get().GetImmediateDeviceContext();
 
 		float color[] = { r, g, b, a };
 		immContext->ClearRenderTargetView(m_RenderTargetView.Get(), color);
 		immContext->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
+	}
+	
+	void SwapChain::_SwapBuffers(bool vsync) const
+	{
+		HRESULT hr = m_SwapChain->Present(vsync, 0u);
+
+		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "SWAP CHAIN", 
+			(hr == DXGI_ERROR_DEVICE_REMOVED ? "DXGI_ERROR_DEVICE_REMOVED" : "Swap buffers failed"));
 	}
 }

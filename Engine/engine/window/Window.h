@@ -3,10 +3,13 @@
 #include <memory>
 
 #include "engine/utility/winapi/WinAPI.h"
-#include "engine/graphics_engine/core/SwapChain.h"
 
 #include "engine/input/Keyboard.h"
 #include "engine/input/Mouse.h"
+
+namespace graphics_engine::core {
+	class SwapChain;
+}
 
 namespace graphics_engine::window {
 	class Window
@@ -32,7 +35,7 @@ namespace graphics_engine::window {
 		};
 
 	public:
-		Window(const wchar_t* title, uint32_t clientStateWidth, uint32_t clientStateHeight);
+		Window(const wchar_t* title, uint32_t drawContextWidth, uint32_t drawContextHeight);
 		~Window();
 
 		Window(const Window&) = delete;
@@ -43,12 +46,13 @@ namespace graphics_engine::window {
 		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
 	
 	public:
-		RECT GetClientWindowRect() const noexcept;
-		const wchar_t* GetTitle() const noexcept;
-		void SetTitle(const wchar_t* title);
 		HWND GetHandle() const noexcept;
 		float GetWidth() const noexcept;
 		float GetHeight() const noexcept;
+
+		RECT GetClientWindowRect() const noexcept;
+		const wchar_t* GetTitle() const noexcept;
+		void SetTitle(const wchar_t* title);
 
 	private:
 		static LRESULT WINAPI HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -69,6 +73,6 @@ namespace graphics_engine::window {
 		uint32_t m_Height;
 		std::wstring m_Title;
 		
-		mutable core::SwapChain m_SwapChain;
+		std::unique_ptr<core::SwapChain> m_SwapChain = nullptr;
 	};
 }

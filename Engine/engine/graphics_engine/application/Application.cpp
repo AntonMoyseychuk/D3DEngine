@@ -70,13 +70,13 @@ namespace graphics_engine::app {
 	{
 		m_Window.ClearBuffers(0.2f, 0.2f, 0.2f);
 
+		core::RenderSystem::Get().SetRasterizerState(true);
+		m_SkySphere.Draw();
+
 		core::RenderSystem::Get().SetRasterizerState(false);
 		for (auto& drawable : m_Drawables) {
 			drawable->Draw();
 		}
-
-		core::RenderSystem::Get().SetRasterizerState(true);
-		m_SkySphere.Draw();
 
 		m_Window.SwapBuffers(true);
 	}
@@ -108,62 +108,64 @@ namespace graphics_engine::app {
 		
 		
 		//CAMERA LOGIC
-		const XMFLOAT3 ROTATION = RenderSystem::Get().Camera.GetRotation();
-		float SPEED = 7.5f * dt;
-		
-		if (m_Window.Keyboard.IsKeyPressed('W')) {
-			RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetForwardVector() * SPEED);
-		}
-		if (m_Window.Keyboard.IsKeyPressed('S')) {
-			RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetBackwardVector() * SPEED);
-		}
-		
-		if (m_Window.Keyboard.IsKeyPressed('A')) {
-			RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetLeftVector() * SPEED);
-		}
-		if (m_Window.Keyboard.IsKeyPressed('D')) {
-			RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetRightVector() * SPEED);
-		}
-		
-		if (m_Window.Keyboard.IsKeyPressed(VK_SPACE)) {
-			RenderSystem::Get().Camera.AdjustPosition(0.0f, SPEED, 0.0f);
-		}
-		if (m_Window.Keyboard.IsKeyPressed(VK_CONTROL)) {
-			RenderSystem::Get().Camera.AdjustPosition(0.0f, -SPEED, 0.0f);
-		}
-		
-		if (m_Window.Keyboard.IsKeyPressed(VK_RIGHT)) {
-			RenderSystem::Get().Camera.AdjustRotation(0.0f, 100 * dt, 0.0f);
-		}
-		if (m_Window.Keyboard.IsKeyPressed(VK_LEFT)) {
-			RenderSystem::Get().Camera.AdjustRotation(0.0f, -100 * dt, 0.0f);
-		}
-		if (m_Window.Keyboard.IsKeyPressed(VK_UP)) {
-			RenderSystem::Get().Camera.AdjustRotation(-100 * dt, 0.0f, 0.0f);
-		}
-		if (m_Window.Keyboard.IsKeyPressed(VK_DOWN)) {
-			RenderSystem::Get().Camera.AdjustRotation(100 * dt, 0.0f, 0.0f);
-		}
-		
-		static bool isRotated;
-		static std::pair<float, float> lastCursorPos, currCursorPos;
-		
-		if (m_Window.Mouse.IsLeftButtonPressed()) {
-			if (!isRotated) {
-				lastCursorPos = m_Window.Mouse.GetPosition();
-				isRotated = true;
+		{
+			const XMFLOAT3 ROTATION = RenderSystem::Get().Camera.GetRotation();
+			float SPEED = 7.5f * dt;
+
+			if (m_Window.Keyboard.IsKeyPressed('W')) {
+				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetForwardVector() * SPEED);
+			}
+			if (m_Window.Keyboard.IsKeyPressed('S')) {
+				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetBackwardVector() * SPEED);
+			}
+
+			if (m_Window.Keyboard.IsKeyPressed('A')) {
+				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetLeftVector() * SPEED);
+			}
+			if (m_Window.Keyboard.IsKeyPressed('D')) {
+				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetRightVector() * SPEED);
+			}
+
+			if (m_Window.Keyboard.IsKeyPressed(VK_SPACE)) {
+				RenderSystem::Get().Camera.AdjustPosition(0.0f, SPEED, 0.0f);
+			}
+			if (m_Window.Keyboard.IsKeyPressed(VK_CONTROL)) {
+				RenderSystem::Get().Camera.AdjustPosition(0.0f, -SPEED, 0.0f);
+			}
+
+			if (m_Window.Keyboard.IsKeyPressed(VK_RIGHT)) {
+				RenderSystem::Get().Camera.AdjustRotation(0.0f, 100 * dt, 0.0f);
+			}
+			if (m_Window.Keyboard.IsKeyPressed(VK_LEFT)) {
+				RenderSystem::Get().Camera.AdjustRotation(0.0f, -100 * dt, 0.0f);
+			}
+			if (m_Window.Keyboard.IsKeyPressed(VK_UP)) {
+				RenderSystem::Get().Camera.AdjustRotation(-100 * dt, 0.0f, 0.0f);
+			}
+			if (m_Window.Keyboard.IsKeyPressed(VK_DOWN)) {
+				RenderSystem::Get().Camera.AdjustRotation(100 * dt, 0.0f, 0.0f);
+			}
+
+			static bool isRotated;
+			static std::pair<float, float> lastCursorPos, currCursorPos;
+
+			if (m_Window.Mouse.IsLeftButtonPressed()) {
+				if (!isRotated) {
+					lastCursorPos = m_Window.Mouse.GetPosition();
+					isRotated = true;
+				}
+				else {
+					currCursorPos = m_Window.Mouse.GetPosition();
+					const float DX = (currCursorPos.first - lastCursorPos.first) / 2.5f;
+					const float DY = (currCursorPos.second - lastCursorPos.second) / 2.5f;
+					RenderSystem::Get().Camera.AdjustRotation(DY, DX, 0.0f);
+
+					lastCursorPos = currCursorPos;
+				}
 			}
 			else {
-				currCursorPos = m_Window.Mouse.GetPosition();
-				const float DX = (currCursorPos.first - lastCursorPos.first) / 2.5f;
-				const float DY = (currCursorPos.second - lastCursorPos.second) / 2.5f;
-				RenderSystem::Get().Camera.AdjustRotation(DY, DX, 0.0f);
-		
-				lastCursorPos = currCursorPos;
+				isRotated = false;
 			}
-		}
-		else {
-			isRotated = false;
 		}
 	}
 }

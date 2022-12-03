@@ -1,6 +1,7 @@
 #pragma once
 #include "D3DDevice.h"
 
+#include <memory>
 #include <d3d11.h>
 #include <stdint.h>
 #include <wrl.h>
@@ -12,17 +13,16 @@ namespace graphics_engine::window {
 namespace graphics_engine::core {
 	class SwapChain final
 	{
-	public:
-		friend class RenderSystem;
-		friend class window::Window;
+		friend class graphics_engine::window::Window;
 
 	public:
 		IDXGISwapChain* GetSwapChain() noexcept;
 
 	private:
-		SwapChain() = default;
-		void Init(HWND windowID, uint32_t clientStateWidth, uint32_t clientStateHeight);
-		void ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
+		SwapChain(HWND windowID, uint32_t contextWidth, uint32_t contextHeight);
+		
+		void _ClearBuffers(float r, float g, float b, float a = 1.0f) const noexcept;
+		void _SwapBuffers(bool vsync) const;
 
 	private:
 		Microsoft::WRL::ComPtr<IDXGISwapChain> m_SwapChain = nullptr;

@@ -5,21 +5,18 @@
 namespace graphics_engine::core {
 	class D3DDevice final
 	{
-		friend class RenderSystem;
-		friend class SwapChain;
 	public:
 		static D3DDevice& Get();
 
 		ID3D11Device* GetDevice();
 		ID3D11DeviceContext* GetImmediateDeviceContext();
+		IDXGIFactory* GetFactoryDXGI();
 
 	private:
 		D3DDevice();
 
 		D3DDevice(const D3DDevice& device) = delete;
 		D3DDevice& operator=(const D3DDevice& device) = delete;
-		
-		IDXGIFactory* GetFactoryDXGI();
 
 	private:
 		D3D_FEATURE_LEVEL m_FeatureLevel;

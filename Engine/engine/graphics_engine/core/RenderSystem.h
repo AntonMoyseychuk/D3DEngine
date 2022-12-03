@@ -5,18 +5,14 @@
 #include <DirectXMath.h>
 #include <wrl.h>
 
-namespace window {
-	class Window;
-}
 
 namespace graphics_engine::core {
 	class RenderSystem final
 	{
-		friend class window::Window;
-
 	public:
 		static RenderSystem& Get() noexcept;
 
+	public:
 		void Draw(uint32_t vertexCount) const noexcept;
 		void DrawIndexed(uint32_t count) const noexcept;
 		void SetRasterizerState(bool cullFront) const noexcept;
