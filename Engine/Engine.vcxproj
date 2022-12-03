@@ -189,8 +189,8 @@
     <ClCompile Include="engine\graphics_engine\core\drawable\Light.cpp" />
     <ClCompile Include="engine\graphics_engine\core\drawable\Model.cpp" />
     <ClCompile Include="engine\graphics_engine\core\drawable\SkySphere.cpp" />
-    <ClCompile Include="engine\input\Keyboard.cpp" />
-    <ClCompile Include="engine\input\Mouse.cpp" />
+    <ClCompile Include="engine\input_engine\Keyboard.cpp" />
+    <ClCompile Include="engine\input_engine\Mouse.cpp" />
     <ClCompile Include="engine\graphics_engine\core\RenderSystem.cpp" />
     <ClCompile Include="engine\graphics_engine\camera\Camera.cpp" />
     <ClCompile Include="engine\utility\exception\Exception.cpp" />
@@ -226,8 +226,8 @@
     <ClInclude Include="engine\utility\exception\WindowException.h" />
     <ClInclude Include="engine\utility\parser\StringParser.h" />
     <ClInclude Include="engine\utility\winapi\WinAPI.h" />
-    <ClInclude Include="engine\input\Keyboard.h" />
-    <ClInclude Include="engine\input\Mouse.h" />
+    <ClInclude Include="engine\input_engine\Keyboard.h" />
+    <ClInclude Include="engine\input_engine\Mouse.h" />
     <ClInclude Include="engine\utility\time\Timer.h" />
     <ClInclude Include="engine\graphics_engine\core\RenderSystem.h" />
     <ClInclude Include="engine\graphics_engine\camera\Camera.h" />
