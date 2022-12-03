@@ -2,7 +2,7 @@
 #include "Buffer.h"
 #include "engine/utility/exception/ExeptionMacros.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
     template<typename T>
     class ConstantBuffer : public Buffer
     {

@@ -2,7 +2,7 @@
 
 #include "engine/utility/winapi/WinAPI.h"
 
-namespace graphics_engine::time {
+namespace engine::time {
 	Timer::Timer()
 	{
 		m_Begin = std::chrono::steady_clock::now();

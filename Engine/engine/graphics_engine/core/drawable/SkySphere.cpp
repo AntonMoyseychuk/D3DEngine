@@ -1,6 +1,6 @@
 #include "SkySphere.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	SkySphere::SkySphere(const Texture& texture)
 		: Model("sandbox\\res\\models\\sphere.obj", texture)
 	{

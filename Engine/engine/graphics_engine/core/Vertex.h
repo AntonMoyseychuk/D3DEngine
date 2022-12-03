@@ -1,7 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	struct Vertex
 	{
 		DirectX::XMFLOAT3 Position;

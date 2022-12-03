@@ -3,7 +3,7 @@
 #include <d3dcompiler.h>
 #include <stdarg.h>
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
     PixelShader::PixelShader(const std::wstring& filepath)
         : Bindable(), m_Filepath(filepath)
     {
@@ -23,7 +23,7 @@ namespace graphics_engine::core {
         {
             if (errorBlob == nullptr) {
                 THROW_EXCEPTION_IF_LOGIC_ERROR(true, "PIXEL SHADER", 
-                    "Invalid pixel shader filepath: " + util::StringParser::ToString(m_Filepath));
+                    "Invalid pixel shader filepath: " + engine::util::StringParser::ToString(m_Filepath));
             }
             else {
                 std::string error((char*)errorBlob->GetBufferPointer());

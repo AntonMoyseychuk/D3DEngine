@@ -6,17 +6,17 @@
 #include <memory>
 #include <vector>
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class Bindable;
 	class IndexBuffer;
 }
 
-namespace graphics_engine::core::entity {
+namespace engine::graphics::core::entity {
 	template <typename T>
 	class GameObject;
 }
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class Drawable
 	{
 		template <typename T>
@@ -42,7 +42,7 @@ namespace graphics_engine::core {
 		std::vector<std::unique_ptr<Bindable>>& GetBinds() noexcept;
 
 	private:
-		const graphics_engine::core::IndexBuffer* m_IndexBuffer = nullptr;
+		const IndexBuffer* m_IndexBuffer = nullptr;
 		std::vector<std::unique_ptr<Bindable>> m_Binds = {};
 	};
 }

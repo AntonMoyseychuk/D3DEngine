@@ -3,7 +3,7 @@
 #include "engine/graphics_engine/core/bindable/ConstantBuffer.h"
 
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class TransformConstantBuffer : public Bindable
 	{
 	public:

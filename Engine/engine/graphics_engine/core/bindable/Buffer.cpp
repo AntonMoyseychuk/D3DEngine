@@ -1,7 +1,7 @@
 #include "Buffer.h"
 #include "engine/utility/exception/ExeptionMacros.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	Buffer::Buffer(size_t size)
 		: Bindable(), m_ID(nullptr), m_BufferDesc({ 0 }), m_Size(size)
 	{

@@ -3,7 +3,7 @@
 #include "engine/utility/winapi/WinAPI.h"
 #include "engine/utility/parser/StringParser.h"
 
-namespace graphics_engine::except {
+namespace engine::except {
 	class HResultable
 	{
 	public:

@@ -9,7 +9,7 @@
 #include <assimp/scene.h>
 
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class Mesh : public Bindable
 	{
 	public:

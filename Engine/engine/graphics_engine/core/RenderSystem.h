@@ -6,7 +6,7 @@
 #include <wrl.h>
 
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class RenderSystem final
 	{
 	public:

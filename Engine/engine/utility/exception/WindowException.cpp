@@ -3,7 +3,7 @@
 
 #include <sstream>
 
-namespace graphics_engine::except {
+namespace engine::except {
 	WindowException::WindowException(const char* file, uint32_t line, HRESULT result) noexcept
 		: Exception(file, line), m_ResultCode(result)
 	{

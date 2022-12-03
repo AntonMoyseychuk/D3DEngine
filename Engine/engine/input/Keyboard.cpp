@@ -1,6 +1,6 @@
 #include "Keyboard.h"
 
-namespace graphics_engine::input {
+namespace engine::input {
 	Keyboard::Event::Event() noexcept
 		: m_Type(Type::RELEASE), m_Code(0u)
 	{

@@ -5,7 +5,7 @@
 
 #include "Bindable.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class Texture : public Bindable
 	{
 	public:

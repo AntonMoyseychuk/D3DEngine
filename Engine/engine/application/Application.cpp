@@ -3,16 +3,17 @@
 #include "engine/graphics_engine/core/RenderSystem.h"
 
 #include "engine/graphics_engine/core/drawable/Model.h"
+#include "engine/graphics_engine/core/bindable/Texture.h"
 
 #include <sstream>
 #include <iomanip>
 #include <DirectXMath.h>
 
-namespace graphics_engine::app {
+namespace engine::app {
 	Application::Application(const wchar_t* title, uint32_t width, uint32_t height)
-		: m_Window(title, width, height), m_SkySphere(core::Texture(L"sandbox\\res\\texture\\sky.jpg"))
+		: m_Window(title, width, height), m_SkySphere(graphics::core::Texture(L"sandbox\\res\\texture\\sky.jpg"))
 	{
-		using namespace core;
+		using namespace graphics::core;
 
 		m_SkySphere.Scale(100.0f);
 
@@ -70,10 +71,10 @@ namespace graphics_engine::app {
 	{
 		m_Window.ClearBuffers(0.2f, 0.2f, 0.2f);
 
-		core::RenderSystem::Get().SetRasterizerState(true);
+		graphics::core::RenderSystem::Get().SetRasterizerState(true);
 		m_SkySphere.Draw();
 
-		core::RenderSystem::Get().SetRasterizerState(false);
+		graphics::core::RenderSystem::Get().SetRasterizerState(false);
 		for (auto& drawable : m_Drawables) {
 			drawable->Draw();
 		}
@@ -84,7 +85,7 @@ namespace graphics_engine::app {
 	void Application::Update()
 	{
 		using namespace DirectX;
-		using namespace core;
+		using namespace graphics::core;
 
 		const float dt = m_Timer.GetDeltaTime();
 
@@ -105,7 +106,7 @@ namespace graphics_engine::app {
 			light->Update();
 		}
 		
-		m_SkySphere.SetPosition(RenderSystem::Get().Camera.GetPosition());
+		m_SkySphere.SetPosition(graphics::core::RenderSystem::Get().Camera.GetPosition());
 		
 		
 		//CAMERA LOGIC

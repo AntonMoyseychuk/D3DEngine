@@ -2,8 +2,8 @@
 #include "engine/graphics_engine/core/bindable/ConstantBuffer.h"
 #include "engine/graphics_engine/core/drawable/GameObject.h"
 
-namespace graphics_engine::core::entity {
-	class Light : protected entity::GameObject<Light> 
+namespace engine::graphics::core::entity {
+	class Light : protected GameObject<Light> 
 	{
 	public:
 		struct LightConstantBuffer

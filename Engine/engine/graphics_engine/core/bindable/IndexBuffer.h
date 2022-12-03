@@ -2,7 +2,7 @@
 #include <vector>
 #include "Buffer.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class IndexBuffer : public Buffer
 	{
 	public:

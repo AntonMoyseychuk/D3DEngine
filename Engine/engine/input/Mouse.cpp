@@ -1,6 +1,6 @@
 #include "Mouse.h"
 
-namespace graphics_engine::input {
+namespace engine::input {
 	Mouse::Event::Event() noexcept
 		: m_Type(Type::INVALID), m_Position(std::make_pair(0, 0))
 	{

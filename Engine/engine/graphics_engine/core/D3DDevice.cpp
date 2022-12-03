@@ -2,7 +2,7 @@
 #include "engine/utility/exception/ExeptionMacros.h"
 #include <stdint.h>
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	D3DDevice& D3DDevice::Get()
 	{
 		static D3DDevice device;

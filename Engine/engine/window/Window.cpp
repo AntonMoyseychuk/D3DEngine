@@ -6,7 +6,7 @@
 #include "engine/utility/exception/ExeptionMacros.h"
 
 
-namespace graphics_engine::window {
+namespace engine::window {
 	Window::WindowClass::WindowClass(const wchar_t* iconFilepath) noexcept
 		: m_Instance(GetModuleHandle(nullptr))
 	{
@@ -66,7 +66,7 @@ namespace graphics_engine::window {
 		ShowWindow(m_HWND, SW_SHOW);
 
 		try {
-			m_SwapChain.reset(new core::SwapChain(m_HWND, drawContextWidth, drawContextHeight));
+			m_SwapChain.reset(new engine::graphics::core::SwapChain(m_HWND, drawContextWidth, drawContextHeight));
 		}
 		catch (const std::exception& ex) {
 			DestroyWindow(m_HWND);

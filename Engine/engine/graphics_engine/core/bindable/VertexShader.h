@@ -7,7 +7,7 @@
 #include <memory>
 
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class VertexShader : public Bindable
 	{
 	public:

@@ -2,7 +2,7 @@
 #include <string>
 #include <algorithm>
 
-namespace util {
+namespace engine::util {
 	class StringParser
 	{
 	public:

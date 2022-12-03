@@ -6,14 +6,14 @@
 #include <stdint.h>
 #include <wrl.h>
 
-namespace graphics_engine::window {
+namespace engine::window {
 	class Window;
 }
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class SwapChain final
 	{
-		friend class graphics_engine::window::Window;
+		friend class engine::window::Window;
 
 	public:
 		IDXGISwapChain* GetSwapChain() noexcept;

@@ -1,7 +1,7 @@
 #include "VertexBuffer.h"
 #include "engine/utility/exception/ExeptionMacros.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices)
 		: Buffer(vertices.size() * sizeof(Vertex))
 	{

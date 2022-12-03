@@ -3,7 +3,7 @@
 #include <d3dcompiler.h>
 #include <stdarg.h>
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
     VertexShader::VertexShader(const std::wstring& filepath)
         : Bindable(), m_Filepath(filepath)
     {
@@ -84,7 +84,7 @@ namespace graphics_engine::core {
         {
             if (errorBlob == nullptr) {
                 THROW_EXCEPTION_IF_LOGIC_ERROR(true, "VERTEX SHADER", 
-                    "Invalid vertex shader filepath: " + util::StringParser::ToString(m_Filepath));
+                    "Invalid vertex shader filepath: " + engine::util::StringParser::ToString(m_Filepath));
             }
             else {
                 std::string error((char*)errorBlob->GetBufferPointer());

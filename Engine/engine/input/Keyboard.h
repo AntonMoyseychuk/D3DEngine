@@ -3,15 +3,15 @@
 #include <bitset>
 #include <queue>
 
-namespace graphics_engine:: window {
+namespace engine::window {
 	class Window;
 }
 
-namespace graphics_engine::input {
+namespace engine::input {
 	class Keyboard
 	{
 	public:
-		friend class graphics_engine::window::Window;
+		friend class engine::window::Window;
 
 		class Event
 		{

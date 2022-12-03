@@ -5,7 +5,7 @@
 #include "engine/utility/winapi/WinAPI.h"
 
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	RenderSystem& RenderSystem::Get() noexcept
 	{
 		static RenderSystem gfx;

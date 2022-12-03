@@ -1,6 +1,6 @@
 #include "PrimitiveTopology.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	PrimitiveTopology::PrimitiveTopology(Type type)
 		: Bindable(), m_Topology(static_cast<D3D11_PRIMITIVE_TOPOLOGY>(type))
 	{

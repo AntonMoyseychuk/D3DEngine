@@ -3,7 +3,7 @@
 #include "Exception.h"
 #include "engine/utility/winapi/WinAPI.h"
 
-namespace graphics_engine::except {
+namespace engine::except {
 	class WindowException : public Exception, public HResultable
 	{
 	public:
@@ -20,6 +20,6 @@ namespace graphics_engine::except {
 	};
 }
 
-#define ENGINE_WINDOW_EXCEPTION(hResult) graphics_engine::except::WindowException(__FILE__, __LINE__, hResult)
-#define ENGINE_WINDOW_EXCEPTION_MSG(hResult, msg) graphics_engine::except::WindowException(msg, __FILE__, __LINE__, hResult)
+#define ENGINE_WINDOW_EXCEPTION(hResult) engine::except::WindowException(__FILE__, __LINE__, hResult)
+#define ENGINE_WINDOW_EXCEPTION_MSG(hResult, msg) engine::except::WindowException(msg, __FILE__, __LINE__, hResult)
 #define ENGINE_WINDOW_LAST_ERROR_EXCEPTION() ENGINE_WINDOW_EXCEPTION(GetLastError())

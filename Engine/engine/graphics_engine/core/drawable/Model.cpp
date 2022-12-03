@@ -6,25 +6,25 @@
 
 #include "engine/graphics_engine/core/bindable/TransformConstantBuffer.h"
 
-namespace graphics_engine::core::entity {
+namespace engine::graphics::core::entity {
 	Model::Model(const std::string& modelFilepath, const Texture& texture)
 		: GameObject<Model>({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
 	{
 		if (!IsStaticInitialized()) {
 			AddStaticBind(std::make_unique<VertexShader>(L"sandbox\\res\\shaders\\ModelVS.hlsl",
-				std::vector<graphics_engine::core::VertexShader::InputLayoutAttribute> 
+				std::vector<graphics::core::VertexShader::InputLayoutAttribute> 
 				{
 					core::VertexShader::InputLayoutAttribute::POSITION,
 					core::VertexShader::InputLayoutAttribute::TEXTURE,
 					core::VertexShader::InputLayoutAttribute::NORMAL
 				})
 			);
-			AddStaticBind(std::make_unique<PixelShader>(L"sandbox\\res\\shaders\\ModelPS.hlsl"));
-			AddStaticBind(std::make_unique<PrimitiveTopology>(core::PrimitiveTopology::Type::TRIANGLES));
+			AddStaticBind(std::make_unique<core::PixelShader>(L"sandbox\\res\\shaders\\ModelPS.hlsl"));
+			AddStaticBind(std::make_unique<core::PrimitiveTopology>(core::PrimitiveTopology::Type::TRIANGLES));
 		}
 
 		AddBind(std::make_unique<Texture>(texture), GetBinds().end());
-		AddBind(std::make_unique<TransformConstantBuffer>(*this), GetBinds().end());
+		AddBind(std::make_unique<core::TransformConstantBuffer>(*this), GetBinds().end());
 
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		LoadModel(modelFilepath);
@@ -95,7 +95,7 @@ namespace graphics_engine::core::entity {
 		}
 	}
 
-	graphics_engine::core::Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+	graphics::core::Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	{
 		std::vector<Vertex> vertices;
 		std::vector<uint32_t> indices;
@@ -128,6 +128,6 @@ namespace graphics_engine::core::entity {
 			}
 		}
 
-		return graphics_engine::core::Mesh(vertices, indices);
+		return graphics::core::Mesh(vertices, indices);
 	}
 }

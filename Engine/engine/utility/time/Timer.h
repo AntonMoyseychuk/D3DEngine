@@ -1,7 +1,7 @@
 #pragma once
 #include <chrono>
 
-namespace graphics_engine::time {
+namespace engine::time {
 	class Timer
 	{
 	public:

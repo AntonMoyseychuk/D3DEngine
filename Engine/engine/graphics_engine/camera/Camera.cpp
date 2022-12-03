@@ -2,7 +2,7 @@
 
 #include "engine/utility/winapi/WinAPI.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
     const DirectX::XMVECTOR Camera::DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
     const DirectX::XMVECTOR Camera::DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
     const DirectX::XMVECTOR Camera::DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);

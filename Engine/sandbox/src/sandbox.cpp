@@ -9,7 +9,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	UNREFERENCED_PARAMETER(nCmdShow);
 
 	try {
-		graphics_engine::app::Application engine(L"Sandbox", 1280, 900);
+		engine::app::Application engine(L"Sandbox", 1280, 900);
 	
 		return engine.Run();
 	}

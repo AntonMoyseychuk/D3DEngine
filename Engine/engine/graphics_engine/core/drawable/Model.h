@@ -5,7 +5,7 @@
 #include "engine/graphics_engine/core/bindable/Texture.h"
 
 
-namespace graphics_engine::core::entity {
+namespace engine::graphics::core::entity {
 	class Model : public GameObject<Model>
 	{
 	public:
@@ -19,9 +19,9 @@ namespace graphics_engine::core::entity {
 	private:
 		void LoadModel(const std::string& filepath);
 		void ProcessNode(aiNode* node, const aiScene* scene);
-		graphics_engine::core::Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
+		core::Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 
 	private:
-		std::vector<graphics_engine::core::Mesh> m_Meshes;
+		std::vector<core::Mesh> m_Meshes;
 	};
 }

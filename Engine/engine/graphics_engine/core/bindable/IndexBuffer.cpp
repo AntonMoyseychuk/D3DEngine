@@ -1,7 +1,7 @@
 #include "IndexBuffer.h"
 #include "engine/utility/exception/ExeptionMacros.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	IndexBuffer::IndexBuffer(const std::vector<uint32_t>& indices)
 		: Buffer(indices.size() * sizeof(uint32_t))
 	{

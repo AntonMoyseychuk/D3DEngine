@@ -7,11 +7,11 @@
 #include "engine/input/Keyboard.h"
 #include "engine/input/Mouse.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class SwapChain;
 }
 
-namespace graphics_engine::window {
+namespace engine::window {
 	class Window
 	{
 	private:
@@ -73,6 +73,6 @@ namespace graphics_engine::window {
 		uint32_t m_Height;
 		std::wstring m_Title;
 		
-		std::unique_ptr<core::SwapChain> m_SwapChain = nullptr;
+		std::unique_ptr<graphics::core::SwapChain> m_SwapChain = nullptr;
 	};
 }

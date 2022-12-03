@@ -5,7 +5,7 @@
 #include <string>
 
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class PixelShader : public Bindable
 	{
 	public:

@@ -2,7 +2,7 @@
 #include <string>
 #include <exception>
 
-namespace graphics_engine::except {
+namespace engine::except {
 	class Exception : public std::exception
 	{
 	public:
@@ -25,5 +25,5 @@ namespace graphics_engine::except {
 	};
 }
 
-#define ENGINE_EXCEPTION() graphics_engine::except::Exception(__FILE__, __LINE__)
-#define ENGINE_EXCEPTION_MSG(msg) graphics_engine::except::Exception(msg, __FILE__, __LINE__)
+#define ENGINE_EXCEPTION() engine::except::Exception(__FILE__, __LINE__)
+#define ENGINE_EXCEPTION_MSG(msg) engine::except::Exception(msg, __FILE__, __LINE__)

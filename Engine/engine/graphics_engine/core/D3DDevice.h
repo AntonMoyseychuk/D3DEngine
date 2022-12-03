@@ -2,7 +2,7 @@
 #include <d3d11.h>
 #include <wrl.h>
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	class D3DDevice final
 	{
 	public:

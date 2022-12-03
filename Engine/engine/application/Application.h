@@ -7,7 +7,7 @@
 #include "engine/graphics_engine/core/drawable/SkySphere.h"
 #include "engine/graphics_engine/core/drawable/Light.h"
 
-namespace graphics_engine::app {
+namespace engine::app {
 	class Application
 	{
 	public:
@@ -20,12 +20,13 @@ namespace graphics_engine::app {
 		virtual void Update();
 
 	private:
+		
 		time::Timer m_Timer;
 		window::Window m_Window;
 
-		std::vector<std::unique_ptr<core::Drawable>> m_Drawables;
-		std::vector<std::unique_ptr<core::entity::Light>> m_Lights;
+		std::vector<std::unique_ptr<graphics::core::Drawable>> m_Drawables;
+		std::vector<std::unique_ptr<graphics::core::entity::Light>> m_Lights;
 		
-		core::SkySphere m_SkySphere;
+		graphics::core::SkySphere m_SkySphere;
 	};
 }

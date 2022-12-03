@@ -1,6 +1,6 @@
 #include "Exception.h"
 
-namespace graphics_engine::except {
+namespace engine::except {
 	Exception::Exception(const char* msg, const char* file, uint32_t line) noexcept
 		: m_File(file), m_Line(line)
 	{

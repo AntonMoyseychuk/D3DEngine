@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include "engine/utility/exception/ExeptionMacros.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	Texture::Texture(const wchar_t* filepath)
 		: Bindable(), m_Filepath(filepath)
 	{

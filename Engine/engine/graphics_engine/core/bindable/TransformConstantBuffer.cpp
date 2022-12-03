@@ -1,7 +1,7 @@
 #include "TransformConstantBuffer.h"
 #include "engine/graphics_engine/core/RenderSystem.h"
 
-namespace graphics_engine::core {
+namespace engine::graphics::core {
 	TransformConstantBuffer::TransformConstantBuffer(const Drawable& parent)
 		: Bindable(), m_Parent(parent)
 	{
