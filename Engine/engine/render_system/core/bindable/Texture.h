@@ -9,14 +9,14 @@
 namespace engine::graphics::core {
 	class TextureManager;
 
-	class Texture : public Resource, public Bindable
+	class Texture final : public Resource, public Bindable
 	{
 		friend class TextureManager;
 	public:
 		void Bind() const noexcept override;
 
 	private:
-		Texture(const wchar_t* filepath);
+		Texture(const std::wstring& filepath);
 		void OnCreate() const;
 
 	private:

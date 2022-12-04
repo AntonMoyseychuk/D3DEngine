@@ -9,11 +9,11 @@ namespace engine::graphics::core {
 	{
 	public:
 		static ModelManager& Get();
-		ModelPtr CreateModelFromFile(const wchar_t* filepath) const;
+		ModelPtr CreateModelFromFile(const std::wstring& filepath);
 
 	protected:
 		ModelManager();
 
-		Resource* CreateResourceFromFileConcrete(const wchar_t* filepath) const override;
+		Resource* CreateResourceFromFileConcrete(const std::wstring& filepath) override;
 	};
 }

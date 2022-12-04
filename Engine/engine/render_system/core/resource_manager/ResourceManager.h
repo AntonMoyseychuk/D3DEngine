@@ -7,17 +7,17 @@
 
 
 namespace engine::graphics::core {
+	typedef std::shared_ptr<Resource> ResourcePtr;
+	
 	class ResourceManager
 	{
 	public:
-		typedef std::shared_ptr<Resource> ResourcePtr;
-
 		ResourceManager() = default;
 		virtual ~ResourceManager() = default;
 
 	protected:
-		ResourcePtr CreateResourceFromFile(const wchar_t* filepath);
-		virtual Resource* CreateResourceFromFileConcrete(const wchar_t* filepath) const = 0;
+		ResourcePtr CreateResourceFromFile(const std::wstring& filepath);
+		virtual Resource* CreateResourceFromFileConcrete(const std::wstring& filepath) = 0;
 
 	private:
 		static std::unordered_map<std::wstring, ResourcePtr> m_Resources;

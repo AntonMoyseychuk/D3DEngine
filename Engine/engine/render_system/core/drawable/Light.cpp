@@ -1,6 +1,6 @@
 #include "Light.h"
 
-namespace engine::graphics::core::entity {
+namespace engine::graphics::core {
 	Light::LightConstantBuffer Light::LightSettings;
 
 	Light::Light(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT4& color)

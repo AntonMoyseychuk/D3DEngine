@@ -193,6 +193,7 @@
     <ClCompile Include="engine\input_system\Mouse.cpp" />
     <ClCompile Include="engine\render_system\core\RenderSystem.cpp" />
     <ClCompile Include="engine\render_system\camera\Camera.cpp" />
+    <ClCompile Include="engine\render_system\core\resource_manager\model_manager\ModelManager.cpp" />
     <ClCompile Include="engine\utility\exception\Exception.cpp" />
     <ClCompile Include="engine\utility\exception\WindowException.cpp" />
     <ClCompile Include="engine\render_system\core\resource_manager\ResourceManager.cpp" />
@@ -221,6 +222,7 @@
     <ClInclude Include="engine\render_system\core\drawable\Light.h" />
     <ClInclude Include="engine\render_system\core\drawable\Model.h" />
     <ClInclude Include="engine\render_system\core\drawable\SkySphere.h" />
+    <ClInclude Include="engine\render_system\core\resource_manager\model_manager\ModelManager.h" />
     <ClInclude Include="engine\render_system\core\Vertex.h" />
     <ClInclude Include="engine\application\Application.h" />
     <ClInclude Include="engine\utility\exception\Exception.h" />

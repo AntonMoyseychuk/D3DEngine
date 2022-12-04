@@ -3,20 +3,23 @@
 #include "engine/render_system/core/bindable/Mesh.h"
 
 #include "engine/render_system/core/bindable/Texture.h"
+#include "engine/render_system/core/resource_manager/Resource.h"
 
 
-namespace engine::graphics::core::entity {
-	class Model : public GameObject<Model>
+namespace engine::graphics::core {
+	class Model : public GameObject<Model>, public Resource
 	{
-	public:
-		Model(const std::string& modelFilepath, const Texture& texture);
+		friend class ModelManager;
 
+	public:
 		void Draw() const noexcept override;
 
 		void SetOwnVertexShader(const std::wstring& filepath);
 		void SetOwnPixelShader(const std::wstring& filepath);
 
 	private:
+		Model(const std::wstring& filepath/*, const Texture& texture*/);
+
 		void LoadModel(const std::string& filepath);
 		void ProcessNode(aiNode* node, const aiScene* scene);
 		core::Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);

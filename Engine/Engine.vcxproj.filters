@@ -54,16 +54,10 @@
     <ClCompile Include="engine\render_system\core\bindable\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\render_system\core\resource_manager\mesh_manager\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="engine\render_system\core\bindable\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\render_system\core\bindable\PrimitiveTopology.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\render_system\core\resource_manager\texture_manager\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\render_system\core\bindable\TransformConstantBuffer.cpp">
@@ -99,7 +93,13 @@
     <ClCompile Include="engine\render_system\core\resource_manager\texture_manager\TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\render_system\core\resource_manager\mesh_manager\MeshManager.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\render_system\core\bindable\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\render_system\core\resource_manager\model_manager\ModelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,16 +164,10 @@
     <ClInclude Include="engine\render_system\core\bindable\IndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\render_system\core\resource_manager\mesh_manager\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="engine\render_system\core\bindable\PixelShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\render_system\core\bindable\PrimitiveTopology.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\render_system\core\resource_manager\texture_manager\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\render_system\core\bindable\TransformConstantBuffer.h">
@@ -209,7 +203,13 @@
     <ClInclude Include="engine\render_system\core\resource_manager\texture_manager\TextureManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\render_system\core\resource_manager\mesh_manager\MeshManager.h">
+    <ClInclude Include="engine\render_system\core\bindable\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\render_system\core\bindable\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\render_system\core\resource_manager\model_manager\ModelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

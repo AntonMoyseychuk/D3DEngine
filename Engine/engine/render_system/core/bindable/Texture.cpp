@@ -2,7 +2,7 @@
 #include "engine/utility/exception/ExeptionMacros.h"
 
 namespace engine::graphics::core {
-	Texture::Texture(const wchar_t* filepath)
+	Texture::Texture(const std::wstring& filepath)
 		: Resource(filepath), Bindable()
 	{
 		OnCreate();

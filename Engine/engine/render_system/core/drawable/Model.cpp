@@ -6,9 +6,12 @@
 
 #include "engine/render_system/core/bindable/TransformConstantBuffer.h"
 
-namespace engine::graphics::core::entity {
-	Model::Model(const std::string& modelFilepath, const Texture& texture)
-		: GameObject<Model>({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
+#include "engine/utility/parser/StringParser.h"
+
+
+namespace engine::graphics::core {
+	Model::Model(const std::wstring& filepath/*, const Texture& texture*/)
+		: Resource(filepath), GameObject<Model>({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
 	{
 		if (!IsStaticInitialized()) {
 			AddStaticBind(std::make_unique<VertexShader>(L"sandbox\\res\\shaders\\ModelVS.hlsl",
@@ -23,11 +26,11 @@ namespace engine::graphics::core::entity {
 			AddStaticBind(std::make_unique<core::PrimitiveTopology>(core::PrimitiveTopology::Type::TRIANGLES));
 		}
 
-		AddBind(std::make_unique<Texture>(texture), GetBinds().end());
+		//AddBind(std::make_unique<Texture>(texture), GetBinds().end());
 		AddBind(std::make_unique<core::TransformConstantBuffer>(*this), GetBinds().end());
 
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		LoadModel(modelFilepath);
+		LoadModel(util::StringParser::ToString(filepath));
 		for (const auto& mesh : m_Meshes) {
 			AddBind(std::make_unique<core::Mesh>(mesh), GetBinds().end());
 		}

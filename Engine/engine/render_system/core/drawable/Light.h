@@ -2,7 +2,7 @@
 #include "engine/render_system/core/bindable/ConstantBuffer.h"
 #include "engine/render_system/core/drawable/GameObject.h"
 
-namespace engine::graphics::core::entity {
+namespace engine::graphics::core {
 	class Light : protected GameObject<Light> 
 	{
 	public:

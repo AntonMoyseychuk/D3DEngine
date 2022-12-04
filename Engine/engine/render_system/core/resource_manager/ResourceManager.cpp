@@ -10,9 +10,9 @@
 #endif
 
 namespace engine::graphics::core {
-	std::unordered_map<std::wstring, ResourceManager::ResourcePtr> ResourceManager::m_Resources;
+	std::unordered_map<std::wstring, ResourcePtr> ResourceManager::m_Resources;
 
-	ResourceManager::ResourcePtr ResourceManager::CreateResourceFromFile(const wchar_t* filepath)
+	ResourcePtr ResourceManager::CreateResourceFromFile(const std::wstring& filepath)
 	{
 		#if (_MSC_VER >= 1900 && _MSC_VER <= 1916)  || ( _MSC_VER >= 1920 && __cplusplus <= 201402L) 
 				std::wstring fullpath = std::experimental::filesystem::absolute(filepath);
@@ -27,12 +27,13 @@ namespace engine::graphics::core {
 			return it->second;
 		}
 
-		auto resource = std::make_shared<Resource>(*this->CreateResourceFromFileConcrete(fullpath.c_str()));
+		auto resource = this->CreateResourceFromFileConcrete(fullpath.c_str());
 
 		if (resource != nullptr) {
-			m_Resources[fullpath] = resource;
+			m_Resources[fullpath] = ResourcePtr(resource);
+			return m_Resources[fullpath];
 		}
 
-		return resource;
+		return nullptr;
 	}
 }

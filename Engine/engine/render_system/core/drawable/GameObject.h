@@ -3,7 +3,7 @@
 
 #include <vector>
 
-namespace engine::graphics::core::entity {
+namespace engine::graphics::core {
 	template <typename T>
 	class GameObject : public Drawable
 	{

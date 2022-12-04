@@ -5,10 +5,10 @@ namespace engine::graphics::core {
 	class Resource
 	{
 	public:
-		Resource(const wchar_t* fullpath);
+		Resource(const std::wstring& fullpath);
 		virtual ~Resource() = default;
 
-		const std::wstring& GetFullpath() const noexcept;
+		const std::wstring& GetSourcePath() const noexcept;
 
 	protected:
 		std::wstring m_Fullpath = L"";

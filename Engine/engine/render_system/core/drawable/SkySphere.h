@@ -3,9 +3,9 @@
 #include "Model.h"
 
 namespace engine::graphics::core {
-	class SkySphere : public entity::Model
-	{
-	public:
-		SkySphere(const Texture& texture);
-	};
+	//class SkySphere : public entity::Model
+	//{
+	//public:
+	//	SkySphere(const Texture& texture);
+	//};
 }

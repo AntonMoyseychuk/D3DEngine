@@ -1,13 +1,14 @@
 #pragma once
 #include "engine/utility/time/Timer.h"
 #include "engine/window_system/Window.h"
-#include "engine/render_system/core/resource_manager/texture_manager/TextureManager.h"
 #include "engine/render_system/core/RenderSystem.h"
+#include "engine/render_system/core/resource_manager/model_manager/ModelManager.h"
+#include "engine/render_system/core/resource_manager/texture_manager/TextureManager.h"
 
 #include "engine/render_system/core/drawable/Drawable.h"
 
-#include "engine/render_system/core/drawable/SkySphere.h"
-#include "engine/render_system/core/drawable/Light.h"
+//#include "engine/render_system/core/drawable/SkySphere.h"
+//#include "engine/render_system/core/drawable/Light.h"
 
 namespace engine::app {
 	class Application
@@ -22,13 +23,14 @@ namespace engine::app {
 		virtual void Update();
 
 	private:
-		time::Timer m_Timer;
-		window::Window m_Window;
-		graphics::core::RenderSystem& m_Renderer;
-		graphics::core::TextureManager& m_TextureManager;
+		time::Timer Timer;
+		window::Window Window;
+		graphics::core::RenderSystem& Renderer;
+		graphics::core::TextureManager& TextureManager;
+		graphics::core::ModelManager& ModelManager;
 
-		std::vector<std::unique_ptr<graphics::core::Drawable>> m_Drawables;
-		std::vector<std::unique_ptr<graphics::core::entity::Light>> m_Lights;
+		std::vector<std::shared_ptr<graphics::core::Drawable>> m_Drawables;
+		//std::vector<std::unique_ptr<graphics::core::entity::Light>> m_Lights;
 		
 		//graphics::core::SkySphere m_SkySphere;
 	};
