@@ -30,8 +30,9 @@ namespace engine::app {
 		graphics::core::ModelManager& ModelManager;
 
 		std::vector<std::shared_ptr<graphics::core::Drawable>> m_Drawables;
-		//std::vector<std::unique_ptr<graphics::core::entity::Light>> m_Lights;
 		
+		//std::vector<std::unique_ptr<graphics::core::entity::Light>> m_Lights;
+		//
 		//graphics::core::SkySphere m_SkySphere;
 	};
 }

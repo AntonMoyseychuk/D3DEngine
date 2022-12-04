@@ -1,9 +1,5 @@
 #include "Application.h"
 
-#include "engine/render_system/core/RenderSystem.h"
-
-#include "engine/render_system/core/drawable/Model.h"
-
 #include <sstream>
 #include <iomanip>
 #include <DirectXMath.h>
@@ -13,12 +9,15 @@ namespace engine::app {
 		: Window(title, width, height), 
 		Renderer(graphics::core::RenderSystem::Get()), 
 		TextureManager(graphics::core::TextureManager::Get()),
-		ModelManager(graphics::core::ModelManager::Get())//,
+		ModelManager(graphics::core::ModelManager::Get())
+		//,
 		//m_SkySphere(*m_TextureManager.CreateTextureFromFile(L"sandbox\\res\\texture\\sky.jpg"))
 	{
 		using namespace graphics::core;
 
+		//
 		//m_SkySphere.Scale(100.0f);
+		//
 
 		Renderer.SetProjectionMatrix(
 			DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV4, Window.GetWidth() / Window.GetHeight(), 0.01f, 150.0f)
@@ -46,7 +45,7 @@ namespace engine::app {
 			m_Drawables.emplace_back(std::move(model));
 		}
 
-		//
+		
 		//m_Lights.emplace_back(std::move(std::make_unique<entity::Light>(DirectX::XMFLOAT3(0.0f, 1000.0f, 1000.0f),
 		//	DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f)))
 		//);
@@ -103,11 +102,11 @@ namespace engine::app {
 			}
 		}
 		
-		//
+		
 		//for (auto& light : m_Lights) {
 		//	light->Update();
 		//}
-		
+		//
 		//m_SkySphere.SetPosition(m_Renderer.Camera.GetPosition());
 		
 		
