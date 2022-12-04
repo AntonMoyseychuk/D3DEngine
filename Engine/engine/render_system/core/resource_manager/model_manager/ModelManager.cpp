@@ -11,7 +11,7 @@ namespace engine::graphics::core {
 	{
 	}
 
-	ModelPtr ModelManager::CreateModelFromFile(const std::wstring& filepath)
+	ModelSharedPtr ModelManager::CreateModelFromFile(const std::wstring& filepath)
 	{
 		return std::static_pointer_cast<Model>(CreateResourceFromFile(filepath));
 	}

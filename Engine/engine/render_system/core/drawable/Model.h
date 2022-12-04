@@ -12,10 +12,12 @@ namespace engine::graphics::core {
 		friend class ModelManager;
 
 	public:
-		void Draw() const noexcept override;
+		const std::vector<Mesh>& GetMeshes() const noexcept;
 
-		void SetOwnVertexShader(const std::wstring& filepath);
-		void SetOwnPixelShader(const std::wstring& filepath);
+		//void Draw() const noexcept override;
+
+		//void SetOwnVertexShader(const std::wstring& filepath);
+		//void SetOwnPixelShader(const std::wstring& filepath);
 
 	private:
 		Model(const std::wstring& filepath/*, const Texture& texture*/);
@@ -25,6 +27,6 @@ namespace engine::graphics::core {
 		core::Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 
 	private:
-		std::vector<core::Mesh> m_Meshes;
+		std::vector<Mesh> m_Meshes;
 	};
 }

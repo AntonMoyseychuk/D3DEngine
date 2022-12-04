@@ -1,6 +1,5 @@
 #pragma once
 #include "engine/render_system/camera/Camera.h"
-#include "engine/render_system/core/resource_manager/texture_manager/TextureManager.h"
 
 #include <d3dx11.h>
 #include <DirectXMath.h>
@@ -8,14 +7,17 @@
 
 
 namespace engine::graphics::core {
+	class Model;
+	class VertexShader;
+	class PixelShader;
+
 	class RenderSystem final
 	{
 	public:
 		static RenderSystem& Get() noexcept;
 
 	public:
-		void Draw(uint32_t vertexCount) const noexcept;
-		void DrawIndexed(uint32_t count) const noexcept;
+		void DrawModel(const Model* model, const VertexShader* vs, const PixelShader* ps);
 		void SetRasterizerState(bool cullFront) const noexcept;
 
 		void SetProjectionMatrix(const DirectX::XMMATRIX& proj) noexcept;
@@ -23,6 +25,9 @@ namespace engine::graphics::core {
 
 	private:
 		RenderSystem();
+
+		void Draw(uint32_t vertexCount) const noexcept;
+		void DrawIndexed(uint32_t count) const noexcept;
 
 		RenderSystem(const RenderSystem&) = delete;
 		RenderSystem& operator=(const RenderSystem&) = delete;

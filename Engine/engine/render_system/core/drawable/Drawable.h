@@ -26,7 +26,7 @@ namespace engine::graphics::core {
 		Drawable(const Drawable&) = delete;
 		Drawable& operator=(const Drawable&) = delete;
 
-		virtual void Draw() const noexcept;
+		//virtual void Draw() const noexcept;
 
 		virtual DirectX::XMMATRIX GetTransform() const noexcept = 0;
 

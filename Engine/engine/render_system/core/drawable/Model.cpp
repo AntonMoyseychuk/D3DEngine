@@ -10,6 +10,11 @@
 
 
 namespace engine::graphics::core {
+	const std::vector<Mesh>& Model::GetMeshes() const noexcept
+	{
+		return m_Meshes;
+	}
+	
 	Model::Model(const std::wstring& filepath/*, const Texture& texture*/)
 		: Resource(filepath), GameObject<Model>({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f })
 	{
@@ -37,43 +42,42 @@ namespace engine::graphics::core {
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 
-	void Model::Draw() const noexcept
-	{
-		for (const auto& bind : GetStaticBinds()) {
-			bind->Bind();
-		}
-
-		for (const auto& bindable : GetBinds()) {
-			bindable->Bind();
-			if (const auto mesh = dynamic_cast<Mesh*>(bindable.get())) {
-				RenderSystem::Get().DrawIndexed(mesh->GetIndexBuffer().GetIndexCount());
-			}
-		}
-	}
-
-	void Model::SetOwnVertexShader(const std::wstring& filepath)
-	{
-		for (auto& vertexShader : GetBinds()) {
-			if (dynamic_cast<core::VertexShader*>(vertexShader.get())) {
-				vertexShader = std::make_unique<core::VertexShader>(filepath);
-				return;
-			}
-		}
-
-		AddBind(std::make_unique<core::VertexShader>(filepath), GetBinds().begin());
-	}
-
-	void Model::SetOwnPixelShader(const std::wstring& filepath)
-	{
-		for (auto& pixelShader : GetBinds()) {
-			if (dynamic_cast<core::PixelShader*>(pixelShader.get())) {
-				pixelShader = std::make_unique<core::PixelShader>(filepath);
-				return;
-			}
-		}
-		AddBind(std::make_unique<core::PixelShader>(filepath), GetBinds().begin());
-	}
-	
+	//void Model::Draw() const noexcept
+	//{
+	//	for (const auto& bind : GetStaticBinds()) {
+	//		bind->Bind();
+	//	}
+	//
+	//	for (const auto& bindable : GetBinds()) {
+	//		bindable->Bind();
+	//		if (const auto mesh = dynamic_cast<Mesh*>(bindable.get())) {
+	//			RenderSystem::Get().DrawIndexed(mesh->GetIndexBuffer().GetIndexCount());
+	//		}
+	//	}
+	//}
+	//
+	//void Model::SetOwnVertexShader(const std::wstring& filepath)
+	//{
+	//	for (auto& vertexShader : GetBinds()) {
+	//		if (dynamic_cast<core::VertexShader*>(vertexShader.get())) {
+	//			vertexShader = std::make_unique<core::VertexShader>(filepath);
+	//			return;
+	//		}
+	//	}
+	//
+	//	AddBind(std::make_unique<core::VertexShader>(filepath), GetBinds().begin());
+	//}
+	//
+	//void Model::SetOwnPixelShader(const std::wstring& filepath)
+	//{
+	//	for (auto& pixelShader : GetBinds()) {
+	//		if (dynamic_cast<core::PixelShader*>(pixelShader.get())) {
+	//			pixelShader = std::make_unique<core::PixelShader>(filepath);
+	//			return;
+	//		}
+	//	}
+	//	AddBind(std::make_unique<core::PixelShader>(filepath), GetBinds().begin());
+	//}
 
 	void Model::LoadModel(const std::string& filepath)
 	{

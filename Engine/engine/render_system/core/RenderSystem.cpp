@@ -1,6 +1,10 @@
 #include "RenderSystem.h"
 #include "D3DDevice.h"
 
+#include "engine/render_system/core/drawable/Model.h"
+#include "engine/render_system/core/bindable/VertexShader.h"
+#include "engine/render_system/core/bindable/PixelShader.h"
+
 #include "engine/utility/exception/ExeptionMacros.h"
 #include "engine/utility/winapi/WinAPI.h"
 
@@ -35,6 +39,16 @@ namespace engine::graphics::core {
 	void RenderSystem::Draw(uint32_t count) const noexcept
 	{
 		D3DDevice::Get().GetImmediateDeviceContext()->Draw(count, 0);
+	}
+
+	void RenderSystem::DrawModel(const Model* model, const VertexShader* vs, const PixelShader* ps)
+	{
+		vs->Bind();
+		ps->Bind();
+		for (auto& mesh : model->GetMeshes()) {
+			mesh.Bind();
+			this->DrawIndexed(mesh.GetIndexBuffer().GetIndexCount());
+		}
 	}
 
 	void core::RenderSystem::SetRasterizerState(bool cullFront) const noexcept

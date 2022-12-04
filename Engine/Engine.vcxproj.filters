@@ -72,13 +72,7 @@
     <ClCompile Include="engine\render_system\core\drawable\Drawable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\render_system\core\drawable\Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="engine\render_system\core\drawable\Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\render_system\core\drawable\SkySphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\render_system\core\bindable\Buffer.cpp">
@@ -185,13 +179,7 @@
     <ClInclude Include="engine\render_system\core\drawable\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\render_system\core\drawable\Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="engine\render_system\core\drawable\Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\render_system\core\drawable\SkySphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\render_system\core\resource_manager\ResourceManager.h">

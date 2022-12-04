@@ -26,7 +26,7 @@ namespace engine::app {
 		
 		const wchar_t* models[] = {
 			//L"sandbox\\res\\models\\Chaynik.obj",
-			L"sandbox\\res\\models\\sphere.obj",
+			//L"sandbox\\res\\models\\sphere.obj",
 			L"sandbox\\res\\models\\suzanne.obj",
 			//L"sandbox\\res\\models\\room.obj",
 			//L"sandbox\\res\\models\\sword.obj",
@@ -45,7 +45,17 @@ namespace engine::app {
 			m_Drawables.emplace_back(std::move(model));
 		}
 
-		
+		m_VS = std::make_shared<VertexShader>(L"sandbox\\res\\shaders\\ModelVS.hlsl",
+			std::vector<graphics::core::VertexShader::InputLayoutAttribute>
+			{
+				VertexShader::InputLayoutAttribute::POSITION,
+				VertexShader::InputLayoutAttribute::TEXTURE,
+				VertexShader::InputLayoutAttribute::NORMAL
+			}
+		);
+		m_PS = std::make_shared<PixelShader>(L"sandbox\\res\\shaders\\ModelPS.hlsl");
+		m_PrimTopology = std::make_shared<PrimitiveTopology>(PrimitiveTopology::Type::TRIANGLES);
+		m_PrimTopology->Bind();
 		//m_Lights.emplace_back(std::move(std::make_unique<entity::Light>(DirectX::XMFLOAT3(0.0f, 1000.0f, 1000.0f),
 		//	DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f)))
 		//);
@@ -77,7 +87,11 @@ namespace engine::app {
 
 		Renderer.SetRasterizerState(false);
 		for (auto& drawable : m_Drawables) {
-			drawable->Draw();
+			if (auto model = std::static_pointer_cast<graphics::core::Model>(drawable)) {
+				auto t = std::make_shared<graphics::core::TransformConstantBuffer>(*model);
+				t->Bind();
+				Renderer.DrawModel(model.get(), m_VS.get(), m_PS.get());
+			}
 		}
 
 		Window.SwapBuffers(true);

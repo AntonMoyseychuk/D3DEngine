@@ -12,18 +12,18 @@ namespace engine::graphics::core {
 		return m_Binds;
 	}
 
-	void Drawable::Draw() const noexcept
-	{
-		for (const auto& bind : m_Binds) {
-			bind->Bind();
-		}
-
-		for (const auto& bind : GetStaticBinds()) {
-			bind->Bind();
-		}
-
-		RenderSystem::Get().DrawIndexed(m_IndexBuffer->GetIndexCount());
-	}
+	//void Drawable::Draw() const noexcept
+	//{
+	//	for (const auto& bind : m_Binds) {
+	//		bind->Bind();
+	//	}
+	//
+	//	for (const auto& bind : GetStaticBinds()) {
+	//		bind->Bind();
+	//	}
+	//
+	//	RenderSystem::Get().DrawIndexed(m_IndexBuffer->GetIndexCount());
+	//}
 
 	void Drawable::AddBind(std::unique_ptr<Bindable> bind, std::vector<std::unique_ptr<Bindable>>::iterator where) noexcept
 	{

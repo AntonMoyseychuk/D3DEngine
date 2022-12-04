@@ -5,6 +5,11 @@
 #include "engine/render_system/core/resource_manager/model_manager/ModelManager.h"
 #include "engine/render_system/core/resource_manager/texture_manager/TextureManager.h"
 
+#include "engine/render_system/core/bindable/VertexShader.h"
+#include "engine/render_system/core/bindable/PixelShader.h"
+#include "engine/render_system/core/bindable/PrimitiveTopology.h"
+#include "engine/render_system/core/bindable/TransformConstantBuffer.h"
+
 #include "engine/render_system/core/drawable/Drawable.h"
 
 //#include "engine/render_system/core/drawable/SkySphere.h"
@@ -31,6 +36,10 @@ namespace engine::app {
 
 		std::vector<std::shared_ptr<graphics::core::Drawable>> m_Drawables;
 		
+		std::shared_ptr<graphics::core::VertexShader> m_VS = nullptr;
+		std::shared_ptr<graphics::core::PixelShader> m_PS = nullptr;
+		std::shared_ptr<graphics::core::PrimitiveTopology> m_PrimTopology = nullptr;
+
 		//std::vector<std::unique_ptr<graphics::core::entity::Light>> m_Lights;
 		//
 		//graphics::core::SkySphere m_SkySphere;

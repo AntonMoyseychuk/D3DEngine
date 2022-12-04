@@ -3,13 +3,13 @@
 #include "engine/render_system/core/drawable/Model.h"
 
 namespace engine::graphics::core {
-	typedef std::shared_ptr<Model> ModelPtr;
+	typedef std::shared_ptr<Model> ModelSharedPtr;
 
 	class ModelManager : public ResourceManager
 	{
 	public:
 		static ModelManager& Get();
-		ModelPtr CreateModelFromFile(const std::wstring& filepath);
+		ModelSharedPtr CreateModelFromFile(const std::wstring& filepath);
 
 	protected:
 		ModelManager();
