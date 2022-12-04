@@ -3,7 +3,6 @@
 #include "engine/render_system/core/RenderSystem.h"
 
 #include "engine/render_system/core/drawable/Model.h"
-#include "engine/render_system/core/resource_manager/texture_manager/TextureManager.h"
 
 #include <sstream>
 #include <iomanip>
@@ -11,17 +10,18 @@
 
 namespace engine::app {
 	Application::Application(const wchar_t* title, uint32_t width, uint32_t height)
-		: m_Window(title, width, height),
-		m_SkySphere(*graphics::core::TextureManager::Get().CreateTextureFromFile(L"sandbox\\res\\texture\\sky.jpg"))
+		: m_Window(title, width, height), m_Renderer(graphics::core::RenderSystem::Get()),
+		m_TextureManager(graphics::core::TextureManager::Get())//,
+		//m_SkySphere(*m_TextureManager.CreateTextureFromFile(L"sandbox\\res\\texture\\sky.jpg"))
 	{
 		using namespace graphics::core;
 
-		m_SkySphere.Scale(100.0f);
+		//m_SkySphere.Scale(100.0f);
 
-		RenderSystem::Get().SetProjectionMatrix(
+		m_Renderer.SetProjectionMatrix(
 			DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV4, m_Window.GetWidth() / m_Window.GetHeight(), 0.01f, 150.0f)
 		);
-		RenderSystem::Get().Camera.SetPosition({ 0.0f, 0.0f, -10.0f });
+		m_Renderer.Camera.SetPosition({ 0.0f, 0.0f, -10.0f });
 		
 		const char* models[] = {
 			//"sandbox\\res\\models\\Chaynik.obj",
@@ -39,9 +39,7 @@ namespace engine::app {
 
 		std::unique_ptr<entity::Model> model = nullptr;
 		for (uint32_t i = 0; i < ARRAYSIZE(models); ++i) {
-			model = std::make_unique<entity::Model>(models[i], 
-				*graphics::core::TextureManager::Get().CreateTextureFromFile(textures[0])
-			);
+			model = std::make_unique<entity::Model>(models[i], *m_TextureManager.CreateTextureFromFile(textures[0]));
 			model->SetPosition(i * 5.0f, 0.0f, 0.0f);
 		
 			m_Drawables.emplace_back(std::move(model));
@@ -74,10 +72,10 @@ namespace engine::app {
 	{
 		m_Window.ClearBuffers(0.2f, 0.2f, 0.2f);
 
-		graphics::core::RenderSystem::Get().SetRasterizerState(true);
-		m_SkySphere.Draw();
+		//m_Renderer.SetRasterizerState(true);
+		//m_SkySphere.Draw();
 
-		graphics::core::RenderSystem::Get().SetRasterizerState(false);
+		m_Renderer.SetRasterizerState(false);
 		for (auto& drawable : m_Drawables) {
 			drawable->Draw();
 		}
@@ -109,46 +107,46 @@ namespace engine::app {
 			light->Update();
 		}
 		
-		m_SkySphere.SetPosition(graphics::core::RenderSystem::Get().Camera.GetPosition());
+		//m_SkySphere.SetPosition(m_Renderer.Camera.GetPosition());
 		
 		
 		//CAMERA LOGIC
 		{
-			const XMFLOAT3 ROTATION = RenderSystem::Get().Camera.GetRotation();
+			const XMFLOAT3 ROTATION = m_Renderer.Camera.GetRotation();
 			float SPEED = 7.5f * dt;
 
 			if (m_Window.Keyboard.IsKeyPressed('W')) {
-				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetForwardVector() * SPEED);
+				m_Renderer.Camera.AdjustPosition(m_Renderer.Camera.GetForwardVector() * SPEED);
 			}
 			if (m_Window.Keyboard.IsKeyPressed('S')) {
-				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetBackwardVector() * SPEED);
+				m_Renderer.Camera.AdjustPosition(m_Renderer.Camera.GetBackwardVector() * SPEED);
 			}
 
 			if (m_Window.Keyboard.IsKeyPressed('A')) {
-				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetLeftVector() * SPEED);
+				m_Renderer.Camera.AdjustPosition(m_Renderer.Camera.GetLeftVector() * SPEED);
 			}
 			if (m_Window.Keyboard.IsKeyPressed('D')) {
-				RenderSystem::Get().Camera.AdjustPosition(RenderSystem::Get().Camera.GetRightVector() * SPEED);
+				m_Renderer.Camera.AdjustPosition(m_Renderer.Camera.GetRightVector() * SPEED);
 			}
 
 			if (m_Window.Keyboard.IsKeyPressed(VK_SPACE)) {
-				RenderSystem::Get().Camera.AdjustPosition(0.0f, SPEED, 0.0f);
+				m_Renderer.Camera.AdjustPosition(0.0f, SPEED, 0.0f);
 			}
 			if (m_Window.Keyboard.IsKeyPressed(VK_CONTROL)) {
-				RenderSystem::Get().Camera.AdjustPosition(0.0f, -SPEED, 0.0f);
+				m_Renderer.Camera.AdjustPosition(0.0f, -SPEED, 0.0f);
 			}
 
 			if (m_Window.Keyboard.IsKeyPressed(VK_RIGHT)) {
-				RenderSystem::Get().Camera.AdjustRotation(0.0f, 100 * dt, 0.0f);
+				m_Renderer.Camera.AdjustRotation(0.0f, 100 * dt, 0.0f);
 			}
 			if (m_Window.Keyboard.IsKeyPressed(VK_LEFT)) {
-				RenderSystem::Get().Camera.AdjustRotation(0.0f, -100 * dt, 0.0f);
+				m_Renderer.Camera.AdjustRotation(0.0f, -100 * dt, 0.0f);
 			}
 			if (m_Window.Keyboard.IsKeyPressed(VK_UP)) {
-				RenderSystem::Get().Camera.AdjustRotation(-100 * dt, 0.0f, 0.0f);
+				m_Renderer.Camera.AdjustRotation(-100 * dt, 0.0f, 0.0f);
 			}
 			if (m_Window.Keyboard.IsKeyPressed(VK_DOWN)) {
-				RenderSystem::Get().Camera.AdjustRotation(100 * dt, 0.0f, 0.0f);
+				m_Renderer.Camera.AdjustRotation(100 * dt, 0.0f, 0.0f);
 			}
 
 			static bool isRotated;
@@ -163,7 +161,7 @@ namespace engine::app {
 					currCursorPos = m_Window.Mouse.GetPosition();
 					const float DX = (currCursorPos.first - lastCursorPos.first) / 2.5f;
 					const float DY = (currCursorPos.second - lastCursorPos.second) / 2.5f;
-					RenderSystem::Get().Camera.AdjustRotation(DY, DX, 0.0f);
+					m_Renderer.Camera.AdjustRotation(DY, DX, 0.0f);
 
 					lastCursorPos = currCursorPos;
 				}

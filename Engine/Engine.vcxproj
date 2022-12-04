@@ -176,10 +176,10 @@
   <ItemGroup>
     <ClCompile Include="engine\render_system\core\bindable\Buffer.cpp" />
     <ClCompile Include="engine\render_system\core\bindable\IndexBuffer.cpp" />
-    <ClCompile Include="engine\render_system\core\resource_manager\mesh_manager\Mesh.cpp" />
+    <ClCompile Include="engine\render_system\core\bindable\Mesh.cpp" />
+    <ClCompile Include="engine\render_system\core\bindable\Texture.cpp" />
     <ClCompile Include="engine\render_system\core\bindable\PixelShader.cpp" />
     <ClCompile Include="engine\render_system\core\bindable\PrimitiveTopology.cpp" />
-    <ClCompile Include="engine\render_system\core\resource_manager\texture_manager\Texture.cpp" />
     <ClCompile Include="engine\render_system\core\bindable\TransformConstantBuffer.cpp" />
     <ClCompile Include="engine\render_system\core\bindable\VertexBuffer.cpp" />
     <ClCompile Include="engine\render_system\core\bindable\VertexShader.cpp" />
@@ -197,7 +197,6 @@
     <ClCompile Include="engine\utility\exception\WindowException.cpp" />
     <ClCompile Include="engine\render_system\core\resource_manager\ResourceManager.cpp" />
     <ClCompile Include="engine\render_system\core\resource_manager\Resource.cpp" />
-    <ClCompile Include="engine\render_system\core\resource_manager\mesh_manager\MeshManager.cpp" />
     <ClCompile Include="sandbox\src\sandbox.cpp" />
     <ClCompile Include="engine\window_system\Window.cpp" />
     <ClCompile Include="engine\utility\time\Timer.cpp" />
@@ -209,10 +208,10 @@
     <ClInclude Include="engine\render_system\core\bindable\Buffer.h" />
     <ClInclude Include="engine\render_system\core\bindable\ConstantBuffer.h" />
     <ClInclude Include="engine\render_system\core\bindable\IndexBuffer.h" />
-    <ClInclude Include="engine\render_system\core\resource_manager\mesh_manager\Mesh.h" />
+    <ClInclude Include="engine\render_system\core\bindable\Mesh.h" />
+    <ClInclude Include="engine\render_system\core\bindable\Texture.h" />
     <ClInclude Include="engine\render_system\core\bindable\PixelShader.h" />
     <ClInclude Include="engine\render_system\core\bindable\PrimitiveTopology.h" />
-    <ClInclude Include="engine\render_system\core\resource_manager\texture_manager\Texture.h" />
     <ClInclude Include="engine\render_system\core\bindable\TransformConstantBuffer.h" />
     <ClInclude Include="engine\render_system\core\bindable\VertexBuffer.h" />
     <ClInclude Include="engine\render_system\core\bindable\VertexShader.h" />
@@ -240,7 +239,6 @@
     <ClInclude Include="engine\render_system\core\resource_manager\ResourceManager.h" />
     <ClInclude Include="engine\render_system\core\resource_manager\Resource.h" />
     <ClInclude Include="engine\render_system\core\resource_manager\texture_manager\TextureManager.h" />
-    <ClInclude Include="engine\render_system\core\resource_manager\mesh_manager\MeshManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
