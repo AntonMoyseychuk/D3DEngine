@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/graphics_engine/core/bindable/Bindable.h"
+#include "engine/render_system/core/bindable/Bindable.h"
 
 namespace engine::graphics::core {
 	class PrimitiveTopology : public Bindable

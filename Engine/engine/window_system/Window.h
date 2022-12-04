@@ -4,8 +4,8 @@
 
 #include "engine/utility/winapi/WinAPI.h"
 
-#include "engine/input_engine/Keyboard.h"
-#include "engine/input_engine/Mouse.h"
+#include "engine/input_system/Keyboard.h"
+#include "engine/input_system/Mouse.h"
 
 namespace engine::graphics::core {
 	class SwapChain;

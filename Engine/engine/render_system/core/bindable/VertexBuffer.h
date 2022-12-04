@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "Buffer.h"
-#include "engine/graphics_engine/core/Vertex.h"
+#include "engine/render_system/core/Vertex.h"
 
 namespace engine::graphics::core {
 	class VertexBuffer : public Buffer

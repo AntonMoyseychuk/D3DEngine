@@ -1,5 +1,5 @@
 #include "Drawable.h"
-#include "engine/graphics_engine/core/bindable/IndexBuffer.h"
+#include "engine/render_system/core/bindable/IndexBuffer.h"
 
 namespace engine::graphics::core {
 	const std::vector<std::unique_ptr<Bindable>>& Drawable::GetBinds() const noexcept

@@ -1,6 +1,6 @@
 #pragma once
-#include "engine/graphics_engine/core/drawable/Drawable.h"
-#include "engine/graphics_engine/core/bindable/ConstantBuffer.h"
+#include "engine/render_system/core/drawable/Drawable.h"
+#include "engine/render_system/core/bindable/ConstantBuffer.h"
 
 
 namespace engine::graphics::core {

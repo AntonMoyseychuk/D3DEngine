@@ -18,13 +18,13 @@
     <ClCompile Include="sandbox\src\sandbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\window\Window.cpp">
+    <ClCompile Include="engine\window_system\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\input_engine\Keyboard.cpp">
+    <ClCompile Include="engine\input_system\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\input_engine\Mouse.cpp">
+    <ClCompile Include="engine\input_system\Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\application\Application.cpp">
@@ -33,10 +33,10 @@
     <ClCompile Include="engine\utility\time\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\RenderSystem.cpp">
+    <ClCompile Include="engine\render_system\core\RenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\camera\Camera.cpp">
+    <ClCompile Include="engine\render_system\camera\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\utility\exception\Exception.cpp">
@@ -45,49 +45,61 @@
     <ClCompile Include="engine\utility\exception\WindowException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\SwapChain.cpp">
+    <ClCompile Include="engine\render_system\core\SwapChain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\D3DDevice.cpp">
+    <ClCompile Include="engine\render_system\core\D3DDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\IndexBuffer.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\Mesh.cpp">
+    <ClCompile Include="engine\render_system\core\resource_manager\mesh_manager\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\PixelShader.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\PrimitiveTopology.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\PrimitiveTopology.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\Texture.cpp">
+    <ClCompile Include="engine\render_system\core\resource_manager\texture_manager\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\TransformConstantBuffer.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\TransformConstantBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\VertexBuffer.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\VertexShader.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\VertexShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\drawable\Drawable.cpp">
+    <ClCompile Include="engine\render_system\core\drawable\Drawable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\drawable\Light.cpp">
+    <ClCompile Include="engine\render_system\core\drawable\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\drawable\Model.cpp">
+    <ClCompile Include="engine\render_system\core\drawable\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\drawable\SkySphere.cpp">
+    <ClCompile Include="engine\render_system\core\drawable\SkySphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\graphics_engine\core\bindable\Buffer.cpp">
+    <ClCompile Include="engine\render_system\core\bindable\Buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\render_system\core\resource_manager\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\render_system\core\resource_manager\Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\render_system\core\resource_manager\texture_manager\TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\render_system\core\resource_manager\mesh_manager\MeshManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,10 +110,10 @@
     <ClInclude Include="engine\utility\winapi\WinAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\input_engine\Keyboard.h">
+    <ClInclude Include="engine\input_system\Keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\input_engine\Mouse.h">
+    <ClInclude Include="engine\input_system\Mouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\application\Application.h">
@@ -110,16 +122,16 @@
     <ClInclude Include="engine\utility\time\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\RenderSystem.h">
+    <ClInclude Include="engine\render_system\core\RenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\window\Window.h">
+    <ClInclude Include="engine\window_system\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\camera\Camera.h">
+    <ClInclude Include="engine\render_system\camera\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\Vertex.h">
+    <ClInclude Include="engine\render_system\core\Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\utility\exception\ExeptionMacros.h">
@@ -134,58 +146,70 @@
     <ClInclude Include="engine\utility\exception\WindowException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\SwapChain.h">
+    <ClInclude Include="engine\render_system\core\SwapChain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\D3DDevice.h">
+    <ClInclude Include="engine\render_system\core\D3DDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\Bindable.h">
+    <ClInclude Include="engine\render_system\core\bindable\Bindable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\Buffer.h">
+    <ClInclude Include="engine\render_system\core\bindable\Buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\ConstantBuffer.h">
+    <ClInclude Include="engine\render_system\core\bindable\ConstantBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\IndexBuffer.h">
+    <ClInclude Include="engine\render_system\core\bindable\IndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\Mesh.h">
+    <ClInclude Include="engine\render_system\core\resource_manager\mesh_manager\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\PixelShader.h">
+    <ClInclude Include="engine\render_system\core\bindable\PixelShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\PrimitiveTopology.h">
+    <ClInclude Include="engine\render_system\core\bindable\PrimitiveTopology.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\Texture.h">
+    <ClInclude Include="engine\render_system\core\resource_manager\texture_manager\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\TransformConstantBuffer.h">
+    <ClInclude Include="engine\render_system\core\bindable\TransformConstantBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\VertexBuffer.h">
+    <ClInclude Include="engine\render_system\core\bindable\VertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\bindable\VertexShader.h">
+    <ClInclude Include="engine\render_system\core\bindable\VertexShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\drawable\Drawable.h">
+    <ClInclude Include="engine\render_system\core\drawable\Drawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\drawable\GameObject.h">
+    <ClInclude Include="engine\render_system\core\drawable\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\drawable\Light.h">
+    <ClInclude Include="engine\render_system\core\drawable\Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\drawable\Model.h">
+    <ClInclude Include="engine\render_system\core\drawable\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\graphics_engine\core\drawable\SkySphere.h">
+    <ClInclude Include="engine\render_system\core\drawable\SkySphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\render_system\core\resource_manager\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\render_system\core\resource_manager\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\render_system\core\resource_manager\texture_manager\TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\render_system\core\resource_manager\mesh_manager\MeshManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

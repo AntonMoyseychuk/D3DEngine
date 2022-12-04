@@ -1,6 +1,6 @@
 #pragma once
 #include "engine/utility/exception/ExeptionMacros.h"
-#include "engine/graphics_engine/core/RenderSystem.h"
+#include "engine/render_system/core/RenderSystem.h"
 
 #include <DirectXMath.h>
 #include <memory>

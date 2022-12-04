@@ -3,7 +3,7 @@
 
 namespace engine::graphics::core {
 	Texture::Texture(const wchar_t* filepath)
-		: Bindable(), m_Filepath(filepath)
+		: Resource(filepath), Bindable()
 	{
 		OnCreate();
 	}
@@ -16,11 +16,11 @@ namespace engine::graphics::core {
 
 	void Texture::OnCreate() const
 	{
-		HRESULT hr = D3DX11CreateShaderResourceViewFromFileW(D3DDevice::Get().GetDevice(), m_Filepath.c_str(), NULL, NULL, &m_ID, NULL);
-		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "TEXTURE", "D3DX11CreateShaderResourceViewFromFile failed!");
+		HRESULT hr = D3DX11CreateShaderResourceViewFromFileW(D3DDevice::Get().GetDevice(), m_Fullpath.c_str(), NULL, NULL, &m_ID, NULL);
+		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "TEXTURE", "Shader resource view creation from file failed!");
 
 		D3D11_SAMPLER_DESC sampDesc;
-		ZeroMemory(&sampDesc, sizeof(sampDesc));
+		memset(&sampDesc, 0, sizeof(sampDesc));
 
 		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -31,6 +31,6 @@ namespace engine::graphics::core {
 		sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
 		hr = D3DDevice::Get().GetDevice()->CreateSamplerState(&sampDesc, &m_SamplerState);
-		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "TEXTURE", "CreateSamplerState failed!");
+		THROW_EXCEPTION_IF_HRESULT_ERROR(hr, "TEXTURE", "Sampler state creation failed!");
 	}
 }

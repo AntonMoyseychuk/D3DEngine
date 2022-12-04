@@ -1,10 +1,10 @@
 #include "Model.h"
 
-#include "engine/graphics_engine/core/bindable/VertexShader.h"
-#include "engine/graphics_engine/core/bindable/PixelShader.h"
-#include "engine/graphics_engine/core/bindable/PrimitiveTopology.h"
+#include "engine/render_system/core/bindable/VertexShader.h"
+#include "engine/render_system/core/bindable/PixelShader.h"
+#include "engine/render_system/core/bindable/PrimitiveTopology.h"
 
-#include "engine/graphics_engine/core/bindable/TransformConstantBuffer.h"
+#include "engine/render_system/core/bindable/TransformConstantBuffer.h"
 
 namespace engine::graphics::core::entity {
 	Model::Model(const std::string& modelFilepath, const Texture& texture)

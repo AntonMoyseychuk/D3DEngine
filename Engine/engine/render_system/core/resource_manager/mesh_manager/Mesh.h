@@ -1,7 +1,8 @@
 #pragma once
-#include "engine/graphics_engine/core/bindable/Bindable.h"
-#include "engine/graphics_engine/core/bindable/VertexBuffer.h"
-#include "engine/graphics_engine/core/bindable/IndexBuffer.h"
+#include "engine/render_system/core/bindable/Bindable.h"
+#include "engine/render_system/core/bindable/VertexBuffer.h"
+#include "engine/render_system/core/bindable/IndexBuffer.h"
+#include "engine/render_system/core/resource_manager/Resource.h"
 
 
 #include <assimp/Importer.hpp>

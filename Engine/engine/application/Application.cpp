@@ -1,9 +1,9 @@
 #include "Application.h"
 
-#include "engine/graphics_engine/core/RenderSystem.h"
+#include "engine/render_system/core/RenderSystem.h"
 
-#include "engine/graphics_engine/core/drawable/Model.h"
-#include "engine/graphics_engine/core/bindable/Texture.h"
+#include "engine/render_system/core/drawable/Model.h"
+#include "engine/render_system/core/resource_manager/texture_manager/TextureManager.h"
 
 #include <sstream>
 #include <iomanip>
@@ -11,7 +11,8 @@
 
 namespace engine::app {
 	Application::Application(const wchar_t* title, uint32_t width, uint32_t height)
-		: m_Window(title, width, height), m_SkySphere(graphics::core::Texture(L"sandbox\\res\\texture\\sky.jpg"))
+		: m_Window(title, width, height),
+		m_SkySphere(*graphics::core::TextureManager::Get().CreateTextureFromFile(L"sandbox\\res\\texture\\sky.jpg"))
 	{
 		using namespace graphics::core;
 
@@ -38,7 +39,9 @@ namespace engine::app {
 
 		std::unique_ptr<entity::Model> model = nullptr;
 		for (uint32_t i = 0; i < ARRAYSIZE(models); ++i) {
-			model = std::make_unique<entity::Model>(models[i], Texture(textures[0]));
+			model = std::make_unique<entity::Model>(models[i], 
+				*graphics::core::TextureManager::Get().CreateTextureFromFile(textures[0])
+			);
 			model->SetPosition(i * 5.0f, 0.0f, 0.0f);
 		
 			m_Drawables.emplace_back(std::move(model));

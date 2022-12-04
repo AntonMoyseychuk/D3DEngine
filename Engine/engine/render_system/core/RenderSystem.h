@@ -1,5 +1,6 @@
 #pragma once
-#include "engine/graphics_engine/camera/Camera.h"
+#include "engine/render_system/camera/Camera.h"
+#include "engine/render_system/core/resource_manager/texture_manager/TextureManager.h"
 
 #include <d3dx11.h>
 #include <DirectXMath.h>

@@ -1,11 +1,11 @@
 #pragma once
-#include "engine/window/Window.h"
+#include "engine/window_system/Window.h"
 #include "engine/utility/time/Timer.h"
 
-#include "engine/graphics_engine/core/drawable/Drawable.h"
+#include "engine/render_system/core/drawable/Drawable.h"
 
-#include "engine/graphics_engine/core/drawable/SkySphere.h"
-#include "engine/graphics_engine/core/drawable/Light.h"
+#include "engine/render_system/core/drawable/SkySphere.h"
+#include "engine/render_system/core/drawable/Light.h"
 
 namespace engine::app {
 	class Application

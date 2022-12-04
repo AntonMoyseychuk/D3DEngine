@@ -1,6 +1,6 @@
 #include "Window.h"
-#include "engine/graphics_engine/core/SwapChain.h"
-#include "engine/graphics_engine/core/D3DDevice.h"
+#include "engine/render_system/core/SwapChain.h"
+#include "engine/render_system/core/D3DDevice.h"
 
 #include "engine/utility/exception/WindowException.h"
 #include "engine/utility/exception/ExeptionMacros.h"
